@@ -56,6 +56,7 @@ Planned layout (PRD §5): `apps/mobile` (Expo/React Native), `services/api` (Typ
 - Data conventions: UUIDs; UTC timestamps plus IANA time zones; local trip dates; money as integer minor units with currency and price basis.
 - Migrations follow expand, compatible code, backfill, verify, then contract. One migration owner at a time. Test row policies with two separate users.
 - Every paid provider call (model, maps, voice) checks the budget before dispatch and is metered.
+- Build for the 1,000-tester beta (plan §12): paginate every list, bound every query, index each column a row policy filters on, and cache model output that doesn't depend on one traveler.
 
 ## Isolation and shared resources
 

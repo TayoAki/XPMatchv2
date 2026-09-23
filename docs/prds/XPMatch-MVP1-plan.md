@@ -6,7 +6,7 @@
 | Method | `mobile-plan-mvp` for scope; `software-factory` for intake, readiness and delivery slices |
 | Readiness | **READY WITH ASSUMPTIONS**: S0 and slices 1–2 can start once this revision is approved. Slice 2's paid model calls also need D-009 (spend ceiling), slices 3 onward need D-006 (pilot city and permissioned content), and the first external invite needs D-021 (who answers safety reports) |
 | Approval | **Pending**: founder |
-| Revision note | Draft 2 (2026-09-23) adds the social features the founder chose for the first pilot: contributor updates, trip partners with comments, an opt-in named activity feed, ask-a-contributor Q&A and direct messages. Draft 3 (2026-09-23) makes the flow profile-first: every traveler has an approved profile before matching, and matching ranks the individual items in travelers' itineraries. Draft 4 (2026-09-23): the app builds each traveler a complete itinerary from those items, shows how each item matches the profile and which similar travelers picked it, and lets any item be swapped in one tap |
+| Revision note | Draft 2 (2026-09-23) adds the social features the founder chose for the first pilot: contributor updates, trip partners with comments, an opt-in named activity feed, ask-a-contributor Q&A and direct messages. Draft 3 (2026-09-23) makes the flow profile-first: every traveler has an approved profile before matching, and matching ranks the individual items in travelers' itineraries. Draft 4 (2026-09-23): the app builds each traveler a complete itinerary from those items, shows how each item matches the profile and which similar travelers picked it, and lets any item be swapped in one tap. Draft 5 (2026-09-23) plans for a 1,000-tester beta, reached in gated waves after the pilot (§12) |
 
 PRD v1.1 stays the base document. This revision changes scope and order only; everything not mentioned here (trust rules, data conventions, quality thresholds, rollout, rollback) carries over unchanged. Requirement IDs are the PRD's own.
 
@@ -17,6 +17,7 @@ PRD v1.1 stays the base document. This revision changes scope and order only; ev
 - The 10-traveler relevance study moves up to S0–S1 and runs by hand, so H1 is tested before most of the code exists.
 - Several decisions recorded in v1's docs are retired because PRD v1.1 replaced them: web-first, selling the service first, fixed prices, match percentages, and a multi-city beta (§3). Pricing stays open (D-016).
 - The first pilot also carries the social features the founder chose on 2026-09-23: contributor itinerary updates, ask-a-contributor Q&A, trip partners with stop comments, an opt-in named activity feed, and direct messages (§4, §8). They add shared access, public profiles, messaging, push notifications and moderation duties, so the first invites move later. Trips stay private unless their owner turns sharing on, travel dates are never shown to other travelers, and block, report and message requests land before any traveler can reach another.
+- Planning assumption (founder, 2026-09-23): the beta grows to 1,000 testers. At that size the servers aren't the constraint; content per city, moderation and tester management are. MVP-1 builds in the cheap scale choices from day one, and the beta grows in gated waves after the 20-person pilot (§12).
 - Founder input needed: approve this revision (D-005). Choose the pilot city and start collecting content permissions now (D-006); nothing after slice 2 can be shown honestly without them. Before the first external invite, name who answers safety reports and how fast (D-021).
 
 ## 2. Product, users and constraints
@@ -28,7 +29,7 @@ PRD v1.1 stays the base document. This revision changes scope and order only; ev
 - **First customer:** a solo traveler or couple planning a 2–4 day leisure trip to the pilot city, invited into the pilot.
 - **Job to be done:** "Show me what people who travel like me actually did there, tell me honestly what won't suit me, and give me a plan I can use."
 - **First measurable outcome:** a new invited traveler adds the plan built for them within 24 hours of approving their profile, and keeps most of its items a week later. Both are hypotheses, measured as plan activation and kept-item ratio in §10 (adapted from PRD §11).
-- **Release type:** an unpaid, controlled pilot. It isn't a demo: real people put private data in, so sign-in, data isolation, deletion and spend caps must be production-grade. It isn't a public launch either: no store listing, no payments, and at most 20 invited travelers (team → 5 → up to 20, PRD §13).
+- **Release type:** an unpaid, controlled pilot. It isn't a demo: real people put private data in, so sign-in, data isolation, deletion and spend caps must be production-grade. It isn't a public launch either: no store listing, no payments, and at most 20 invited travelers (team → 5 → up to 20, PRD §13). After the pilot, the same app grows in gated waves toward a 1,000-tester beta (§12).
 
 **Confirmed constraints (supplied):**
 
@@ -44,6 +45,7 @@ PRD v1.1 stays the base document. This revision changes scope and order only; ev
   - builds the traveler a complete itinerary from them;
   - shows how each item matches the profile, and which travelers with similar profiles picked the same item;
   - makes it simple to swap any item.
+- The beta targets 1,000 testers, reached in gated waves after the pilot (founder planning assumption, 2026-09-23).
 
 ## 3. What v1 teaches (repository evidence)
 
@@ -192,6 +194,7 @@ Every traveler creates a profile once, and the app builds their itinerary from i
 | Travelers like you | Plan items show, by display name, similar travelers who picked the same item, only with their consent; contributors only with public-taste consent | Founder addition; social proof from people with similar profiles | REQ-027 |
 | Direct messages | Message requests, inbox, text messages, an allow-messages setting, block and report in conversations | Founder addition | REQ-022 |
 | Notifications | In-app notices and unread counts; push notifications that never include message text | Messages, answers, partner edits and updates need to reach people | REQ-024 |
+| Scale foundations | The day-one choices listed in §12 | Lets the same app grow to 1,000 testers without rework | NFR-008 |
 
 ### Next (MVP-1.1, before inviting more than the first 5 travelers)
 
@@ -203,14 +206,14 @@ Every traveler creates a profile once, and the app builds their itinerary from i
 
 ### Later (each needs its own approval)
 
-- Contributor self-serve submission, preview and submission review (REQ-005 submission path).
+- Contributor self-serve submission and in-app answers to questions have moved up: they're required before the first wave beyond the pilot (§12).
 - Shortlist and compare up to three with price bases (REQ-009).
 - AI-proposed rearrangements with an exact preview (REQ-003 bulk proposals).
 - Live offer refresh, then hotel, flight and experience providers (REQ-011 refresh, REQ-016).
 - Guest browsing without an account (PRD D-004).
 - Hotel and flight preference questions (D-013).
 - Numeric match scores, trips with more than two people and group preference matching, the web companion, more cities, creator payouts and subscriptions (PRD §3 expansion gates).
-- Photos or attachments in messages and comments; contributors answering questions inside the app.
+- Photos or attachments in messages and comments.
 
 ## 6. Screens and states
 
@@ -295,6 +298,9 @@ Plan items show similar travelers who picked them (founder decision). So the rel
 | API host | `services/api` | Must support long-lived WebSockets later for voice (D-010) |
 | Push notifications | Messages, requests, answers, partner edits, updates | Expo's push service with APNs and FCM credentials (D-012); previews never include message text (D-018) |
 | Real-time delivery | Messages and shared boards | Supabase Realtime is the candidate; confirm in S0.1 that it enforces row policies, with polling as the fallback (D-020) |
+| Email sender | Sign-in codes | A production provider; Supabase's built-in sender is for testing and heavily rate-limited (D-007) |
+| Crash and error monitoring | App and API errors | Chosen in S0.1 |
+| Over-the-air updates | App fixes without new store builds | Expo EAS Update, with a minimum-version check |
 
 Not in MVP-1: the Google Maps SDK or Places API (MVP-1.1), Gemini Live (MVP-1.1), partner APIs. Place facts are operator-entered, which avoids provider retention limits.
 
@@ -401,10 +407,10 @@ Each slice is an end-to-end, demonstrable outcome; split it into 0.5–2 day tic
 
 | Slice | Demonstrable outcome | Covers | Depends on |
 | --- | --- | --- | --- |
-| S0.1 Project shell | Expo app opens on iOS and Android development builds; API health endpoint; shared contracts package; migration runner; CI runs typecheck, lint and tests; versions pinned from current official docs | REQ-015 baseline | D-005 |
+| S0.1 Project shell | Expo app opens on iOS and Android development builds; API health endpoint; shared contracts package; migration runner; CI runs typecheck, lint and tests; versions pinned from current official docs; crash and error monitoring; an over-the-air update channel with a minimum-version check; a city on every core table (§12) | REQ-015 baseline | D-005 |
 | S0.2 Voice spike (throwaway, time-boxed) | Two-way audio with interruption on a physical iPhone and Android phone; latency and cost per minute measured | REQ-004 feasibility | Devices, development credentials |
 | S0.3 Founder track (no code) | Pilot city chosen, permissions collected, hand-run relevance study, spend ceiling, developer accounts | D-006, D-009, D-012, H1 | — |
-| 1 Sign-in and ownership | Sign in on two devices; U can't read T's data; account deletion | T8, T12 | S0.1, D-007 |
+| 1 Sign-in and ownership | Sign in on two devices; U can't read T's data; account deletion; a production email sender; invite codes carrying wave and city | T8, T12 | S0.1, D-007 |
 | 2 Profile creation | Chat or form, correct, approve; no plan without an approved profile; trip-only overrides; budget fallback | T2, T10 | 1, D-008, D-009, D-011 |
 | 3 Content import and rights | Real permissioned itinerary imported, published and withdrawn | T1, T9 (read gate) | S0.1, D-006 |
 | 4 Item matching and Explore | Items ranked for the profile, grouped by place and traceable to their sources, or an honest empty state; Explore; deterministic eval baseline | T4 | 2, 3 |
@@ -417,10 +423,11 @@ Each slice is an end-to-end, demonstrable outcome; split it into 0.5–2 day tic
 | 11 Messages and notifications | Requests, inbox, real-time delivery, block and report in conversations, push without message text | T20, T21, T23 | 7, D-012, D-017, D-018, D-020 |
 | 12 Pilot hardening | Accessibility pass; release builds on both platforms; kill switches for every feature, including `activity_feed`, `travelers_like_you`, `trip_partners`, `direct_messages`, `contributor_qa` and `push_notifications`; deletion recheck across all social data; database backups proven by a restore; error monitoring; privacy, terms and community pages; a check against current app-store rules for user content. Then team dogfood, then the first 5 invited travelers | T13, T24, NFR-007 | 1–11 |
 | MVP-1.1 | Voice (if S0.2 passed), in-app map, offline reading; then up to 20 travelers | REQ-004, REQ-007, REQ-015 | 12 plus learnings from the first 5 |
+| Beta expansion | The work needed before the first wave (§12), then waves of 100, 300 and 1,000 testers, each opening only when the previous one met its gates | NFR-008, NFR-009, NFR-010 | MVP-1.1 plus the pilot's results; D-025 to D-029 |
 
 ## 10. Measurement plan
 
-With at most 20 travelers, report counts next to every rate. Staff and test accounts are flagged `is_internal` and excluded.
+With at most 20 travelers, report counts next to every rate. In the waves, report every metric per city and per wave, and separately for testers who are planning a real trip (D-028). Staff and test accounts are flagged `is_internal` and excluded.
 
 | Metric | Definition | Window | Informs |
 | --- | --- | --- | --- |
@@ -469,7 +476,7 @@ With at most 20 travelers, report counts next to every rate. Staff and test acco
 
 ### Assumptions (reversible)
 
-- `A-001`: TestFlight and Google Play internal testing are enough to reach the first cohort.
+- `A-001`: TestFlight and Google Play internal testing are enough for the pilot; both stores cap internal testing at 100 testers. The waves need TestFlight external testing, which goes through Apple's Beta App Review, and Google Play closed testing (§12).
 - `A-002`: Operator-entered place facts (name, address, area, website) are enough for MVP-1; no Places API.
 - `A-003`: Each invited traveler plans one pilot-city trip within a 7-day window.
 - `A-004`: Copying one contributor's whole itinerary is dropped. The generated plan replaces it, and source itineraries stay viewable for context. (This replaces draft 3's whole-itinerary shortcut.)
@@ -488,7 +495,7 @@ With at most 20 travelers, report counts next to every rate. Staff and test acco
 | D-009 | Spend ceiling | Founder sets global daily and per-user daily caps | Founder, from available funds | Paid calls in slice 2 |
 | D-010 | API hosting | A host with long-lived WebSockets; Railway is a candidate (v1 is configured to deploy there) | Deploying the S0.1 health endpoint | First deploy |
 | D-011 | Chat framework for the interview | A plain chat screen plus one server-side structured-extraction endpoint. Adopt CopilotKit, with server-side tools only, when the assistant does more than the interview (v1 ran 19 tools in the browser, only 2 with confirmation) | S0.1 integration effort | Slice 2 |
-| D-012 | Distribution accounts | Apple Developer Program and Google Play Console, using TestFlight and internal testing; the same accounts supply push credentials | Accounts active | Slices 11–12 |
+| D-012 | Distribution accounts | Apple Developer Program and Google Play Console. Internal testing for the pilot; TestFlight external testing and Google Play closed testing for the waves. The same accounts supply push credentials | Accounts active | Slices 11–12 |
 | D-013 | Hotel and flight preference questions | Defer until those categories launch | Evals show matching doesn't need them | — |
 | D-014 | Thanks for contributors | Attribution in the app; any payment handled outside it | Recruiting response | D-006 |
 | D-015 | Team capacity | Keep the slice order; re-estimate after slice 1. v1's business plan describes a solo founder with contractors, with AI doing research, drafting and code, while PRD §9's 14-week schedule assumes two engineers | Slice 1 actuals | Dates only |
@@ -497,12 +504,95 @@ With at most 20 travelers, report counts next to every rate. Staff and test acco
 | D-018 | Push notification previews | Sender name only, never message or comment text | Tester feedback | Slice 11 |
 | D-019 | Account deletion with shared data | The deleted traveler's messages show as deleted; their comments and activity are removed; their memberships end; a trip they owned passes to the partner | Deletion test (T24) | Slice 9 |
 | D-020 | Real-time delivery | Supabase Realtime if S0.1 confirms it enforces row policies; otherwise polling | S0.1 check | Slice 11 |
-| D-021 | Safety response owner and time | The founder answers reports within 24 hours during the pilot and pauses the affected feature when unavailable | Founder commitment | First external invite |
+| D-021 | Safety response owner and time | The founder answers reports within 24 hours during the pilot and pauses the affected feature when unavailable. The waves need D-026 | Founder commitment | First external invite |
 | D-022 | People per shared trip | Two (the owner and one partner), matching the solo-and-couples segment | Pilot requests for bigger groups | Slice 9 |
 | D-023 | How plans are built | A deterministic, versioned planner fills slots from ranked items, and the model only writes explanation wording (PRD D-002) | Planner eval cases and swap rates | Slice 5 |
 | D-024 | Who appears as a similar traveler | Only people who share activity and turned on "show my picks", and contributors with public-taste consent; no anonymous counts in the pilot | Opt-in rate and tester feedback | Slice 10 |
+| D-025 | Cities in the beta | Open one city at a time, the pilot city first, and each only after it passes NFR-009 | Coverage reports and waitlist demand per city | Wave 1 |
+| D-026 | Moderation staffing | A named rota, the founder plus at least one trained helper, meeting NFR-010 before wave 1 | Report volume in the pilot | Wave 1 |
+| D-027 | Anonymous counts | Add a separate opt-in, "count my picks anonymously", shown as "kept by N travelers with similar taste" only when N is 5 or more. Making it opt-out would mean relaxing the current opt-in rule | Opt-in rate in wave 1 | Wave 2 |
+| D-028 | Who gets invited | People who say they're planning a trip to an open city within the next 8 weeks. Others wait on the waitlist, and metrics report planners separately | Waitlist answers; planner versus non-planner metrics | Wave 1 |
+| D-029 | Messaging by wave | Planning features open to every wave. Direct messages open to a wave only after the previous wave met NFR-010 | Moderation metrics per wave | Each wave |
 
-## 12. Changes from source (v1.1 → v1.2)
+## 12. Scaling to 1,000 beta testers
+
+Planning assumption (founder, 2026-09-23): the beta grows to 1,000 testers. The pilot still starts with the team, then 5, then 20 travelers (§2). This section covers what the design needs so the same app can grow to 1,000 in gated waves.
+
+For this stack, 1,000 testers is a small load. What doesn't scale is the work done by hand in the pilot: entering content, relaying questions, handling reports and managing testers. So the design keeps the PRD's architecture, builds cheap scale choices in from day one, and replaces the hand-run jobs with tools before the waves grow.
+
+### Capacity
+
+| Measure | Planning assumption (replace with pilot data) | Design target |
+| --- | --- | --- |
+| Testers | 1,000, invited in waves | — |
+| Weekly active | About 30%, roughly 300 people | — |
+| Peak concurrent users | About 50 | The main journey passes a load test at 150 concurrent users (NFR-008) |
+| Plan builds, swaps and trip reads | Bursts at peak | p95 first plan within 5 seconds and p95 trip read within 1 second (PRD NFR-003) |
+
+At that size, one Postgres database on Supabase and one stateless API, with a second instance for redundancy, are enough. Background work runs in one worker process that reads a job table in Postgres, which serves as the PRD's outbox. That work covers push notifications, account deletion, cached explanation wording and coverage reports. No cache server, queue service or extra services until a measured need (PRD §5).
+
+### Built in from day one (cheap now, costly to add later)
+
+| Choice | Why it matters at 1,000 | Lands in |
+| --- | --- | --- |
+| A city on every trip, item, itinerary, invite and metric | Cities can open one at a time without a migration, and supply and metrics are per city | S0.1 |
+| Invite codes that carry the wave, city and source, plus a waitlist | Waves stay controlled, and metrics split by cohort | Slice 1 |
+| A production email sender for sign-in codes | Supabase's built-in sender is for testing and heavily rate-limited | Slice 1 |
+| Crash and error monitoring; over-the-air updates (Expo EAS Update); a minimum-version check | Fixes reach 1,000 testers without new store builds, and broken builds can be blocked | S0.1 |
+| Match chips ("seafood ✓") drawn from scoring results, not the model; model sentences cached by item, matched components and model version | Model cost stays roughly flat as testers grow | Slices 4–5 |
+| Assessments stored only for items shown; diagnostic snapshots expire after 30 days (PRD §7) | Matching tables don't grow with every plan build | Slice 4 |
+| Cursor pagination on every list; an index on every column a row policy filters on | Activity, Inbox, conversations and Explore stay fast as data grows | Every slice |
+| Real-time connections only while a conversation or shared board is open; push and refresh elsewhere | Keeps concurrent connections low | Slice 11 |
+| Per-user and per-device rate limits on invites, questions, message requests, messages and plan builds | Controls abuse and cost | Slice 7 |
+| Feature flags per cohort, on top of the kill switches | A feature can open to one wave at a time | Slice 12 |
+
+### Needed before inviting beyond the 20-person pilot
+
+These replace the pilot's hand-run jobs:
+
+| Capability | Why | Covers |
+| --- | --- | --- |
+| Contributor self-serve submission with a preview, rights and an operator review queue | 1,000 testers need far more content than the founder can enter by hand | REQ-005 (submission path) |
+| Contributors answer questions in the app | Relaying every question by hand doesn't scale | REQ-021 |
+| A moderation console with a report queue, auto-hide once several people report the same item, account restrictions and an audit log | Scripts don't scale to 1,000 people | REQ-023, NFR-010 |
+| Contact anti-abuse: message requests only from accounts with an approved profile that are at least a day old; links blocked in message requests; senders throttled after reports | Travel apps attract scams | REQ-022, REQ-023 |
+| A coverage report per city: build plans for a fixed set of fixture profiles and check full days, must-have compliance and swap depth | A city opens only when it can serve its testers | NFR-009 |
+| TestFlight external testing (through Apple's Beta App Review) and Google Play closed testing | Both stores cap internal testing at 100 testers | A-001, D-012 |
+| In-app feedback and bug reports, an FAQ and a support address | 1,000 testers will need help | — |
+| A load test at 3× the assumed peak, plus dashboards with alerts on latency, errors and spend | Finds limits before testers do | NFR-008 |
+| Point-in-time database recovery and a restore drill | More real data at stake | PRD NFR-002 |
+| Hosting region, privacy policy and data-access requests settled (PRD §14) | More personal data, possibly from the EU or UK | REQ-014 |
+
+### Waves and gates
+
+Nothing expands by calendar (PRD §13). Each wave opens only after the previous one met its gates. Features open per wave through flags, so planning can reach a wave before messaging does (D-029).
+
+| Wave | Testers | Opens when (proposed thresholds) |
+| --- | --- | --- |
+| Pilot | Team, then 5, then 20 | Slices 1–12 pass (§9) |
+| Wave 1 | 100 | The work above is done; the relevance study passed (at least 7 of 10); no cross-user exposure (PRD NFR-001); reports handled within NFR-010 |
+| Wave 2 | 300 | Wave 1 had crash-free sessions of at least 99%, p95 latency within PRD NFR-003, model cost per started trip under USD 3, and every open city passing NFR-009 |
+| Wave 3 | 1,000 | Wave 2 met the same gates, and moderation kept to NFR-010 at the higher volume |
+
+### Cost
+
+PRD §11's hypothesis is about USD 1 of variable spend per started trip, with anything above USD 3 investigated, and voice counted inside that figure. If each of 1,000 testers starts one trip, that's about USD 1,000 of variable spend. Deterministic chips and cached wording should keep it lower. Database, API hosting, email, push and builds add a smaller fixed monthly cost; price them from current plans when setting D-009. The global daily cap rises with each wave.
+
+### Proposed quality requirements
+
+- **NFR-008, capacity:** at 3× the assumed peak (150 concurrent users), a scripted load test of the main journey meets PRD NFR-003's latency targets with an error rate under 1%.
+- **NFR-009, city supply gate:** a city opens to invites only when its coverage report fills every day for at least 90% of fixture profiles, with no must-have violations and at least three swap alternatives per slot.
+- **NFR-010, moderation response:** reports are triaged within 24 hours, and safety-critical ones (threats, scams, anything involving minors) within 4 hours. Content reported by three different people is hidden until reviewed.
+
+These are proposed thresholds, not measurements; pilot data should confirm or replace them (PRD §10).
+
+### Pilot defaults this changes
+
+- `A-001` (internal testing) holds for the pilot only.
+- D-021 (the founder answers reports) holds for the pilot only; the waves need D-026.
+- The operator-run contributor journey and question relay (§4) hold for the pilot only. The work above replaces them before wave 1.
+
+## 13. Changes from source (v1.1 → v1.2)
 
 - **Clarified:** the release type (unpaid, controlled pilot); the first working transaction (§8); operator-run supply for the pilot; the operational basics slice 12 must prove (backups with a tested restore, error monitoring, privacy and terms pages).
 - **Moved to MVP-1.1:** the voice interview (REQ-004), the in-app map (REQ-007 map part), offline reading (REQ-015 offline part). The S0 voice spike still runs first.
@@ -516,9 +606,10 @@ With at most 20 travelers, report counts next to every rate. Staff and test acco
   - The app builds each traveler a complete itinerary from those items (REQ-025). Every item shows how it matches the profile, any item can be swapped in one tap (REQ-026), and items show similar travelers who picked them, with consent (REQ-027).
   - "Add to my trips" saves the plan (A-007). Copying one contributor's whole itinerary is dropped (A-004). The similar-taste labels that draft 2 listed as later move into MVP-1.
 - **Unchanged:** requirement IDs, trust and privacy rules, stack direction (Expo, TypeScript API, Supabase), rollout stages, kill switches and cost hypotheses.
-- **Unresolved:** D-005 to D-024.
+- **Added for the 1,000-tester beta (founder planning assumption, 2026-09-23):** gated waves of 100, 300 and 1,000 testers after the pilot, the day-one scale choices, and NFR-008 to NFR-010 (§12). Contributor self-serve submission and in-app answers move up from later to before the first wave.
+- **Unresolved:** D-005 to D-029.
 
-## 13. Completion check
+## 14. Completion check
 
 - Every build-now item supports a traveler journey step (§4), including the social journeys the founder added, or a release requirement for real users: isolation, deletion, spend caps, safety controls, or the telemetry the pilot is judged by.
 - Nothing is simulated:
@@ -526,10 +617,10 @@ With at most 20 travelers, report counts next to every rate. Staff and test acco
   - Demand isn't fabricated. There is only permissioned real content, honest empty states, and real travelers in the relevance study. No activity, messages or questions are seeded, and team activity is labeled as the team's.
   - Access control isn't left for later. Isolation lands in slice 1, before any real data. Each social feature's access rules land with that feature, after the safety foundation in slice 7.
 - **Scope:** the founder's social additions roughly double what must work before the first invite. The core loop still comes first (slices 1–6), and each social feature has its own kill switch.
-- **Demo versus production:** MVP-1 is production-grade for up to 20 invited travelers. It is not store-ready; store review, privacy disclosures and commercial decisions come before any public release (PRD §10).
+- **Demo versus production:** MVP-1 is production-grade for the 20-person pilot, and the §12 work readies it for waves up to 1,000 testers. It is not store-ready; store review, privacy disclosures and commercial decisions come before any public release (PRD §10).
 
-## 14. Readiness and next action
+## 15. Readiness and next action
 
-**Readiness: READY WITH ASSUMPTIONS.** S0.1 and slices 1–2 can start once D-005 is approved. D-007, D-008, D-010, D-011 and D-017 to D-024 have working defaults. D-009 needs the founder's cap amounts before slice 2 makes paid model calls. Slices 3 onward need D-006, and the first external invite needs D-021 confirmed.
+**Readiness: READY WITH ASSUMPTIONS.** S0.1 and slices 1–2 can start once D-005 is approved. D-007, D-008, D-010, D-011 and D-017 to D-029 have working defaults. D-009 needs the founder's cap amounts before slice 2 makes paid model calls. Slices 3 onward need D-006, and the first external invite needs D-021 confirmed. Waves beyond the pilot need the §12 work, NFR-008 to NFR-010, and D-025 to D-029 confirmed.
 
 **Next action (founder):** approve revision v1.2 as written, or list the changes you want. After approval, the factory's next task is S0.1 (project shell) on its own branch, with CI and device evidence.
