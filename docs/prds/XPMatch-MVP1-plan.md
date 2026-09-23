@@ -6,7 +6,7 @@
 | Method | `mobile-plan-mvp` for scope; `software-factory` for intake, readiness and delivery slices |
 | Readiness | **READY WITH ASSUMPTIONS**: S0 and slices 1–2 can start once this revision is approved. Paid model and voice calls (slices 2b and 5) also need D-009 (spend ceiling), slices 3 onward need D-006 (pilot city and permissioned content), and the first external invite needs D-021 (who answers safety reports) |
 | Approval | **Pending**: founder |
-| Revision note | Draft 2 (2026-09-23) adds the social features the founder chose for the first pilot: contributor updates, trip partners with comments, an opt-in named activity feed, ask-a-contributor Q&A and direct messages. Draft 3 (2026-09-23) makes the flow profile-first: every traveler has an approved profile before matching, and matching ranks the individual items in travelers' itineraries. Draft 4 (2026-09-23): the app builds each traveler a complete itinerary from those items, shows how each item matches the profile and which similar travelers picked it, and lets any item be swapped in one tap. Draft 5 (2026-09-23) plans for a 1,000-tester beta, reached in gated waves after the pilot (§12). Draft 6 (2026-09-23): travelers review what they did, through evening check-ins during the trip and a check-in after it. Ratings stay private unless shared as reviews, and whole trips can be published before the first wave. Draft 7 (2026-09-23): one-tap sign-in with Apple or Google, a voice interview or a survey for the profile, plans requested by typing in a chat box, swipes or arrow taps to change items, and trips saved automatically. Draft 8 (2026-09-23): the chat first answers with options the traveler swipes through, changes by typing and can undo, and a "Create itinerary" button then turns the picks into the itinerary |
+| Revision note | Draft 2 (2026-09-23) adds the social features the founder chose for the first pilot: contributor updates, trip partners with comments, an opt-in named activity feed, ask-a-contributor Q&A and direct messages. Draft 3 (2026-09-23) makes the flow profile-first: every traveler has an approved profile before matching, and matching ranks the individual items in travelers' itineraries. Draft 4 (2026-09-23): the app builds each traveler a complete itinerary from those items, shows how each item matches the profile and which similar travelers picked it, and lets any item be swapped in one tap. Draft 5 (2026-09-23) plans for a 1,000-tester beta, reached in gated waves after the pilot (§12). Draft 6 (2026-09-23): travelers review what they did, through evening check-ins during the trip and a check-in after it. Ratings stay private unless shared as reviews, and whole trips can be published before the first wave. Draft 7 (2026-09-23): one-tap sign-in with Apple or Google, a voice interview or a survey for the profile, plans requested by typing in a chat box, swipes or arrow taps to change items, and trips saved automatically. Draft 8 (2026-09-23): the chat first answers with options the traveler swipes through, changes by typing and can undo, and a "Create itinerary" button then turns the picks into the itinerary. Draft 9 (2026-09-23): travelers can change the app's colors (System, Light or Dark, and five contrast-checked accents, REQ-030), and the UI plan in `docs/design/XPMatch-UI-plan.md` sets the design system: v1's design language with the PRD's colors |
 
 PRD v1.1 stays the base document. This revision changes scope and order only; everything not mentioned here (trust rules, data conventions, quality thresholds, rollout, rollback) carries over unchanged. Requirement IDs are the PRD's own.
 
@@ -19,6 +19,7 @@ PRD v1.1 stays the base document. This revision changes scope and order only; ev
 - The first pilot also carries the social features the founder chose on 2026-09-23: contributor itinerary updates, ask-a-contributor Q&A, trip partners with stop comments, an opt-in named activity feed, and direct messages (§4, §8). They add shared access, public profiles, messaging, push notifications and moderation duties, so the first invites move later. Trips stay private unless their owner turns sharing on, travel dates are never shown to other travelers, and block, report and message requests land before any traveler can reach another.
 - Planning assumption (founder, 2026-09-23): the beta grows to 1,000 testers. At that size the servers aren't the constraint; content per city, moderation and tester management are. MVP-1 builds in the cheap scale choices from day one, and the beta grows in gated waves after the 20-person pilot (§12).
 - Travelers feed the supply side (founder, 2026-09-23). On each evening of the trip and once after it, they tick what they did and rate it. Ratings are private by default and only suggest profile changes for approval. In the pilot, travelers can share ratings as labeled, moderated reviews; before the first wave, they can publish whole trips as itineraries. This is how content keeps up with 1,000 testers.
+- Look and feel (founder, 2026-09-23): v2 keeps v1's calm design language but uses the PRD's colors, and travelers can change the colors themselves (REQ-030). The components follow shadcn's model through its React Native counterpart (D-037). Details are in `docs/design/XPMatch-UI-plan.md`.
 - Founder input needed: approve this revision (D-005). Choose the pilot city and start collecting content permissions now (D-006); nothing after slice 2 can be shown honestly without them. Before the first external invite, name who answers safety reports and how fast (D-021).
 
 ## 2. Product, users and constraints
@@ -228,6 +229,7 @@ On a shared trip, each partner gets their own check-ins and ratings.
 | Telemetry | Authoritative events from committed actions; internal accounts flagged | Measuring the pilot | REQ-012 |
 | Spend caps and kill switches | Per-user and global daily model budgets checked before each call; metered usage; switches for model features, matching and outbound links | Real money | REQ-013 |
 | Accessibility basics | Screen-reader labels, large text, button alternatives to drag | Main journey on both platforms | REQ-015 (subset) |
+| Appearance | System, Light or Dark and five contrast-checked accent colors, chosen in Profile. Applies instantly, is saved to the account, and is cached on the device so it doesn't flash at start-up (UI plan §4) | Founder addition: travelers can change the colors easily | REQ-030 |
 | Safety foundation | Display names; block and report on every piece of user content; a text filter; the operator queue with a response owner; community guidelines and contact details; 18+ confirmation; rate limits | Required before travelers can see or reach each other; app-store rules for user content | REQ-023, REQ-010 (report and block) |
 | Contributor updates | "New" markers on updated itineraries, notices on trips that use that itinerary's items, updates in Activity | Founder addition; keeps human content visibly current | REQ-017 |
 | Ask-a-contributor Q&A | Question form, operator queue, published answers, an "answered" notice | Founder addition; answers resolve unknowns for every traveler | REQ-021 |
@@ -260,7 +262,7 @@ On a shared trip, each partner gets their own check-ins and ratings.
 
 ## 6. Screens and states
 
-Bottom navigation: Trips, Explore, Inbox, Profile. Trips is the home screen: a chat box to ask for a plan, then the traveler's trips. Explore replaces Discover, for browsing and Activity. Inbox is new, for messages, requests, answers and updates. The PRD had Discover, Trips and Profile. Colors: pine `#174D42`, ivory `#F7F8F5`, white surfaces and dark `#182B28` text (PRD §4).
+Bottom navigation: Trips, Explore, Inbox, Profile. Trips is the home screen: a chat box to ask for a plan, then the traveler's trips. Explore replaces Discover, for browsing and Activity. Inbox is new, for messages, requests, answers and updates. The PRD had Discover, Trips and Profile. Colors: the PRD's pine `#174D42`, ivory `#F7F8F5`, white surfaces and dark `#182B28` text (PRD §4) are the default theme, and travelers can switch mode and accent color in Profile (REQ-030). Layouts, tokens and components are in `docs/design/XPMatch-UI-plan.md`.
 
 | Screen | Main decision | States that change the experience |
 | --- | --- | --- |
@@ -270,7 +272,7 @@ Bottom navigation: Trips, Explore, Inbox, Profile. Trips is the home screen: a c
 | Survey | Answer a few one-tap questions | Progress shown; skip a question; back; submit |
 | Taste recap (first time, then from Profile) | Correct and approve | Uncertain values flagged; unknowns stay unknown; newer version approved on another device (reload); saving; no plan until approved |
 | Chat box (on Trips and on each plan) | Say what trip you want, or what to change | Understood (shown as chips); one follow-up question if something important is missing; city not open (a clear answer and a waitlist); daily budget reached (saved trips still work); offline |
-| Trip options (in the chat) | Swipe or tap arrows to pick the option for each slot, type changes, then tap "Create itinerary" | Building options; partial failure; not enough good options for every day (says so); an option's source withdrawn; draft saved as you go |
+| Trip options (in the chat) | Swipe or tap arrows to pick the option for each slot, type changes, then tap "Create itinerary" | Building options; partial failure; not enough good options for every day (says so); an option's source withdrawn; draft saved as you go. The options open full screen from the chat reply, with the chat box still at the bottom (UI plan §7) |
 | Itinerary | Review the day-by-day plan; swipe, remove or move items | Creating; clashes flagged (closed that day, outside the dates); an item's source withdrawn; saved automatically |
 | Item alternatives (swipe or arrows) | Keep the item showing, or move on to the next alternative | Loading; no more alternatives (says so); undo |
 | Item detail | Does this fit me, what's the catch, whose trip is it from, and who like me picked it? | Profile matches, tradeoffs, unknowns; every source traveler's note; similar travelers shown only with their consent; source withdrawn |
@@ -280,6 +282,7 @@ Bottom navigation: Trips, Explore, Inbox, Profile. Trips is the home screen: a c
 | Add to a day (from Explore) | Add it to a day of the plan, or pick which trip if there's more than one | Added; already in the plan; conflicts flagged |
 | Trips (home) | Ask for a plan in the chat box, or open a saved trip | No trips yet (the chat box invites a first request); network failure |
 | Profile and privacy | Update taste, delete account, sign out | Edits create a new version; deletion in progress or failed with retry |
+| Appearance (in Profile) | Choose System, Light or Dark, and an accent color | Live preview; applied at once; saved to the account; another device picks it up after sign-in |
 | Report a problem | Say what's wrong with a source | Submitted; offline |
 | Activity (a tab in Explore) | Which shared place or update to look at | Empty ("No shared activity yet"); item removed since loading; blocked people hidden |
 | Traveler profile | Who is this, and can I message them? | Messages off; blocked; account deleted |
@@ -399,7 +402,7 @@ Scenario: contributor C's 3-day itinerary for the pilot city and two of C's revi
 
 ### New requirements (REQ-017 onward)
 
-PRD v1.1 stops at REQ-016. These continue its numbering and are pending approval with this revision. REQ-017 to REQ-024 cover the social features, REQ-025 to REQ-027 cover the generated plan, REQ-028 covers trip check-ins, and REQ-029 covers chat trip requests.
+PRD v1.1 stops at REQ-016. These continue its numbering and are pending approval with this revision. REQ-017 to REQ-024 cover the social features, REQ-025 to REQ-027 cover the generated plan, REQ-028 covers trip check-ins, REQ-029 covers chat trip requests, and REQ-030 covers appearance.
 
 - **REQ-017, contributor itinerary updates.** A new revision of a published itinerary shows what changed, and travelers whose trips use its items can choose whether to add the new stops.
   - `AC-REQ-017-01`: When revision 2 of C's itinerary adds a stop, viewers see it marked new, and a traveler whose trip uses items from C's itinerary gets a notice. Adding the stop to a day records lineage to revision 2 as one trip revision; dismissing changes nothing.
@@ -440,6 +443,9 @@ PRD v1.1 stops at REQ-016. These continue its numbering and are pending approval
 - **REQ-029, chat trip requests.** Travelers ask for plans, and for changes, by typing in a chat box.
   - `AC-REQ-029-01`: A typed request becomes a structured trip request (city, length, dates, party, purpose, trip-only preferences), shown back as chips, and the chat answers with options and a "Create itinerary" button. A request without a length gets 3 days and says so. A typed change such as "cheaper dinner on day 2" changes only the options, or itinerary slots, it names.
   - `AC-REQ-029-02`: The model only turns words into a request; the planner chooses the items. A city that isn't open, or dates in the past, get a clear answer and no plan. Text in the chat can't change permissions, settings or anyone else's data (PRD REQ-003). Trip-only preferences from the chat never change the profile.
+- **REQ-030, appearance (founder addition, 2026-09-23).** Travelers can change the app's colors.
+  - `AC-REQ-030-01`: In Profile → Appearance, the traveler chooses System, Light or Dark and one of the offered accent colors. Every screen changes at once, without a restart, and the choice holds after restarting and on a second device signed in to the same account. With System chosen, switching the phone between light and dark changes the app while it's open.
+  - `AC-REQ-030-02`: Every offered mode-and-accent pair passes an automated contrast check in CI: text at least 4.5:1, field outlines and focus rings at least 3:1. Fit, catch, unknown and error colors keep their meaning in every theme and always come with an icon and words. Appearance never affects matching, and only its owner can read or change it.
 
 ### Social checks
 
@@ -487,18 +493,25 @@ Scenario: T saved a dated 3-day trip, and U is another invited traveler.
 | T32 | T signs in with Apple on an iPhone and U with Google on an Android phone, with no code or password. Signing in again with the same account on a second device opens the same account and trips. After T deletes the account, the Sign in with Apple authorization is revoked. | AC-REQ-001-01, AC-REQ-001-03 | Device runs on both platforms |
 | T33 | T types "3 days with my partner, slow mornings, lots of seafood". The chips read 3 days · couple · slow mornings · seafood, and the chat answers with options and a "Create itinerary" button. "Make dinner on day 2 cheaper" changes only that option. A request for a city that isn't open gets a clear answer and no options. Text that tries to reach other travelers' data or change settings has no effect. | AC-REQ-029-01, AC-REQ-029-02, AC-REQ-003-02 | Eval cases; injection tests; device run |
 
+### Appearance check
+
+| # | Observable result | Criteria | Evidence |
+| --- | --- | --- | --- |
+| T34 | T picks Dark and Ocean on an iPhone. Every screen changes at once, including the options, the itinerary and sheets. After a restart the app opens in Dark and Ocean without flashing the default colors. After T signs in on an Android phone it switches to Dark and Ocean. With System chosen, switching the phone to light mode changes the app while it's open. The CI contrast check passes for every offered pair, and a build with a failing pair is rejected. | AC-REQ-030-01, AC-REQ-030-02 | Device runs on both platforms; CI contrast test; before and after captures |
+
 ## 9. Delivery slices
 
 Each slice is an end-to-end, demonstrable outcome; split it into 0.5–2 day tickets when it becomes Ready (PRD §9). No dates until slice 1 has been measured.
 
 | Slice | Demonstrable outcome | Covers | Depends on |
 | --- | --- | --- | --- |
-| S0.1 Project shell | Expo app opens on iOS and Android development builds; API health endpoint; shared contracts package; migration runner; CI runs typecheck, lint and tests; versions pinned from current official docs; crash and error monitoring; an over-the-air update channel with a minimum-version check; a city on every core table (§12) | REQ-015 baseline | D-005 |
+| S0.1 Project shell | Expo app opens on iOS and Android development builds; API health endpoint; shared contracts package; migration runner; CI runs typecheck, lint and tests; versions pinned from current official docs; crash and error monitoring; an over-the-air update channel with a minimum-version check; a city on every core table (§12); semantic color tokens with light and dark themes, a CI contrast test and the UI kit checked on both platforms (UI plan §4, §9) | REQ-015 baseline | D-005, D-037 |
 | S0.2 Voice spike (throwaway, time-boxed) | Two-way audio with interruption on a physical iPhone and Android phone; latency and cost per minute measured; decides whether voice is in the pilot (D-035) | REQ-004 feasibility | Devices, development credentials |
 | S0.3 Founder track (no code) | Pilot city chosen, permissions collected, hand-run relevance study, spend ceiling, developer accounts | D-006, D-009, D-012, H1 | — |
 | 1 Sign-in and ownership | Sign in with Apple and Google on two devices; U can't read T's data; account deletion, including revoking Sign in with Apple | T8, T12, T32 | S0.1, D-007 |
 | 2 Profile: survey and recap | The survey, recap and approval; no plan without an approved profile; trip-only overrides | T2 (survey) | 1, D-034 |
 | 2b Voice interview | The AI voice interview with interrupt, mute, end and "switch to survey"; falls back to the survey with answers kept; metered and capped | T2 (voice), T10 | 2, S0.2 passed, D-008, D-009, D-035 |
+| 2c Appearance | System, Light or Dark and five accent colors in Profile; applied at once; saved to the account and restored on a second device; no color flash at start-up | T34 | 1, D-037, D-039 |
 | 3 Content import and rights | Real permissioned itinerary imported, published and withdrawn | T1, T9 (read gate) | S0.1, D-006 |
 | 4 Item matching and Explore | Items ranked for the profile, grouped by place and traceable to their sources, or an honest empty state; Explore; deterministic eval baseline | T4 | 2, 3 |
 | 5 Chat options, itinerary and trip | The chat turns a message into a trip request and answers with options; swipe or arrows to pick; typed changes and undo; the draft saves as it goes; "Create itinerary" arranges and saves the trip; the same edits on the itinerary; remove, move, add from Explore; rebuild with Keep and Undo; restore on a second device; conflicts | T3, T5, T6, T9 (trip side), T10, T25, T27, T33 | 4, D-008, D-009, D-011, D-023, D-033, D-036 |
@@ -618,6 +631,10 @@ With at most 20 travelers, report counts next to every rate. In the waves, repor
 | D-034 | Survey length | Five one-tap screens (pace, interests, food, budget, must-haves), each skippable, with a progress bar | Completion rate and time (§10) | Slice 2 |
 | D-035 | Voice in the pilot | Voice ships in the pilot if the S0.2 device test passes on both platforms. Otherwise the pilot starts with the survey only, and voice follows in MVP-1.1 | S0.2 results | Slice 2b |
 | D-036 | How options are laid out | Grouped by day and time of day, with one swipeable card per slot. "Create itinerary" then orders each day by time and area. The alternative is grouping by type (eat, do, stay) and assigning days when the itinerary is created | Tester feedback and the options-to-itinerary rate | Slice 5 |
+| D-037 | UI kit | React Native Reusables (shadcn/ui's React Native counterpart, MIT) on the free Uniwind edition, with Expo SDK 57 and Expo Router 57. Sheets from Expo Router's form sheet or `@gorhom/bottom-sheet`. Fallback: HeroUI Native. shadcn/ui itself only for web surfaces such as the landing page (UI plan §9) | S0.1 check: every UI plan §6 component on both platforms, accents with dark mode, no-flash start-up | S0.1 component work |
+| D-038 | Canonical palette | The PRD's tokens are the default Pine theme; v1's "Serene Resort" values are retired; dark-mode values as in the UI plan §4.2 | Founder approval | — (S0.1 proceeds on the default) |
+| D-039 | Appearance options | System, Light or Dark plus five accents (Pine, Ocean, Terracotta, Plum, Graphite), every pair contrast-checked; no free color picker; Android dynamic color later at most | Founder's pick; accent use in the pilot | Slice 2c |
+| D-040 | Place imagery in MVP-1 | Text cards with a category icon, area and time of day. A contributor's photos only where their permission covers photos. No stock, generated or map-provider photos (A-002) | Permission inventory (D-006) | Slice 4 visuals only |
 
 ## 12. Scaling to 1,000 beta testers
 
@@ -723,7 +740,8 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
   - swipes or arrow taps to change items, replacing the swap sheet (REQ-026);
   - trips saved automatically, replacing "Add to my trips" (A-007).
 - **Changed by founder decision (2026-09-23), draft 8:** the chat answers a request with options the traveler swipes or taps arrows through, changes by typing, and can undo. Only then does "Create itinerary" turn the picks into the itinerary, where the same edits keep working (REQ-025, REQ-026, REQ-029, D-036).
-- **Unresolved:** D-005 to D-036.
+- **Added by founder decision (2026-09-23), draft 9:** travelers can change the app's colors: System, Light or Dark and five contrast-checked accents (REQ-030, slice 2c, T34). The UI plan (`docs/design/XPMatch-UI-plan.md`) keeps v1's design language, uses the PRD's colors, and chooses the shadcn-style React Native kit (D-037 to D-040).
+- **Unresolved:** D-005 to D-040.
 
 ## 14. Completion check
 
@@ -737,6 +755,6 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
 
 ## 15. Readiness and next action
 
-**Readiness: READY WITH ASSUMPTIONS.** S0.1 and slices 1–2 can start once D-005 is approved. D-007, D-008, D-010, D-011 and D-017 to D-036 have working defaults. D-009 needs the founder's cap amounts before slices 2b and 5 make paid model and voice calls. Slices 3 onward need D-006, and the first external invite needs D-021 confirmed. Waves beyond the pilot need the §12 work, NFR-008 to NFR-010, and D-025 to D-029 confirmed.
+**Readiness: READY WITH ASSUMPTIONS.** S0.1 and slices 1–2 can start once D-005 is approved. D-007, D-008, D-010, D-011 and D-017 to D-040 have working defaults. D-009 needs the founder's cap amounts before slices 2b and 5 make paid model and voice calls. Slices 3 onward need D-006, and the first external invite needs D-021 confirmed. Waves beyond the pilot need the §12 work, NFR-008 to NFR-010, and D-025 to D-029 confirmed.
 
 **Next action (founder):** approve revision v1.2 as written, or list the changes you want. After approval, the factory's next task is S0.1 (project shell) on its own branch, with CI and device evidence.
