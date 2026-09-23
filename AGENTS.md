@@ -43,7 +43,7 @@ There is no application code yet. Sprint 0 ticket S0.1 (the project shell) estab
 
 ## Architecture and invariants
 
-Planned layout (PRD §5): `apps/mobile` (Expo/React Native), `services/api` (TypeScript), `services/voice` (long-lived WebSocket relay for the voice interview), `packages/contracts` (shared schemas), `db/migrations` (PostgreSQL/Supabase), `evals` (matching and explanation cases).
+Planned layout (PRD §5): `apps/mobile` (Expo/React Native), `services/api` (TypeScript), `services/voice` (long-lived WebSocket relay for the voice interview), `packages/contracts` (shared schemas), `db/migrations` (PostgreSQL on Railway, plan D-046), `evals` (matching and explanation cases).
 
 - The model interprets and phrases. Server code owns authorization, eligibility, scoring, persistence, source freshness and spend limits. Never expose model-generated SQL or an open-ended HTTP tool.
 - Keep itinerary and content fit separate from author similarity. Commission is never a ranking input. Missing evidence lowers coverage; it never counts as a good fit.
@@ -66,7 +66,7 @@ Planned layout (PRD §5): `apps/mobile` (Expo/React Native), `services/api` (Typ
 - Single-checkout mode (two tasks sharing one local checkout) is not allowed unless the founder authorizes it for that task.
 - Evidence goes in `.artifacts/<task>/`. No external evidence host is approved.
 - Hosting: the Railway project `xpmatch-v2` (plan D-010). v1's Railway project, `xpmatch`, is not ours to deploy to or change. Deploys and new paid services need the founder's authorization.
-- Worktrees do not isolate Supabase projects, API keys and quotas, device builds or test accounts. Use development credentials only, and never put production data in fixtures.
+- Worktrees do not isolate Railway environments and databases, API keys and quotas, device builds or test accounts. Use development credentials only, and never put production data in fixtures.
 
 ## Verification and evidence
 

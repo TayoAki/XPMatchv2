@@ -185,7 +185,7 @@ The **Type** column uses these conventions:
 
 | Table | Field | Type | Notes |
 | --- | --- | --- | --- |
-| `app_user` | `auth_provider` | enum(apple, google) | With `auth_subject`: unique; bound to the verified subject (REQ-001) |
+| `app_user` | `auth_provider` | enum(apple, google) | With `auth_subject`: unique; bound to the verified subject (REQ-001). The values follow the beta sign-in method (plan D-007, reopened 2026-09-23) |
 | | `auth_subject` | text | |
 | | `age_confirmed_at` | timestamptz | The 18+ confirmation at sign-in |
 | | `terms_version` | text | |

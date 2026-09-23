@@ -5,7 +5,7 @@
 | Source | `docs/prds/XPMatch-Build-PRD-v1.1.md` (founder's PRD v1.1, 2026-09-23); read-only review of `TayoAki/XPMatchv1`; founder answers of 2026-09-23 |
 | Method | `mobile-plan-mvp` for scope; `software-factory` for intake, readiness and delivery slices |
 | Readiness | **READY WITH ASSUMPTIONS**: this revision is approved, so S0 and slices 1–2 can start. Paid model and voice calls (slices 2b and 5) also need D-009 (spend ceiling), slices 3 onward need D-006 (pilot city and permissioned content), and the first external invite needs D-021 (who answers safety reports) |
-| Approval | **Approved** by the founder on 2026-09-23, as written in draft 10 (D-005). D-041 to D-045 were approved the same day. The other decisions (D-006 to D-040) stay open until the founder resolves them; §15 says which have working defaults and which block a slice |
+| Approval | **Approved** by the founder on 2026-09-23, as written in draft 10 (D-005). D-041 to D-045 were approved the same day. The other decisions (D-006 to D-040) stay open until the founder resolves them; §15 says which have working defaults and which block a slice. Founder changes since approval (2026-09-23): Railway hosting (D-010), Postgres on Railway instead of Supabase (D-046), and sign-in reopened for a simpler beta method (D-007) |
 | Revision note | Draft 2 (2026-09-23) adds the social features the founder chose for the first pilot: contributor updates, trip partners with comments, an opt-in named activity feed, ask-a-contributor Q&A and direct messages. Draft 3 (2026-09-23) makes the flow profile-first: every traveler has an approved profile before matching, and matching ranks the individual items in travelers' itineraries. Draft 4 (2026-09-23): the app builds each traveler a complete itinerary from those items, shows how each item matches the profile and which similar travelers picked it, and lets any item be swapped in one tap. Draft 5 (2026-09-23) plans for a 1,000-tester beta, reached in gated waves after the pilot (§12). Draft 6 (2026-09-23): travelers review what they did, through evening check-ins during the trip and a check-in after it. Ratings stay private unless shared as reviews, and whole trips can be published before the first wave. Draft 7 (2026-09-23): one-tap sign-in with Apple or Google, a voice interview or a survey for the profile, plans requested by typing in a chat box, swipes or arrow taps to change items, and trips saved automatically. Draft 8 (2026-09-23): the chat first answers with options the traveler swipes through, changes by typing and can undo, and a "Create itinerary" button then turns the picks into the itinerary. Draft 9 (2026-09-23): travelers can change the app's colors (System, Light or Dark, and five contrast-checked accents, REQ-030), and the UI plan in `docs/design/XPMatch-UI-plan.md` sets the design system: v1's design language with the PRD's colors. Draft 10 (2026-09-23): the data shape in `docs/design/XPMatch-data-shape.md` defines the taste vocabulary (taxonomy 0.1), the contributor capture template, field-level shapes for the core loop, matching and planner rules v0, and the option card contract (D-041 to D-045) |
 
 PRD v1.1 stays the base document. This revision changes scope and order only; everything not mentioned here (trust rules, data conventions, quality thresholds, rollout, rollback) carries over unchanged. Requirement IDs are the PRD's own.
@@ -36,7 +36,7 @@ PRD v1.1 stays the base document. This revision changes scope and order only; ev
 
 **Confirmed constraints (supplied):**
 
-- Native iOS and Android with React Native and Expo; PostgreSQL on Supabase (PRD D-001, §5).
+- Native iOS and Android with React Native and Expo; PostgreSQL (PRD D-001, §5). The PRD named Supabase; the founder moved the database to Railway on 2026-09-23 (D-046).
 - No booking, payments, subscriptions or creator payouts in the pilot (PRD §3).
 - One city; solo travelers and couples; 2–4 day leisure trips (PRD §2).
 - Trust rules: deterministic authorization and ranking, evidence-backed explanations, no fabricated peers, commission never affects ranking (PRD D-002, §5).
@@ -358,13 +358,13 @@ The entities:
 
 | Service | Used for | Note |
 | --- | --- | --- |
-| Supabase | Auth, Postgres, row policies | Separate development and production projects |
+| Railway Postgres | Postgres and row policies (D-046) | In the `xpmatch-v2` Railway project, with separate development and production environments. The API sets the signed-in user on each transaction, and row policies read it |
 | Text model provider | Interview extraction, explanation wording | Chosen in S0 (D-008); metered and capped |
 | Expo EAS | Builds and internal distribution | Needs Apple and Google developer accounts (D-012) |
 | API host | `services/api` | Must support long-lived WebSockets for the voice interview (D-010) |
 | Push notifications | Messages, requests, answers, partner edits, updates, trip check-ins | Expo's push service with APNs and FCM credentials (D-012); previews never include message text (D-018) |
-| Real-time delivery | Messages and shared boards | Supabase Realtime is the candidate; confirm in S0.1 that it enforces row policies, with polling as the fallback (D-020) |
-| Apple and Google sign-in | One-tap sign-in | Supabase Auth with native Sign in with Apple and Google sign-in; needs the Apple capability and Google OAuth clients (D-007, D-012) |
+| Real-time delivery | Messages and shared boards | Polling while a conversation or shared board is open; the API's own WebSocket if polling proves too slow (D-020) |
+| Sign-in | No codes or passwords (D-007) | The API verifies sign-in and issues its own sessions (D-046). The founder asked for a simpler sign-in for the beta, so the method is being chosen again (D-007, reopened 2026-09-23) |
 | Voice model (Gemini Live) | The voice interview | Chosen and measured in the S0.2 spike; metered and capped (D-009, D-035) |
 | Crash and error monitoring | App and API errors | Chosen in S0.1 |
 | Over-the-air updates | App fixes without new store builds | Expo EAS Update, with a minimum-version check |
@@ -608,7 +608,7 @@ With at most 20 travelers, report counts next to every rate. In the waves, repor
 | --- | --- | --- | --- | --- |
 | D-005 | This MVP-1 scope | Approve as written, or name the cuts to reverse | **Approved** as written (founder, 2026-09-23; draft 10) | All implementation |
 | D-006 | Pilot city and content supply | The city where permissioned content is fastest to secure. Target 5 contributors, 15 itineraries and 30 reviews, with at least 3 distinct suitable itineraries per invited traveler (PRD §12). No city has been chosen; v1 used Rome as its example | Permission inventory | Slices 3 onward |
-| D-007 | Sign-in method | One tap with Apple or Google, no codes or passwords (founder, 2026-09-23). No email fallback in the pilot; revisit if testers ask | Slice 1 two-device test | Slice 1 |
+| D-007 | Sign-in method | One tap with Apple or Google, no codes or passwords (founder, 2026-09-23). No email fallback in the pilot; revisit if testers ask | **Reopened** (founder, 2026-09-23): a simpler sign-in for the beta; the method is the founder's pick. Then the slice 1 two-device test | Slice 1 |
 | D-008 | Text model provider | Run 8–12 fixture interviews and trip requests through 2–3 candidates; compare accuracy and cost | Eval results | Slices 2b and 5 |
 | D-009 | Spend ceiling | Founder sets global daily and per-user daily caps | Founder, from available funds | Paid calls in slices 2b and 5 |
 | D-010 | API hosting | A host with long-lived WebSockets; Railway is a candidate (v1 is configured to deploy there) | **Chosen:** Railway (founder, 2026-09-23), in a new private project, `xpmatch-v2`, separate from v1's `xpmatch`. Deploying the S0.1 health endpoint still has to confirm long-lived WebSockets | First deploy |
@@ -621,7 +621,7 @@ With at most 20 travelers, report counts next to every rate. In the waves, repor
 | D-017 | Who can be messaged | Only travelers who share activity; message requests are on by default for them, and anyone can turn messages off | Request acceptance and report rates | Slice 11 |
 | D-018 | Push notification previews | Sender name only, never message or comment text | Tester feedback | Slice 11 |
 | D-019 | Account deletion with shared data | The deleted traveler's messages show as deleted; their comments and activity are removed; their memberships end; a trip they owned passes to the partner | Deletion test (T24) | Slice 9 |
-| D-020 | Real-time delivery | Supabase Realtime if S0.1 confirms it enforces row policies; otherwise polling | S0.1 check | Slice 11 |
+| D-020 | Real-time delivery | Polling while a conversation or shared board is open; the API's own WebSocket if polling proves too slow. (Supabase Realtime left with Supabase, D-046) | Slice 11 latency check | Slice 11 |
 | D-021 | Safety response owner and time | The founder answers reports within 24 hours during the pilot and pauses the affected feature when unavailable. The waves need D-026 | Founder commitment | First external invite |
 | D-022 | People per shared trip | Two (the owner and one partner), matching the solo-and-couples segment | Pilot requests for bigger groups | Slice 9 |
 | D-023 | How plans are built | A deterministic, versioned planner fills slots from ranked items, and the model only writes explanation wording (PRD D-002) | Planner eval cases and swap rates | Slice 5 |
@@ -647,6 +647,7 @@ With at most 20 travelers, report counts next to every rate. In the waves, repor
 | D-043 | Contributors' spending | Matching uses venue price facts and the contributor's range, but only venue price bands are ever shown. A contributor's own spending is never published | **Approved** (founder, 2026-09-23) | S0.3 template |
 | D-044 | Slots per pace | Relaxed: lunch, afternoon, dinner. Moderate: + morning. Packed: + evening. The day-start and dinner-time preferences set the time windows (A-006) | **Approved** (founder, 2026-09-23). Tune with planner evaluations and swipe rates | Slice 5 |
 | D-045 | Sensitive preferences | Dietary needs are optional, sensitive, used only by the server's filter, never sent to the model, analytics or logs, and their voice excerpts aren't kept. Allergies aren't collected in MVP-1. Explicit consent before saving; the privacy policy says so | **Approved** (founder, 2026-09-23). A privacy review is still due before the first external invite | Slice 2 |
+| D-046 | Database and hosting | Postgres on Railway, in the `xpmatch-v2` project, instead of Supabase. The API verifies sign-in and issues sessions, sets the signed-in user on each transaction for row policies, and polls for real-time (D-020) | **Chosen** (founder, 2026-09-23) | S0.1 onward |
 
 ## 12. Scaling to 1,000 beta testers
 
@@ -663,7 +664,7 @@ For this stack, 1,000 testers is a small load. What doesn't scale is the work do
 | Peak concurrent users | About 50 | The main journey passes a load test at 150 concurrent users (NFR-008) |
 | Plan builds, swaps and trip reads | Bursts at peak | p95 first plan within 5 seconds and p95 trip read within 1 second (PRD NFR-003) |
 
-At that size, one Postgres database on Supabase and one stateless API, with a second instance for redundancy, are enough. Background work runs in one worker process that reads a job table in Postgres, which serves as the PRD's outbox. That work covers push notifications, account deletion, cached explanation wording and coverage reports. No cache server, queue service or extra services until a measured need (PRD §5).
+At that size, one Postgres database on Railway (D-046) and one stateless API, with a second instance for redundancy, are enough. Background work runs in one worker process that reads a job table in Postgres, which serves as the PRD's outbox. That work covers push notifications, account deletion, cached explanation wording and coverage reports. No cache server, queue service or extra services until a measured need (PRD §5).
 
 ### Built in from day one (cheap now, costly to add later)
 
@@ -739,7 +740,7 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
   - Matching ranks the items in travelers' itineraries against that profile (`AC-REQ-006-03`).
   - The app builds each traveler a complete itinerary from those items (REQ-025). Every item shows how it matches the profile, any item can be swapped in one tap (REQ-026), and items show similar travelers who picked them, with consent (REQ-027).
   - "Add to my trips" saved the plan (A-007); draft 7 replaced it with automatic saving. Copying one contributor's whole itinerary is dropped (A-004). The similar-taste labels that draft 2 listed as later move into MVP-1.
-- **Unchanged:** requirement IDs, trust and privacy rules, stack direction (Expo, TypeScript API, Supabase), rollout stages, kill switches and cost hypotheses.
+- **Unchanged:** requirement IDs, trust and privacy rules, stack direction (Expo, TypeScript API, Postgres), rollout stages, kill switches and cost hypotheses.
 - **Added for the 1,000-tester beta (founder planning assumption, 2026-09-23):** gated waves of 100, 300 and 1,000 testers after the pilot, the day-one scale choices, and NFR-008 to NFR-010 (§12). Contributor self-serve submission and in-app answers move up from later to before the first wave.
 - **Added by founder decision (2026-09-23), reviews:**
   - trip check-ins during and after the trip, with private ratings (REQ-028);
@@ -761,6 +762,9 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
   - Decisions D-041 to D-045.
 - **Approved on 2026-09-23:** this revision as a whole (D-005, draft 10), and D-041 to D-045.
 - **Chosen on 2026-09-23:** Railway for API hosting (D-010). The S0.1 deploy still has to confirm long-lived WebSockets.
+- **Changed by founder decision after approval (2026-09-23):**
+  - Postgres runs on Railway instead of Supabase (D-046). The API now owns sign-in, sessions and the signed-in user that row policies read, and real-time starts as polling (D-020).
+  - Sign-in is reopened for a simpler beta method (D-007). `AC-REQ-001-03` and T32 follow the method the founder picks.
 - **Unresolved:** D-006 to D-040 (§15).
 
 ## 14. Completion check
@@ -775,7 +779,7 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
 
 ## 15. Readiness and next action
 
-**Readiness: READY WITH ASSUMPTIONS.** The founder approved this revision on 2026-09-23 (D-005), so S0.1 and slices 1–2 can start. D-007, D-008, D-011 and D-017 to D-040 have working defaults, Railway is chosen for hosting (D-010), and D-041 to D-045 are approved. D-009 needs the founder's cap amounts before slices 2b and 5 make paid model and voice calls. Slices 3 onward need D-006, and the first external invite needs D-021 confirmed. Waves beyond the pilot need the §12 work, NFR-008 to NFR-010, and D-025 to D-029 confirmed.
+**Readiness: READY WITH ASSUMPTIONS.** The founder approved this revision on 2026-09-23 (D-005), so S0.1 can start now. Slice 1 needs the founder's sign-in pick (D-007, reopened), and slice 2 follows slice 1. D-007, D-008, D-011 and D-017 to D-040 have working defaults, Railway is chosen for hosting (D-010), and D-041 to D-045 are approved. D-009 needs the founder's cap amounts before slices 2b and 5 make paid model and voice calls. Slices 3 onward need D-006, and the first external invite needs D-021 confirmed. Waves beyond the pilot need the §12 work, NFR-008 to NFR-010, and D-025 to D-029 confirmed.
 
 **Next action:** the factory's next task is S0.1 (project shell) on its own branch, with CI and device evidence. Any paid provider, account or credential it needs waits for the founder's explicit authorization (AGENTS.md).
 
