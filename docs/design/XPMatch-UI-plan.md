@@ -430,9 +430,23 @@ Method: WCAG 2.x contrast ratios for every foreground and background pair that a
 - **Contrast:** 136 pairs, 0 failures, from a scratch script (§4.4).
 - **UI kit facts:** npm registry and live docs, 2026-09-23 (§9).
 
-**Untested:** everything that needs the app, because there is no app code yet (AGENTS.md: never claim it ran):
-- device behavior;
+**S0.1 results (2026-09-23), for D-037:**
+- **Contrast in CI:** `packages/design-tokens` checks 140 pairs on every push, with 0 failures. The earlier 136, plus the aliased token pairs, which are now checked by name.
+- **React Native Reusables on SDK 57 with Uniwind 1.12:**
+  - 18 components installed with CLI 0.7.1, plus Icon and Label.
+  - The iOS and Android bundles build, locally and in CI.
+  - Every component renders on the web preview. That's supplementary only; phones are the real test.
+- **Accent overrides compose with `dark:` classes:** confirmed on web in Dark + Ocean. The screenshots aren't committed (AGENTS.md: `.artifacts/`).
+- **Changes to the copied components:**
+  - pill buttons with a 44 pt minimum height;
+  - destructive labels and placeholders on contrast-checked tokens (the originals used white text and 50% muted text);
+  - a still skeleton under Reduce Motion.
+
+**Untested (needs physical phones, AGENTS.md):**
+- device behavior on iOS and Android;
 - Dynamic Type and font scale;
 - VoiceOver and TalkBack;
-- startup without a color flash;
-- React Native Reusables on SDK 57.
+- startup without a color flash (built in, but not yet seen on a phone);
+- Reusables' components on native.
+
+The device checks are listed in `apps/mobile/README.md`.
