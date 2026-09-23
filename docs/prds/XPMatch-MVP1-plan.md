@@ -36,10 +36,26 @@ PRD v1.1 stays the base document. This revision changes scope and order only; ev
 
 ## 3. What v1 teaches (repository evidence)
 
-v1 is a Next.js web prototype, reviewed read-only on 2026-09-23. Its code is not carried over; these lessons are.
+v1 is a Next.js web prototype. Its code (commit `28c66b6`) and docs were reviewed read-only on 2026-09-23. Its code is not carried over; these lessons are.
 
 - **Onboarding length is the first known drop-off.** Most production traffic was iPhone Safari. The only outside sign-up recorded created an account, saw the six-step onboarding quiz and left (v1 `docs/MOBILE_PLAN.md`). This is one data point, not a trend, but it is the only external evidence there is. MVP-1 keeps the interview short, allows skipping straight to an editable recap, and shows matches right after approval.
 - **Phone patterns v1 already converged on:** a three-question conversational quiz instead of a long form, bottom tabs, and up/down buttons instead of drag on the trip board (v1 `docs/MOBILE_PLAN.md`, Plan B). MVP-1 starts from those behaviors.
+- **The core content doesn't exist yet.** v1 has no real travelers' itineraries: each one is a model-written proposal or the user's own edits. Its reviews come from Google, and its "taste twin" means a place the user loved, not a person. Permissioned itineraries, first-party reviews and author similarity are all new work. That is why D-006 (content supply) is the critical path.
+- **v1 inverts the PRD's trust model; MVP-1 must not.** In v1:
+  - chat cards show model-written ratings and prices with no "estimate" label;
+  - match scores are computed in the browser from model text;
+  - the model refers to places by name rather than by ID;
+  - one tool replaces a whole itinerary with no preview or undo;
+  - profile changes apply without approval;
+  - the itinerary is a single field where the last write wins.
+
+  MVP-1 answers each with a server-owned rule: catalog IDs only, server-side scoring, a preview before any bulk change, approved profile versions, and trip revisions with conflict checks.
+- **Provider data needs its own policy.** v1 keeps Google Places data, including review author names, in a catalog shared by all users with no expiry. It also saves the first search hit as a permanent match. MVP-1 uses operator-entered place facts (A-002). When the in-app map arrives in MVP-1.1, it must follow the provider's caching terms and verify matches.
+- **Spend limits must cover every paid call.** v1 caps only some place lookups; model calls and most Google calls are uncapped. MVP-1 checks the budget before every model call (REQ-013).
+- **Ideas worth keeping (as behavior, not code):**
+  - review answers that cite quotes by index, so the quote shown is always verbatim;
+  - prompt rules that require honest downsides;
+  - fake-provider test servers, so journeys can be tested without paid APIs. Fixtures must be labeled as fixtures, never recorded into demos as real reviews.
 
 ## 4. Journeys
 
@@ -224,6 +240,7 @@ With at most 20 travelers, report counts next to every rate. Staff and test acco
 | The interview misreads a must-have | Wrong or unsafe suggestions | Recap approval, interview-accuracy metric, eval cases for contradictions | Slice 2 exit |
 | Model spend overruns | Cost | Pre-call caps, metering, kill switch | D-009 before slice 2 |
 | Cross-user data exposure | Trust and legal harm | Isolation lands first (slice 1); two-user tests block release (NFR-001) | Every release |
+| Model-written facts shown as real (v1's failure mode) | Travelers act on invented ratings, prices or places | Facts come only from the catalog or cited content; explanations reference stored evidence; anything estimated is labeled | NFR-004 in the release eval |
 
 ### Assumptions (reversible)
 
@@ -241,7 +258,7 @@ With at most 20 travelers, report counts next to every rate. Staff and test acco
 | D-008 | Text model provider | Run 8–12 fixture interviews through 2–3 candidates; compare extraction accuracy and cost | Eval results | Slice 2 |
 | D-009 | Spend ceiling | Founder sets global daily and per-user daily caps | Founder, from available funds | Paid calls in slice 2 |
 | D-010 | API hosting | A host with long-lived WebSockets; Railway is a candidate (v1 is configured to deploy there) | Deploying the S0.1 health endpoint | First deploy |
-| D-011 | Chat framework for the interview | A plain chat screen plus one structured-extraction endpoint; adopt CopilotKit when the assistant does more than the interview | S0.1 integration effort | Slice 2 |
+| D-011 | Chat framework for the interview | A plain chat screen plus one server-side structured-extraction endpoint. Adopt CopilotKit, with server-side tools only, when the assistant does more than the interview (v1 ran 19 tools in the browser, only 2 with confirmation) | S0.1 integration effort | Slice 2 |
 | D-012 | Distribution accounts | Apple Developer Program and Google Play Console, using TestFlight and internal testing | Accounts active | Slice 7 |
 | D-013 | Hotel and flight preference questions | Defer until those categories launch | Evals show matching doesn't need them | — |
 | D-014 | Thanks for contributors | Attribution in the app; any payment handled outside it | Recruiting response | D-006 |
