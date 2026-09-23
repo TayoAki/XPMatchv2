@@ -48,10 +48,10 @@ Skill: `cmba-journey` (stage 6 of `cmba-run`). Written 2026-09-23, after `lead-m
 > 1. Give each day four slots: morning, lunch, afternoon, dinner. Not eight. The gaps are where the trip happens.
 > 2. Keep each half-day in one area. Pick the morning's neighborhood first, then find lunch within a short walk of it.
 > 3. Put the thing you'd hate to miss in a morning slot. It's the slot a late night or a long queue is least likely to eat.
-> 4. Leave one slot a day loose. Fill it on the day, or not at all.
+> 4. Leave a slot empty rather than fill it. If nothing fits, a free hour beats a stop you'd only visit because it's famous.
 > 5. Check opening days per slot, not per place. A café that's closed on Mondays is fine on Tuesday's plan.
 >
-> Four slots, one area per half-day, the must-see in the morning, one loose slot, opening days checked per slot. Shape first. Then every slot has to earn its place, and that's the harder part: if you can't say why it fits *you*, it's filler.
+> Four slots, one area per half-day, the must-see in the morning, an empty slot over a filler one, opening days checked per slot. Shape first. Then every slot has to earn its place, and that's the harder part: if you can't say why it fits *you*, it's filler.
 >
 > How many things do you plan per day on a city trip, and do you manage them all?
 >
@@ -68,11 +68,11 @@ Skill: `cmba-journey` (stage 6 of `cmba-run`). Written 2026-09-23, after `lead-m
 2. Four slots, and why four.
 3. One area per half-day: pick the area before the place.
 4. The must-see goes in a morning.
-5. The loose slot.
+5. The empty slot: leave it rather than fill it with filler.
 6. **Every slot answers three questions:**
    - Why does it fit me?
    - What's the catch?
-   - Who recommended it, and do they travel like me?
+   - Who recommended it, and what kind of trip were they on?
 7. Five checks before you go (links to `content.md` asset 7).
 8. **CTA:** *Get the 4-slot planner template*, which goes to the magnet landing page.
 
@@ -82,7 +82,7 @@ Skill: `cmba-journey` (stage 6 of `cmba-run`). Written 2026-09-23, after `lead-m
 
 **The 4-slot city trip planner** (`lead-magnet.md`).
 - **Narrow problem it solves:** shaping 2–4 days (slots, areas, must-sees).
-- **Wide problem it exposes:** filling every slot with a place that fits, including why, the catch and the source. That takes evenings, and it's what the beta app does.
+- **Wide problem it exposes:** filling every slot with a place that fits, including why, the catch and the source. That's the slow part, and it's what the beta app does.
 
 ### 5. Emails 1–6
 
@@ -107,7 +107,7 @@ Placeholders:
 >
 > We're XPMatch. We're building a phone app that plans short city trips from real travelers' trips, starting in [pilot city]. More on that in a couple of days, but the template works fine without it.
 >
-> One question, so we send you the right things: **where's your next city trip, and when?** Just hit reply. A city and a month is plenty. Or take the 2-minute survey: [survey link].
+> One question, so we send you the right things: **where's your next city trip, and when?** Just hit reply. A city and a month is plenty. Or take the short survey: [survey link].
 >
 > [first name] at XPMatch
 
@@ -119,15 +119,15 @@ Placeholders:
 
 **Email 2 — Highlight the problem** (day 2)
 **Subject:** The empty column
-**Preview:** Filling the slots is the part that takes evenings.
+**Preview:** Filling the slots is the slow part.
 
 > If you've started the planner, you've probably hit it already.
 >
-> The slots are easy. It's the columns next to them: *Why it fits me. The catch. Who recommended it.* For every place you have to work out whether it suits how you travel, what will go wrong, and whether the person who recommended it is anything like you. Multiply that by twelve slots and it's an evening, or three.
+> The slots are easy. It's the columns next to them: *Why it fits me. The catch. Who recommended it.* For every place you have to work out whether it suits how you travel, what will go wrong, and who's behind the recommendation. Multiply that by twelve slots and it adds up fast.
 >
 > The usual sources don't help much. Top-10 lists rank by popularity. Reviews come from people you know nothing about. AI planners fill every slot in seconds, but with the places everyone else gets, and sometimes with places that have closed.
 >
-> That column is what XPMatch fills in.
+> Those columns are what XPMatch fills in.
 >
 > You tell it once how you like to travel, in a short voice chat or a few taps. Then you type the trip you want: "Three days in [pilot city] with my partner, slow mornings, lots of seafood." XPMatch builds the days from what real travelers actually did, matched stop by stop to how you travel, and every stop arrives with its row filled in: why it fits you, what the catch is, and whose trip it came from. Don't like one? Swipe it for another.
 >
@@ -149,9 +149,9 @@ Placeholders:
 >
 > It wasn't your planning.
 >
-> The tools are built to give everyone the same answer. Lists rank places by how many people already went. Review scores average together people who travel nothing like you. AI planners are built to fill every hour, anywhere, in seconds, so they reach for whatever is most written about. No number of extra evenings fixes a source that doesn't know who you are.
+> Lists rank places by how many people already went. Review scores mix together people who travel nothing like you. And travelers who've tried AI planners say the answers feel generic: "the same itinerary as it seems everyone else is on". No number of extra evenings fixes a source that doesn't know who you are.
 >
-> That's what we're changing. XPMatch only uses what real travelers actually did, and it matches every stop to how you travel, not to what's most written about. When it doesn't have enough good options for you, it says so instead of padding your day.
+> That's what we're changing. XPMatch only uses what real travelers actually did, and it matches every stop to how you travel, not to what's most popular. When it doesn't have enough good options for you, it says so instead of padding your day.
 >
 > The [pilot city] beta is free, and it's small on purpose: real trips take time to collect.
 >
@@ -243,7 +243,7 @@ The set reads top to bottom as one argument. Does each asset set up the next?
 | Article → Magnet | Yes | Section 6's three questions are the template's three columns |
 | Magnet → Email 1 | Yes | Delivers it and starts the traveler on it (must-haves, then areas) |
 | Email 1 → Email 2 | Yes | Email 2 opens on the column the traveler just tried to fill |
-| Email 2 → Email 3 | Yes | From "it takes evenings" to "that wasn't your fault" |
+| Email 2 → Email 3 | Yes | From "the slow part" to "that wasn't your fault" |
 | Email 3 → Email 4 | Yes | From "we're changing it" to exactly what changes |
 | Email 4 → Emails 5–6 | Yes | Benefits land, then the real cap makes it time-bound |
 
@@ -282,7 +282,8 @@ These are `UNSOURCED` planning bands. Replace them with the first cohort's numbe
 - **Every conversion band here is `UNSOURCED`.**
 - **Corrected after `eval.md` (2026-09-23):**
   - **Post 2 contradicted email 2.** The post said short trips "fail at the scheduling, not the choosing", while email 2 says "The slots are easy". The post now says shape comes first and choosing is the harder part, which is the magnet's narrow-to-wide gap.
-  - **An unmeasured duration was removed** from post 1 and the article: "It takes ten minutes".
-  - **A wrong mechanism was removed** from emails 2 and 3: "travelers whose taste matches yours". Stops are matched to the traveler (plan §5).
+  - **Unmeasured durations were removed:** "It takes ten minutes" (post 1) and "The 10-minute check" (the article). In the re-grade round, "takes evenings", "an evening, or three" and "2-minute" went too.
+  - **A wrong mechanism was removed:** "travelers whose taste matches yours" (email 2) and "travelers whose taste is like yours" (email 3). Stops are matched to the traveler (plan §5).
+  - **In the re-grade round:** email 2 stopped implying that XPMatch judges whether each source traveler is like you, and email 3's unsourced "built to give everyone the same answer" became a sourced traveler quote.
 - **Email 2's "short voice chat"** depends on D-035. If voice isn't in the pilot, say "a few taps" (`uvp.md`).
 - **Send timing** (days 0, 2, 4 and 6) and the weekly cap after that are owned by `email.md`, routing rule 5.

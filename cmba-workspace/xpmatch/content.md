@@ -6,7 +6,7 @@ Skill: `cmba-content` (stage 5 of `cmba-run`). Written 2026-09-23. Read first: `
 
 | # | URL | Type | Read in full? | Voice trait, with a quote |
 | --- | --- | --- | --- | --- |
-| 1 | xpmatchme.com | Landing page, with a "Why weekends disappoint" section citing 4 studies | Yes | Cites research: Gollwitzer & Sheeran 2006, Iyengar & Lepper 2000, Wilson & Gilbert 2005, Alves et al. 2023 |
+| 1 | xpmatchme.com | Landing page; its "The research behind the questions" section cites 4 studies | Yes | Cites research: Gollwitzer & Sheeran 2006, Iyengar & Lepper 2000, Wilson & Gilbert 2005, Alves et al. 2023 |
 | 2 | xpmatchme.com/guide | Teaching piece: "Ten habits of people who never waste a weekend" | Yes | One imperative action per item, then a short closer: "One booked table beats ten open threads." / "Thirty seconds, and it compounds." |
 | 3 | xpmatchme.com/about | Company page | Yes | Plain and specific: "two honest reviews can be opposites because the reviewers have different reference points" |
 | — | The founder's LinkedIn | Posts | No (login wall) | — |
@@ -48,7 +48,7 @@ Themes (9) × styles; each cell is a headline.
 | T3 Trusting recommendations | 4 questions to ask about any review | Stop asking "where should I eat?" | Friend's tip vs stranger's review | — | — | — |
 | T4 AI itineraries | Check an AI itinerary before you trust it | The problem with AI plans isn't accuracy, it's sameness | ChatGPT's plan vs real trips | We checked an AI plan against real trips | 5 checks before you trust any generated plan | Next year's AI plans will still be the same for everyone, unless… |
 | T5 The pilot city | 3 days in [pilot city] from real trips | — | — | [Pilot city] in [month]: what's open, what's crowded | — | — |
-| T6 Tourist traps | How to spot a trap in 30 seconds | — | — | — | Where real travelers ate in [pilot city] | — |
+| T6 Tourist traps | How to spot a trap before you sit down | — | — | — | Where real travelers ate in [pilot city] | — |
 | T7 Solo city trips | Two solo days in [pilot city] | — | — | — | — | — |
 | T8 Couples | Plan a trip for two without splitting the list | — | — | What couples kept and skipped | — | — |
 | T9 Real trips | How to share a trip so it helps the next person | — | — | — | — | Why XPMatch starts in one city |
@@ -68,7 +68,7 @@ Themes (9) × styles; each cell is a headline.
 11. 5 checks before you trust any generated itinerary (T4, listicle)
 12. 3 days in [pilot city] for three kinds of traveler, from real trips, catches and unknowns included (T5, pillar)
 13. [Pilot city] in [month]: what's open, what's crowded, what real travelers did (T5, analytical, seasonal)
-14. How to spot a tourist trap in 30 seconds (T6, actionable)
+14. How to spot a tourist trap before you sit down (T6, actionable)
 15. Where real travelers ate in [pilot city], and what they'd skip (T6, listicle)
 16. Two solo days in [pilot city], from solo travelers' trips (T7, step-by-step)
 17. Planning for two without splitting the list in half (T8, actionable; low priority per `validation.md`)
@@ -89,7 +89,7 @@ Rank 1 is the searcher closest to booking *this* trip. The build order differs f
 | 7 | Check an AI itinerary before you trust it (#8) | "chatgpt travel itinerary prompt reddit" | Problem-aware | Weeks 1–2 | None: can start now |
 | 8 | 4 questions about any reviewer (#6) | "a rating from a person you know nothing about" | Problem-aware | Weeks 2–3 | None |
 | 9 | The 4-slot day (#1) | "overwhelmed in trying to narrow it down" (about choosing; four slots a day forces the choice) | Problem-aware | Weeks 3–4 | None |
-| 10 | How to spot a tourist trap in 30 seconds (#14) | "how to avoid tourist traps" | Problem-aware | Weeks 4–5 | None |
+| 10 | How to spot a tourist trap before you sit down (#14) | "how to avoid tourist traps" | Problem-aware | Weeks 4–5 | None |
 | 11 | How to share a trip so it helps the next traveler (#18) | Supply: "the UGC with users or lack thereof" (GridTravel, HN) | Contributors | **The first 2 weeks after D-006**, the same dates as `metrics.md` W1. Moved from weeks 11–12: see the note below | The contributor form (`profile.md`) |
 | 12 | Planning for two without splitting the list (#17) | Old evidence only | Problem-aware | Weeks 12–13 | Replace it if the survey (Q3) shows no couple pain |
 
@@ -137,6 +137,8 @@ These are LinkedIn posts from the founder (spokes), with the meat written first.
 
 ### Post 2 (asset 8): the reviewer, not the stars
 
+**Source:** adapts habit 05 of v1's weekend guide ("read reviews from people whose standards match yours"). Link the guide when posting; don't present it as new.
+
 **Trailer:**
 > A 4.8-star restaurant can still be wrong for you.
 > The stars aren't the problem. Not knowing who gave them is.
@@ -153,7 +155,7 @@ These are LinkedIn posts from the founder (spokes), with the meat written first.
 
 **Testable expectation:**
 - **Stage:** problem-aware.
-- **It landed if** answers name *people*, such as a friend, a specific creator or a partner, rather than platforms. That supports the "people like me" premise.
+- **It landed if** answers name *people*, such as a friend, a specific creator or a partner, rather than platforms. That supports the "people like me" instinct behind the consented "travelers like you" feature (REQ-027).
 - **It missed if** most answers name a platform. Then T3 drops in rank.
 
 ### Post 3 (asset 9): the 4-slot day
@@ -166,10 +168,10 @@ These are LinkedIn posts from the founder (spokes), with the meat written first.
 1. **Give each day four slots:** morning, lunch, afternoon, dinner. Not eight. The gaps are where the trip happens.
 2. **Keep each half-day in one area.** Pick the morning's neighborhood first, then find lunch within a short walk of it.
 3. **Put the thing you'd hate to miss in a morning slot.** It's the slot a late night or a long queue is least likely to eat.
-4. **Leave one slot a day loose.** Fill it on the day, or not at all.
+4. **Leave a slot empty rather than fill it.** If nothing fits, a free hour beats a stop you'd only visit because it's famous.
 5. **Check opening days per slot, not per place.** A café that's closed on Mondays is fine on Tuesday's plan.
 
-**Summary:** Four slots, one area per half-day, the must-see in the morning, one loose slot, opening days checked per slot. Shape first. Then every slot has to earn its place, and that's the harder part.
+**Summary:** Four slots, one area per half-day, the must-see in the morning, an empty slot over a filler one, opening days checked per slot. Shape first. Then every slot has to earn its place, and that's the harder part.
 
 **CTC:** How many things do you plan per day on a city trip, and do you manage them all?
 
@@ -185,7 +187,7 @@ These are LinkedIn posts from the founder (spokes), with the meat written first.
 > The fix is one line long.
 
 **Meat:**
-1. **Say who you are as a traveler:** pace, budget band, what you'd cross town for. A plan is only useful to people who travel like you.
+1. **Say who you are as a traveler:** pace, budget band, what you'd cross town for. It lets the next person judge whether your picks will fit them.
 2. **Give the order you did things in, and the area.** A list of places isn't a trip.
 3. **Name one catch per stop.** "Worth it, but go before 11" is worth more than "amazing".
 4. **Say what you'd skip next time.** It's the line that saves the next traveler a wasted afternoon.
@@ -220,8 +222,10 @@ These are LinkedIn posts from the founder (spokes), with the meat written first.
 ## Hub and spoke
 
 **Hub:** Asset 1, *3 days in [pilot city] for three kinds of traveler, built from real trips, with every stop's catch and what we still don't know* (the landing site).
-- **Why this title (after `eval.md`):** Wanderlog and Mindtrip already publish 3-day city itineraries built from one traveler's trip.
-- **What they don't do:** split by kind of traveler, show each stop's catch, or say what's unknown. That's the differentiator, so it goes in the title.
+- **Why this title (corrected in the re-grade):** Mindtrip publishes creator-written 3-day city itineraries (seen in search results, not fetched), and Wanderlog collects travelers' guides (W3), so "a 3-day plan from a real trip" isn't distinctive on its own.
+- **What the title adds:** three things XPMatch commits to doing: splitting by kind of traveler, showing each stop's catch, and saying what's unknown. Whether rivals' guides do these wasn't checked, so the title makes no claim about them.
+- **Enough trips:** each version needs at least 3 permissioned trips (9 in total). With fewer, publish fewer versions rather than one trip per version, which is the format rivals already have.
+- **It also teaches the refusal:** a day without enough good options says so instead of being padded. That's the part of the differentiator rivals built on breadth can't follow (`differentiators.md`).
 
 | # | Spoke | Style | Where |
 | --- | --- | --- | --- |
@@ -288,4 +292,4 @@ All are original and untested; none is copied from a named creator.
 - **Search volume:** intent depth comes from autocomplete stems for Rome, used as a probe; no pilot-city volumes were measured. Human task: once D-006 is decided, check the city's stems and adjust the ranking.
 - `GAP`: AnswerSocrates, AnswerThePublic, competitor guides, and proven hooks from adjacent niches.
 - **Web permission:** assets 1–3, 5 and 11's examples depend on contributors granting web publication, a scope the plan doesn't define yet. Raise it with the content-permission design (plan §7) before asset 1.
-- **A test to schedule:** post 3's claim (4 slots a day) is also the plan's default (D-036). Its CTC is an informal check of it, not a measurement; `metrics.md` shouldn't double-count it.
+- **A test to schedule:** post 3's claim (4 slots a day) is also the plan's moderate-pace default (A-006). Its CTC is an informal check of it, not a measurement; `metrics.md` shouldn't double-count it.

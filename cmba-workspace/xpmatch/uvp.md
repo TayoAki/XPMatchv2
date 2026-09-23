@@ -116,7 +116,7 @@ Read from `differentiators.md`, not re-derived. **Verdict: POSITIONAL.**
   - **v1:** "Ready to stop wasting your weekends?" / "Answer 15 questions and find out why what you do with your free time doesn't fit you, and what to do about it."
   - The new paragraph is more specific: short city trips, real trips, evidence per stop, one city.
   - It also fixes a direct conflict: v1 leads with a 15-question quiz, which the friction evidence (O4) argues against. A reader can tell them apart. **Not capped.**
-  - **Also on the live v1 site** (found by `eval.md`, re-fetched 2026-09-23): an example card already shows a fit reason, a tradeoff and "Elsa, books like you", under the heading "Plans from people whose taste looks like yours."
+  - **Also on the live v1 site** (found by `eval.md`, re-fetched 2026-09-23): an example card already shows a fit reason, a tradeoff and "Elsa, books like you". It's in the "How it works" section next to "Get matched, not ranked."; a later section is headed "Plans from people whose taste looks like yours."
     - So per-stop evidence isn't new to XPMatch's own copy.
     - What's new is the scope (short city trips, one city), the source (only real trips, named), and the refusal (an honest "not enough").
 
@@ -127,7 +127,8 @@ Read from `differentiators.md`, not re-derived. **Verdict: POSITIONAL.**
 - **Founder's LinkedIn headline** (≤220 characters; it's the founder's own profile, so their voice is allowed):
   > Founder, XPMatch · Trip plans built only from what real travelers actually did, matched stop by stop to your taste. Every stop shows why it fits, the catch, and whose trip it came from. One city first.
 - **Site hero:**
-  - **Headline:** *Real travelers' trips, matched to how you travel.*
+  - **Headline:** *Only real travelers' trips, matched to how you travel.*
+    - "Only" is what rivals can't claim. The version without it read as true for Wanderlog and Mindtrip in the re-grade.
   - **Subhead:** *XPMatch builds your 2–4 days in [pilot city] from what real travelers actually did, matched stop by stop to you. Every stop shows why it fits, what the catch is and whose trip it came from. Free while in beta.*
   - **Ship-today subhead** (no placeholder): *XPMatch builds 2–4 day city plans from what real travelers actually did, matched stop by stop to you. Every stop shows why it fits, what the catch is and whose trip it came from. Starting with one city, free while in beta.*
 - **One-line intro** (podcasts and DMs):
@@ -148,6 +149,7 @@ Read from `differentiators.md`, not re-derived. **Verdict: POSITIONAL.**
   - Every other objection and aspiration has a verbatim source in `validation.md`.
   - That sample skews toward older travelers who mostly go to Europe (RS) and toward technical readers (HN).
 - **"In minutes"** is a design target (plan §4), not a measurement. Keep it out of public copy until the pilot times it.
+  - The same goes for "minutes instead of evenings" in the value statement, and for the O1 answer that relies on "In minutes".
 - **"a short voice chat"** holds only if D-035 (decided by the voice spike, S0.2) puts voice in the pilot. If voice slips to MVP-1.1, say "a few taps" in every derivative: here, `profile.md` and `journey.md` email 2.
 - **"free while in beta"** follows the pilot decision (plan §4, "How money moves") and `validation.md`'s pivot. Change it if D-016 sets a price.
 - **Couples:** kept in the audience but not in the lead. The evidence that couples disagree is old and contested (`validation.md`).

@@ -115,7 +115,7 @@ Adapted for LIFECYCLE ONLY:
 
 | Track (Q2 challenge) | Issues | Titles | Merge point |
 | --- | --- | --- | --- |
-| Too many options | 4 | 1. The overlap test · 2. Write your 3 must-haves first · 3. The 4-slot day · 4. Leave one slot loose | Lifecycle list (invitation and seasonal note) |
+| Too many options | 4 | 1. The overlap test · 2. Write your 3 must-haves first · 3. The 4-slot day · 4. Leave a slot empty rather than fill it | Lifecycle list (invitation and seasonal note) |
 | Lists don't match what we like | 4 | 1. A 4.8-star place can be wrong for you · 2. Popular vs right for you · 3. Your 3 must-haves · 4. How XPMatch shows why a stop fits | Same |
 | Who to trust | 4 | 1. 4 questions about any reviewer · 2. A friend's tip vs a stranger's review · 3. The catch is the useful part · 4. Why every XPMatch stop names whose trip it came from | Same |
 

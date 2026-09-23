@@ -105,7 +105,7 @@ Every value in this section is a placeholder and `UNSOURCED` unless it cites a s
    - **A day XPMatch can't fill well** is shown honestly (plan §4 step 4), but it counts as a miss against this promise, not a success. The first version let either outcome count (`eval.md`).
 
 2. **Likelihood:**
-   - **Outcome statement:** Today a short trip means evenings of open tabs and a plan that looks like everyone else's. After one session, you have days that fit how you travel, and you know the catches before you go.
+   - **Outcome statement:** Today a short trip means a pile of open tabs and a plan that looks like everyone else's. After one session, you have days that fit how you travel, and you know the catches before you go.
    - **Testimonial required** (spec only; none exists):
      - from a pilot traveler who isn't a friend, family member or staff;
      - about *this plan*, naming one stop that fit and one catch that helped;

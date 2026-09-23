@@ -31,7 +31,7 @@ Fix these before any new traffic goes to xpmatchme.com. The copy lives in the v1
 1. **Remove the two lines that appear word for word on Mindtrip's site:** "Snag a coveted table at the hottest restaurants." and "Create. Inspire. Earn." (`differentiators.md`). That's brand and legal risk.
 2. **Remove the claims the new product can't make:**
    - "In seconds, XPMatch drafts a plan for anywhere you want to go" (it covers one city);
-   - "Recommendations use live map data" (MVP-1 uses operator-entered places);
+   - "Recommendations use live map data" (on the app's login page, app.xpmatchme.com; MVP-1 uses operator-entered places);
    - "get paid when people with your standards book what you recommend" (no creator payouts in MVP-1).
 3. **Replace "Answer 15 questions…".** The friction evidence in `validation.md` ("ridiculous levels of detail") argues against leading with a long quiz, and the plan's profile is 3–5 questions.
 4. **Also close to Mindtrip's copy** (found by `eval.md`; re-fetched 2026-09-23):
@@ -42,6 +42,10 @@ Fix these before any new traffic goes to xpmatchme.com. The copy lives in the v1
 5. **The example card** ("Alto Terrace · 4.4 overall · 4.8 from people like you · 91 fit · 9/10 of comparable travelers would go back · Elsa, books like you") shows specific ratings and a named reviewer.
    - If Alto Terrace or Elsa are real, or the numbers aren't real data, label the card "Example" or remove it (AGENTS.md: never present fabricated reviews or activity as real).
    - Whether the venue exists wasn't checked.
+6. **Remove v1's own "people like you" claims** (found in the re-grade). They describe a mechanism v2 doesn't have: v2 matches stops to the traveler, and similarity to others appears only with consent.
+   - "matches you to experiences people like you actually loved"
+   - "borrow plans from XPMatchers whose taste profile looks like yours"
+   - the "Get inspired" heading "Plans from people whose taste looks like yours."
 
 ## Recommended primary platform: LinkedIn
 
@@ -54,7 +58,7 @@ Fix these before any new traffic goes to xpmatchme.com. The copy lives in the v1
 ## LinkedIn
 
 1. **Banner copy** (one thing: the beta):
-   - Line 1: `Real travelers' trips, matched to how you travel.` (49 characters)
+   - Line 1: `Only real travelers' trips, matched to how you travel.` (54 characters)
    - Line 2: `XPMatch beta · Join the waitlist at xpmatchme.com` (49 characters). This assumes the v2 landing page replaces the v1 site at the founder's existing domain.
    - Once D-006 names the city, line 2 can become `XPMatch beta · [pilot city] · xpmatchme.com`.
    - **No social proof number:** there isn't a real one yet.
@@ -64,10 +68,10 @@ Fix these before any new traffic goes to xpmatchme.com. The copy lives in the v1
    - Natural light, outdoors or at a café table.
    - Use the same photo on the landing page's founder note.
 
-3. **Tagline** (201 characters; limit 220 per the skill, `[VERIFY]` the current limit):
-   > Founder, XPMatch · Trip plans built only from what real travelers actually did, matched stop by stop to your taste. Every stop shows why it fits, the catch, and whose trip it came from. One city first.
+3. **Tagline** (199 characters; limit 220 per the skill, `[VERIFY]` the current limit):
+   > Founder, XPMatch · 2–4 day city trips for couples and solo travelers, built only from what real travelers actually did, matched stop by stop to your taste. Every stop shows why it fits and its catch.
 
-   - **Traces to:** `uvp.md` value clause plus the differentiator. The audience noun comes through "your taste", and the city scopes it.
+   - **Traces to:** `uvp.md` value clause plus the differentiator. It names the audience (couples and solo travelers on 2–4 day city trips); the city is added once D-006 names it.
 
 4. **Custom profile link and creator tools:**
    - Claim `linkedin.com/in/[linkedin-url]`.
@@ -107,7 +111,7 @@ Fix these before any new traffic goes to xpmatchme.com. The copy lives in the v1
 
 7. **Company page:**
    - Name: `XPMatch`.
-   - Tagline: `Real travelers' trips, matched to how you travel.` (49 characters; `[VERIFY]` the current limit).
+   - Tagline: `Only real travelers' trips, matched to how you travel.` (54 characters; `[VERIFY]` the current limit).
    - Description:
      > XPMatch is a phone app, now in development, that plans short city trips from what real travelers actually did, matched stop by stop to your taste. Tell it once how you like to travel, type the trip you want, and get a day-by-day plan where every stop shows why it fits, what the catch is and whose trip it came from. The beta starts in one city and is free.
    - Attach the company page to the founder's Experience entry.
@@ -118,7 +122,8 @@ Skipped by Gate 0. Not rewritten.
 
 ## One-page site (the beta landing page)
 
-- **Hero headline:** Real travelers' trips, matched to how you travel.
+- **Hero headline:** Only real travelers' trips, matched to how you travel.
+  - The first fix, "Real travelers' trips, matched to how you travel.", read as true for Wanderlog and Mindtrip in the re-grade. "Only" is the part they can't claim.
 - **Subhead** (ships today): XPMatch builds 2–4 day city plans from what real travelers actually did, matched stop by stop to you. Every stop shows why it fits, what the catch is and whose trip it came from. Starting with one city, free while in beta.
 - **Once D-006 names the city:** "…your 2–4 days in [pilot city]…"
 - **One CTA** (ships today): `Join the beta`. Once the city is named: `Join the [pilot city] beta`.
@@ -135,7 +140,7 @@ Skipped by Gate 0. Not rewritten.
 
 **Proof:** omitted. There is none yet; don't add testimonials, counts or ratings until real ones exist.
 
-**Form:** only what the invitation needs, plus two optional fields: 8 fields, 5 required.
+**Form:** only what the invitation needs, plus three optional fields: 8 fields, 5 required.
 - The first version also asked "Who with?". It moved to the optional survey (`validation.md` Q2), because nothing about the invitation depends on it.
 - The magnet page (`lead-magnet.md`) asks for email only.
 
@@ -145,12 +150,12 @@ Skipped by Gate 0. Not rewritten.
 | First name | text | No | Greeting in emails |
 | Where are you going? | select: [pilot city] · Somewhere else (then a text field "Which city?") | Yes | Separates pilot testers from the waitlist for other cities (plan §4 step 3) |
 | When? | select: month · Not sure yet | No | Invitation timing; check-in timing later |
-| Your phone | select: iPhone · Android | Yes | Chooses the store testing program the invitation comes from: TestFlight or Google Play closed testing (plan §12). Android testers are asked for their Play account email only when invited. `[VERIFY]` Play's current way of adding testers. Added after `journey.md` found the gap |
+| Your phone | select: iPhone · Android | Yes | Chooses the store testing program the invitation comes from: TestFlight, or Google Play testing: internal for the pilot, closed for the waves (plan A-001, §12). Android testers are asked for their Play account email only when invited. `[VERIFY]` Play's current way of adding testers. Added after `journey.md` found the gap |
 | I'm 18 or older | checkbox | Yes | The app requires 18+ (plan §4 step 1) |
 | Email me my beta invitation | checkbox | Yes | Consent for the invitation |
 | Also send occasional XPMatch updates | checkbox | No | Separate consent for updates; `email.md` sends updates only to people who ticked it |
 
-- **After submitting:** "You're on the list." Then an optional 2-minute survey: `validation.md`'s ten questions, multiple choice first and one open question last.
+- **After submitting:** "You're on the list." Then an optional short survey: `validation.md`'s ten questions, multiple choice first and one open question last.
 - **Footer:** privacy policy link, and one text link: *Took a trip you'd share? Tell us* → a separate contributor form (name the city once D-006 is decided). It's secondary to the hero CTA, because supply is the binding constraint (`idea.md`).
 - **Before the form goes live:** the founder picks the form and email provider. None is chosen, and AGENTS.md forbids enabling a paid provider without the founder's authorization. The privacy policy must name that provider.
 
@@ -176,10 +181,13 @@ Skipped by Gate 0. Not rewritten.
 ## Assumptions & Unknowns
 
 - **Origin:** the About uses the founder's published origin line (xpmatchme.com/about). A personal trip story is optional, not a gap.
-- **Ship-today check** (after `eval.md`):
-  - **Ship today:** banner lines 1 and 2, the tagline, the About, the company page, the headline, the ship-today subhead, the CTA "Join the beta", How it works and the form.
-  - **Wait for D-006:** only the city-named variants.
-  - **Wait for the live-site fixes below:** everything that sends traffic.
+- **Ship-today check** (corrected in the re-grade):
+  - **Ships today:** banner line 1, the tagline, the About without its waitlist line, the company page, the headline and the ship-today subhead.
+  - **Waits for a waitlist page plus a form and email provider** (the founder's choice; the live site's call to action is still "Get my Fit Score"): banner line 2, the About's waitlist line, the "Join the beta" CTA and the form.
+  - **Waits for D-006 (the city):** the city-named variants and the form's "Where are you going?" options.
+  - **Waits for D-035 (voice):** "a short voice chat" in How it works. Otherwise it says "a few taps".
+  - **Waits for D-005 (plan approval):** anything describing the product as planned.
+  - **Waits for the live-site fixes above:** anything that sends traffic to xpmatchme.com.
 - `[VERIFY]`: current LinkedIn character limits for headline and company tagline, and newsletter availability. Only the hashtag and Creator Mode removals carry a verified stamp (2026-07-28, from the skill).
 - `UNSOURCED`: "free while in beta" is the plan's pilot policy, not a price decision (D-016).
 - **"A short voice chat"** in How it works depends on D-035. If voice isn't in the pilot, the step reads "A few taps" (`uvp.md`).

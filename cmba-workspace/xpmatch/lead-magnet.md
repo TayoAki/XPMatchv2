@@ -11,8 +11,8 @@ Skill: `cmba-leadmagnet` (stage 7 of `cmba-run`). Written 2026-09-23. Read first
 ## Problem architecture
 
 - **Narrow problem:** turning a list of places into 2–4 days that work (how many things a day, which area when, what goes in the morning). Small, tactical, done in one sitting.
-- **Wide problem it exposes:** filling each slot with a place that fits how *you* travel, knowing why it fits, what the catch is and whether the person who recommended it travels like you. That's the ongoing, expensive part: evenings of research and distrust (`validation.md`, quotes 1–9). It's what the beta app does (`offer.md`).
-- **Bridge sentence:** *"Great, your days have a shape now. But what are you putting in the slots? Every row asks why it fits you, what the catch is and who recommended it. That's the part that takes evenings, and it's the part XPMatch does from real travelers' trips."*
+- **Wide problem it exposes:** filling each slot with a place that fits how *you* travel, knowing why it fits, what the catch is and who recommended it. That's the ongoing, expensive part: research and distrust (`validation.md`, quotes 1–9). The beta app fills those three things in from real travelers' trips (`offer.md`).
+- **Bridge sentence:** *"Great, your days have a shape now. But what are you putting in the slots? Every row asks why it fits you, what the catch is and who recommended it. That's the slow part, and it's the part XPMatch fills in from real travelers' trips."*
 
 **Failure tests:**
 - **Too generous?** No. The template gives structure and leaves the slots empty. It teaches the three questions (fit, catch, source) but can't answer them.
@@ -26,7 +26,7 @@ Skill: `cmba-leadmagnet` (stage 7 of `cmba-run`). Written 2026-09-23. Read first
 **Format:** *The 4-slot city trip planner*, a copyable template (Google Sheets and a printable page), plus a 6-minute video showing it filled in for one day.
 - **Tab 1, "Your days":**
   - rows are Day 1–4 × Morning, Lunch, Afternoon, Dinner;
-  - columns are Area, Place, Why it fits me, The catch, Who recommended it (and do they travel like me?), Open that day?, Backup.
+  - columns are Area, Place, Why it fits me, The catch, Who recommended it (and what kind of trip were they on?), Open that day?, Backup.
 - **Tab 2, "Your 3 must-haves":** three lines, filled in before searching (content headline #4).
 - **Tab 3, "Five checks":** the checks from content post 1 as tick boxes beside each row: open that day, one area per half-day, whose trip it came from, why it's there for me, the catch.
 - **The video:** fills one day using the method. The example is labeled *illustrative* and uses no real traveler's trip unless that traveler gave web permission (`content.md` rules).

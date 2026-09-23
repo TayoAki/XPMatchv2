@@ -120,3 +120,58 @@ Graded on 2026-09-23 by an independent agent that hadn't written the artifacts:
 | Seam | Question |
 | --- | --- |
 | Copy ↔ product mechanism | Does any public copy describe *how the product works* differently from the plan? Check every "built from", "matched to" and "never" claim against the plan's requirements |
+
+## Re-grade (review cycle 2) — 2026-09-23, revision `ca81dec`
+
+This was graded independently, with the same protocol: blind first, then verified, and v1 pages fetched by GET only.
+
+| Artifact | Before | After | Verdict | Change |
+| --- | --- | --- | --- | --- |
+| `content.md` | 0/20 (kill check); 12/20 rubric | **14/20** (14 blind); kill check clear | **FAIL**: below 15, and the substitution test fails | Faithfulness 2→3, voice 1→2 |
+| `profile.md` | 13/20 (15 blind) | **15/20** (15 blind); kill check clear | **PASS at the threshold**; substitution passes narrowly | Shippability 1→2, falsifiability 2→3 |
+
+**Did the fixes land?**
+- Most of the 22 claimed fixes landed.
+- **Partly landed:**
+  - one D-036 citation remained;
+  - asset 9's quote was re-justified instead of re-labeled;
+  - the ship-today list included a form with a bracketed option.
+
+**Residual defects the grader found:**
+- **Implied source-traveler similarity:** journey email 2, the magnet's wide problem and its template column, and content post 4.
+- **Untimed durations:** "30 seconds", "2-minute", "takes evenings".
+- **Two v1 quotes placed in the wrong section of the page.**
+- **New defects introduced by the fixes:**
+  - the ship-today list's errors;
+  - a tagline that lost its audience;
+  - a headline generic enough to read true for rivals;
+  - unverified claims about what rivals' guides don't do;
+  - the habit-05 rule not applied to post 2;
+  - a wrong optional-field count.
+
+### Fixes after the re-grade (review cycle 3 edits, not re-graded)
+
+**Removed:** "30 seconds", "2-minute", "takes evenings", "an evening, or three" and "evenings of open tabs".
+
+**Changed:**
+- **Email 2 and the lead magnet** no longer imply XPMatch judges each source traveler's similarity. The template column now asks "what kind of trip were they on?".
+- **Email 3** swaps its unsourced "built to give everyone the same answer" for a sourced traveler quote (Judy, `validation.md`).
+- **Headline:** "*Only* real travelers' trips, matched to how you travel." "Only" is what rivals can't claim.
+- **The LinkedIn tagline** names its audience: couples and solo travelers on 2–4 day city trips.
+- **The ship-today list** is corrected:
+  - the form and waitlist lines wait for a waitlist page and a provider;
+  - the D-005, D-006 and D-035 dependencies are named.
+- **The live-site fix list** adds v1's own "people like you" claims.
+- **The hub:**
+  - its reasoning no longer claims what rivals don't do;
+  - it needs at least 3 trips per version;
+  - the content now teaches the refusal. Post 3 says to leave a slot empty rather than fill it, and that line carries through the journey and the email track.
+- **Post 2** credits v1's habit 05.
+- **Also corrected:** the misplaced quote locations, the last D-036 citation, the field count, and the Play testing track (internal for the pilot).
+
+**Not fixable without the founder:** voice match needs 5 of the founder's own posts (LinkedIn was unreadable). It will cap `content.md`'s voice score until then.
+
+**Status:**
+- `content.md` was last graded at 14/20 (FAIL) and `profile.md` at 15/20 (PASS).
+- Both were edited after that grade.
+- A third grade would be review cycle 3 of the repository's maximum of 5 (AGENTS.md). It wasn't run.
