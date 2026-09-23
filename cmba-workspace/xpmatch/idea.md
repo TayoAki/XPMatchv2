@@ -22,7 +22,7 @@ This is an audit of an existing, decided premise, not a blank-page search. The s
 - **Real constraint on this business:** content supply per city (plan D-006) and proof that matching beats destination-only suggestions (PRD H1). Positioning is not the binding constraint.
 
 **Subject type:** organization, so the organizational sources are used.
-**Sources that produced candidates: 2/4.** Proven capability and underused asset did; repeated inbound request and solved-internally are `GAP`. That meets the minimum of 2, but the overlap signal is weak, which makes the recommendation below less certain than a four-source harvest would.
+**Sources that produced candidates: 3/4.** Corrected after `eval.md`; the first version said 2/4. Proven capability, underused asset and solved-internally did; repeated inbound request is a `GAP`.
 
 ## Harvest (organizational sources)
 
@@ -31,14 +31,14 @@ This is an audit of an existing, decided premise, not a blank-page search. The s
 | Proven capability | What does XPMatch demonstrably do better than its category? | Nothing is demonstrated against the category yet: zero paying customers and no outside testers (v1 `docs/BUSINESS_PLAN.md`, `docs/BETA_READINESS.md`). What v1 *built*: explained match scoring, review answers that quote evidence verbatim, and "packages" of one stay, three things to do and three places to eat | A, D |
 | Underused asset | What does XPMatch own that isn't monetized? | v1's planning and import tooling (links, screenshots, reservations), its advisor-segment research, and the PRD's trust rules | A, B, C, E |
 | Repeated inbound request | What do customers keep asking for? | `GAP`: there are no customers yet. Human task: log every tester request during the pilot | — |
-| Solved-internally | What problem did the founders solve for themselves? | `GAP`: the founder's own planning story isn't documented. Human task: write it down; it is also the profile About section's missing input | — |
+| Solved-internally | What problem did the founders solve for themselves? | Found after `eval.md`: xpmatchme.com/about says "XPMatch grew out of MileMatch, a travel review concept built on one observation: two honest reviews can be opposites because the reviewers have different reference points." The first version called this a `GAP` without checking the site | A, E |
 
-Overlap: A appears in two sources (proven capability and underused asset). Nothing appears in three.
+Overlap: A appears in three sources (proven capability, underused asset and solved-internally); E appears in two.
 
 ## Candidates
 
 ### A. Taste-matched itineraries from real travelers (the PRD premise)
-- Sources: proven capability and underused asset (overlap: 2)
+- Sources: proven capability, underused asset and solved-internally (overlap: 3)
 - Chain: real travelers' permissioned trips → matched to one traveler's taste profile, with honest reasons and catches → a plan for both partners in minutes instead of hours → save time, and peace of mind that the trip fits → **Relationships** (a couple's shared trip). Solo travelers get the same outcome without the second person.
 - Angle: the trust rules (only real, permissioned sources; honest catches; commission never ranks) are the PRD's, not a generic planner's.
 
@@ -118,7 +118,7 @@ It sits in a paying market only if validation shows travelers already spend on p
 
 ## Assumptions & Unknowns
 
-- `GAP`: the founder's own origin story (solved-internally) and any inbound requests (none exist yet).
+- `GAP`: inbound requests (none exist yet). The origin is public in one line (xpmatchme.com/about); the page says the full story is coming.
 - `INFERRED`: stickiness scores assume 2–4 leisure trips a year, from v1's segment description (v1 `docs/BUSINESS_PLAN.md` §3), not measured behavior.
 - **Profitability scores, checked in `validation.md`:** A's 2 stands and B's 4 is superseded (now 2). Neither is measured on XPMatch's own travelers yet.
 - The advisor benchmark's stickiness score (5) is reasoning from how often advisors plan trips, not a measurement.

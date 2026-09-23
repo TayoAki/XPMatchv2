@@ -2,11 +2,24 @@
 
 Skill: `cmba-content` (stage 5 of `cmba-run`). Written 2026-09-23. Read first: `idea.md`, `validation.md`, `differentiators.md`, `uvp.md`, `profile.md`.
 
-**Existing content read before writing:**
-- **The live v1 landing page** (fetched 2026-09-23, quoted in `differentiators.md`) is the only public XPMatch content found.
-- **The founder's LinkedIn posts** couldn't be read (login wall).
-- **So voice can't be matched:** the register below follows `uvp.md`: plain, specific, second person, no hype.
-- **Existing strategy:** there is no content strategy to misdiagnose. v1's page is a product page, not content.
+**Existing content read** (corrected after `eval.md`; re-fetched 2026-09-23):
+
+| # | URL | Type | Read in full? | Voice trait, with a quote |
+| --- | --- | --- | --- | --- |
+| 1 | xpmatchme.com | Landing page, with a "Why weekends disappoint" section citing 4 studies | Yes | Cites research: Gollwitzer & Sheeran 2006, Iyengar & Lepper 2000, Wilson & Gilbert 2005, Alves et al. 2023 |
+| 2 | xpmatchme.com/guide | Teaching piece: "Ten habits of people who never waste a weekend" | Yes | One imperative action per item, then a short closer: "One booked table beats ten open threads." / "Thirty seconds, and it compounds." |
+| 3 | xpmatchme.com/about | Company page | Yes | Plain and specific: "two honest reviews can be opposites because the reviewers have different reference points" |
+| — | The founder's LinkedIn | Posts | No (login wall) | — |
+
+- **The first version was wrong about this:** it said v1's landing page was the only content and that there was no content strategy. The weekend guide is a real teaching piece, linked from v1's top navigation.
+- **Voice fingerprint** (from rows 1–3):
+  - second person;
+  - an imperative action per item;
+  - a one-line aphorism to close ("A five-star from someone with different reference points is noise.");
+  - numbered items;
+  - research cited where it exists.
+- **Still short of the skill's minimum:** 3 pieces, not 5, so the posts below are marked **DRAFT: VOICE PARTLY MATCHED**.
+- **Existing strategy:** v1's content taught *weekend experiences* (the Fit Score quiz). Its habits 01 ("name your three favorite kinds of experiences"), 03 ("what you loved, what you'd skip") and 05 ("reviews from people whose standards match yours") already cover headline 4, hook 8 and post 2. Adapt and link those habits; don't restate them as new.
 
 ## 0. Distribution mode: intent-led
 
@@ -33,7 +46,7 @@ Themes (9) × styles; each cell is a headline.
 | T1 Planning 2–4 days | The 4-slot day | "See everything" is how short trips go wrong | 3 days vs 4 days | How long real trips there lasted | 6 things to decide before you pick a single place | — |
 | T2 Judging fit | Write your 3 must-haves before you search | A 4.8-star place can be wrong for you | Popular vs right for you | — | — | — |
 | T3 Trusting recommendations | 4 questions to ask about any review | Stop asking "where should I eat?" | Friend's tip vs stranger's review | — | — | — |
-| T4 AI itineraries | Check an AI itinerary in 10 minutes | The problem with AI plans isn't accuracy, it's sameness | ChatGPT's plan vs real trips | We checked an AI plan against real trips | 5 checks before you trust any generated plan | Next year's AI plans will still be the same for everyone, unless… |
+| T4 AI itineraries | Check an AI itinerary before you trust it | The problem with AI plans isn't accuracy, it's sameness | ChatGPT's plan vs real trips | We checked an AI plan against real trips | 5 checks before you trust any generated plan | Next year's AI plans will still be the same for everyone, unless… |
 | T5 The pilot city | 3 days in [pilot city] from real trips | — | — | [Pilot city] in [month]: what's open, what's crowded | — | — |
 | T6 Tourist traps | How to spot a trap in 30 seconds | — | — | — | Where real travelers ate in [pilot city] | — |
 | T7 Solo city trips | Two solo days in [pilot city] | — | — | — | — | — |
@@ -49,11 +62,11 @@ Themes (9) × styles; each cell is a headline.
 5. A 4.8-star restaurant can still be wrong for you. Here's how to tell (T2, contrarian)
 6. 4 questions that tell you whether a reviewer travels like you (T3, step-by-step)
 7. Stop asking "where should I eat?" Ask this instead (T3, contrarian)
-8. How to check an AI itinerary in 10 minutes before you trust it (T4, step-by-step)
+8. How to check an AI itinerary before you trust it (T4, step-by-step)
 9. The problem with AI trip plans isn't accuracy. It's sameness (T4, contrarian)
 10. We checked an AI's 3-day [pilot city] plan against real trips (T4, analytical)
 11. 5 checks before you trust any generated itinerary (T4, listicle)
-12. 3 days in [pilot city], built from real travelers' trips, catches included (T5, pillar)
+12. 3 days in [pilot city] for three kinds of traveler, from real trips, catches and unknowns included (T5, pillar)
 13. [Pilot city] in [month]: what's open, what's crowded, what real travelers did (T5, analytical, seasonal)
 14. How to spot a tourist trap in 30 seconds (T6, actionable)
 15. Where real travelers ate in [pilot city], and what they'd skip (T6, listicle)
@@ -67,15 +80,15 @@ Rank 1 is the searcher closest to booking *this* trip. The build order differs f
 
 | Rank | Asset (headline #) | Intent evidence (`validation.md`) | Funnel stage | Build window | Needs |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 3 days in [pilot city] from real trips (#12) | "how to plan a 3 day trip to rome", "3 days in rome itinerary reddit" | Solution-aware | Weeks 5–6 | D-006, ≥3 web-permissioned trips |
+| 1 | 3 days in [pilot city] for three kinds of traveler, from real trips (#12) | "how to plan a 3 day trip to rome", "3 days in rome itinerary reddit" | Solution-aware | Weeks 5–6 | D-006, ≥3 web-permissioned trips |
 | 2 | How many days in [pilot city] (#3) | "how many days in rome is enough" | Solution-aware | Weeks 6–7 | Same |
 | 3 | Where real travelers ate, and what they'd skip (#15) | "how to avoid tourist traps in rome" | Solution-aware | Weeks 7–8 | Consented picks |
 | 4 | [Pilot city] in [month] (#13) | Seasonal planning; replayed yearly | Solution-aware | Weeks 8–9 | D-006 |
-| 5 | Two solo days in [pilot city] (#16) | "overwhelmed… only have a few days" (a solo traveler) | Solution-aware | Weeks 9–10 | Solo trips with permission |
+| 5 | Two solo days in [pilot city] (#16) | "overwhelmed… only have a few days" (a solo traveler, but on a 3-day Switzerland trip, not a city break: weak evidence) | Solution-aware | Weeks 9–10 | Solo trips with permission |
 | 6 | We checked an AI's plan against real trips (#10) | "can chatgpt plan a trip for me", "which ai is best for trip planning" | Problem-aware | Weeks 10–11 | A published method (below) |
-| 7 | Check an AI itinerary in 10 minutes (#8) | "chatgpt travel itinerary prompt reddit" | Problem-aware | Weeks 1–2 | None: can start now |
+| 7 | Check an AI itinerary before you trust it (#8) | "chatgpt travel itinerary prompt reddit" | Problem-aware | Weeks 1–2 | None: can start now |
 | 8 | 4 questions about any reviewer (#6) | "a rating from a person you know nothing about" | Problem-aware | Weeks 2–3 | None |
-| 9 | The 4-slot day (#1) | "overwhelmed in trying to narrow it down" | Problem-aware | Weeks 3–4 | None |
+| 9 | The 4-slot day (#1) | "overwhelmed in trying to narrow it down" (about choosing; four slots a day forces the choice) | Problem-aware | Weeks 3–4 | None |
 | 10 | How to spot a tourist trap in 30 seconds (#14) | "how to avoid tourist traps" | Problem-aware | Weeks 4–5 | None |
 | 11 | How to share a trip so it helps the next traveler (#18) | Supply: "the UGC with users or lack thereof" (GridTravel, HN) | Contributors | **The first 2 weeks after D-006**, the same dates as `metrics.md` W1. Moved from weeks 11–12: see the note below | The contributor form (`profile.md`) |
 | 12 | Planning for two without splitting the list (#17) | Old evidence only | Problem-aware | Weeks 12–13 | Replace it if the survey (Q3) shows no couple pain |
@@ -97,22 +110,23 @@ Rank 1 is the searcher closest to booking *this* trip. The build order differs f
 
 ## Written posts
 
-These are LinkedIn posts from the founder (spokes), with the meat written first. None uses a statistic, because none exists yet.
+These are LinkedIn posts from the founder (spokes), with the meat written first. All four are **DRAFT: VOICE PARTLY MATCHED** (see the inventory above).
+- **No statistics and no untimed durations:** the first version's "10 minutes" and "most people" claims were removed after `eval.md`.
 
 ### Post 1 (asset 7): check an AI itinerary
 
 **Trailer:**
 > An AI can plan 3 days in a city in seconds.
-> Checking it takes 10 minutes, and most people skip it.
+> Before you trust it, run five checks.
 
 **Meat:**
 1. **Open every place's own website or map listing.** You're checking that it exists and is open on the day the plan puts it. Generated plans still suggest places that have closed.
 2. **Put each day's stops on one map.** If a morning jumps across the city twice, the plan is ranking places, not planning your day.
-3. **Count the famous names.** If every stop is on every top-10 list, you've got the same trip as everyone else who asked.
+3. **Ask whose trip each stop came from.** A place someone actually went to, with a note on when and why, tells you more than a place that's on every list. If the plan can't say, treat that stop as a guess.
 4. **Ask "why this, for me?" of three stops.** If the only answer is "it's popular", replace it.
-5. **Find the catch.** Queues, cash only, closed Mondays, a 40-minute walk. If the plan names none, you'll meet them on the day.
+5. **Find the catch.** Queues, cash only, closed Mondays, a 40-minute walk. If the plan names none, you may meet them on the day.
 
-**Summary:** Existence, geography, sameness, fit, catches. Five checks, about ten minutes, before you trust any generated plan.
+**Summary:** Is it open? Does the day hang together? Whose trip is it from? Why is it here for you? What's the catch? A checked plan beats a hopeful one.
 
 **CTC:** What's the worst thing an AI itinerary has sent you to?
 
@@ -145,36 +159,36 @@ These are LinkedIn posts from the founder (spokes), with the meat written first.
 ### Post 3 (asset 9): the 4-slot day
 
 **Trailer:**
-> Short city trips fail at the scheduling, not the choosing of places.
-> Here's the 4-slot day, which fixes that.
+> A short city trip needs a shape before it needs places.
+> Get the shape right and every choice after it gets easier.
 
 **Meat:**
 1. **Give each day four slots:** morning, lunch, afternoon, dinner. Not eight. The gaps are where the trip happens.
 2. **Keep each half-day in one area.** Pick the morning's neighborhood first, then find lunch within a short walk of it.
-3. **Put the thing you'd hate to miss in a morning slot.** Mornings are least likely to be lost to queues and tiredness.
+3. **Put the thing you'd hate to miss in a morning slot.** It's the slot a late night or a long queue is least likely to eat.
 4. **Leave one slot a day loose.** Fill it on the day, or not at all.
 5. **Check opening days per slot, not per place.** A café that's closed on Mondays is fine on Tuesday's plan.
 
-**Summary:** Four slots, one area per half-day, the must-see in the morning, one loose slot, opening days checked per slot.
+**Summary:** Four slots, one area per half-day, the must-see in the morning, one loose slot, opening days checked per slot. Shape first. Then every slot has to earn its place, and that's the harder part.
 
 **CTC:** How many things do you plan per day on a city trip, and do you manage them all?
 
 **Testable expectation:**
 - **Stage:** problem-aware.
 - **It landed if** people share their own number and their failures ("we planned 8 and did 3").
-- **Why it matters:** the plan's slot design (D-036) assumes 4 slots a day. A consistent answer of 2–3 is a product signal worth passing to the planner's defaults.
+- **Why it matters:** the plan sets items per day by pace: relaxed 3, moderate 4, packed 5 (A-006; the first version wrongly cited D-036). If most answers say 2–3, pass that on as a reason to make "relaxed" the default.
 
 ### Post 4 (asset 11): share a trip so it helps
 
 **Trailer:**
-> Most trip reports are useless to the next traveler.
-> Not because they're wrong, but because they leave out the one thing that helps.
+> A trip report can be accurate and still useless to the next traveler.
+> The fix is one line long.
 
 **Meat:**
 1. **Say who you are as a traveler:** pace, budget band, what you'd cross town for. A plan is only useful to people who travel like you.
 2. **Give the order you did things in, and the area.** A list of places isn't a trip.
 3. **Name one catch per stop.** "Worth it, but go before 11" is worth more than "amazing".
-4. **Say what you'd skip next time.** It's the most useful line in any trip report and the one most people leave out.
+4. **Say what you'd skip next time.** It's the line that saves the next traveler a wasted afternoon.
 5. **Leave out what's private.** Exact dates, who you were with, what you spent: the next traveler doesn't need them.
 
 **Summary:** Your travel style, the order, a catch per stop, what you'd skip, and nothing private.
@@ -196,7 +210,7 @@ These are LinkedIn posts from the founder (spokes), with the meat written first.
 | Tourist traps | Google autocomplete | "how to avoid tourist traps in rome" |
 | Sameness of AI plans | RS forum thread | "Help! I don't know where to start!" (Judy, 04/01/26) |
 | Generic AI answers | RS forum thread | "Itinerary question experiment" (Lexma, 03/29/26) |
-| Double-checking AI | YouTube comments | "I have to double check everything" (a comment, 2 likes; `validation.md`) |
+| Double-checking AI | YouTube comments | "I have to double check everything": a comment on youtube.com/watch?v=2mxxMr9qoUE (comment `UgwHb0OaRYCX4HqUCaZ4AaABAg`, 2 likes), reported by the validation research pass. `UNVERIFIED`: it isn't in `validation.md` and wasn't re-checked here. The first version cited `validation.md`, which was wrong (`eval.md`) |
 | Reviewer context | RS forum thread | "Fake Reviews" (Paul, 01/29/23) |
 | Real people's routes | Hacker News | Show HN GridTravel comments (2026-05-15) |
 | Closed places | App Store reviews | The Layla 1★ review "Don’t waste your money!" (2026-07-05) |
@@ -205,7 +219,9 @@ These are LinkedIn posts from the founder (spokes), with the meat written first.
 
 ## Hub and spoke
 
-**Hub:** Asset 1, *3 days in [pilot city], built from real travelers' trips, catches included* (the landing site).
+**Hub:** Asset 1, *3 days in [pilot city] for three kinds of traveler, built from real trips, with every stop's catch and what we still don't know* (the landing site).
+- **Why this title (after `eval.md`):** Wanderlog and Mindtrip already publish 3-day city itineraries built from one traveler's trip.
+- **What they don't do:** split by kind of traveler, show each stop's catch, or say what's unknown. That's the differentiator, so it goes in the title.
 
 | # | Spoke | Style | Where |
 | --- | --- | --- | --- |
@@ -213,12 +229,12 @@ These are LinkedIn posts from the founder (spokes), with the meat written first.
 | 2 | "3 things every real trip there had in common" | Observation | LinkedIn |
 | 3 | "5 stops people skipped, and why" | Listicle | LinkedIn |
 | 4 | "The top-10 list is the wrong way to see [pilot city]" | Contrarian | LinkedIn |
-| 5 | "How people planned [pilot city] ten years ago vs now" | Past vs present | A forum answer, no links where the rules ban them |
+| 5 | "How people planned [pilot city] ten years ago vs now, and the one habit worth keeping" | Past vs present | A forum answer, no links where the rules ban them |
 | 6 | "One couple's plan, what they changed on the day" (with permission) | Case study | LinkedIn |
-| 7 | "Why city plans will be built from real trips, not generated" | Prediction | LinkedIn |
+| 7 | "Why city plans will be built from real trips, and how to check whether yours was" | Prediction | LinkedIn |
 | 8 | "Build your own 3-day plan with the 4-slot method" | Step-by-step | Short video walkthrough |
 
-- **Pre-promo (the day before):** "Tomorrow I'm publishing a 3-day [pilot city] plan built only from real travelers' trips, catches included. What would you want it to answer?"
+- **Pre-promo (the day before):** "Tomorrow I'm publishing a 3-day [pilot city] plan built only from real travelers' trips, in three versions for three kinds of traveler, with the catches and unknowns included. What would you want it to answer?"
 - **Post-promo (the day after):** "Yesterday I published a 3-day [pilot city] plan from real trips. The most-asked question so far: [the real question, filled in from replies]. Here's the answer."
 
 ## Hook bank (24)
@@ -227,12 +243,12 @@ All are original and untested; none is copied from a named creator.
 - **Why untested:** harvesting proven hooks from adjacent niches needs LinkedIn access, which this run didn't have (`GAP`). Score each after use.
 - **Burn rule:** retire a hook after about 3 uses.
 
-1. An AI can plan your trip in seconds. Checking it takes ten minutes.
+1. An AI can plan your trip in seconds. Checking it is up to you.
 2. A 4.8-star place can still be wrong for you.
-3. Short trips fail at the scheduling, not the choosing of places.
-4. Most trip reports leave out the one line that helps.
+3. A short trip needs a shape before it needs places.
+4. Your trip report is missing one line.
 5. You don't need more recommendations. You need to know who made them.
-6. Everyone who asked the same AI got the same trip.
+6. Is your AI itinerary the same as everyone else's?
 7. "Must-see" is doing a lot of work in your itinerary.
 8. The best line in any trip report: "I'd skip this."
 9. Three days in [pilot city] is enough, if you stop trying to see everything.
@@ -268,7 +284,7 @@ All are original and untested; none is copied from a named creator.
 
 ## Assumptions & Unknowns
 
-- **Voice is unmatched:** no founder posts were readable. Before publishing, compare against 5 of the founder's own posts and adjust sentence length and person.
+- **Voice is partly matched:** from v1's weekend guide and site (3 pages; the skill asks for 5–10). Before publishing, compare with 5 of the founder's own LinkedIn posts.
 - **Search volume:** intent depth comes from autocomplete stems for Rome, used as a probe; no pilot-city volumes were measured. Human task: once D-006 is decided, check the city's stems and adjust the ranking.
 - `GAP`: AnswerSocrates, AnswerThePublic, competitor guides, and proven hooks from adjacent niches.
 - **Web permission:** assets 1–3, 5 and 11's examples depend on contributors granting web publication, a scope the plan doesn't define yet. Raise it with the content-permission design (plan §7) before asset 1.

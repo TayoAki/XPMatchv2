@@ -22,12 +22,15 @@ Skill: `cmba-offer` (stage 9 of `cmba-run`). Written 2026-09-23. Read first: eve
 | Concierge | A hand-built itinerary (the PRD's separate experiment) | USD 79 | `INFERRED`: defined in the PRD, with no sign it's running | PRD §1 (via `idea.md`) |
 | Creator payouts | "get paid when people with your standards book what you recommend" | — | `UNKNOWN`: claimed on the live v1 site, not in the plan (no payouts in MVP-1) | X1 (`differentiators.md`) |
 | Subscription | Like Wanderlog Pro (USD 5.99–16.99 a month) or Layla Premium (USD 9.99 a month) | — | Absent; D-016 open | Plan D-016; `validation.md` |
+| Business offers (v1 site) | "For business": Venues, Hosts, Packages, "Book a demo" | — | `CONFIRMED` in the live v1 site's navigation (fetched 2026-09-23); whether anything is sold is `UNKNOWN` | xpmatchme.com; missed by the first version, found by `eval.md` |
+| Creator program (v1 site) | "For creators": Become a Creator, Creator Academy | — | `CONFIRMED` in v1's navigation; whether it runs is `UNKNOWN` | xpmatchme.com |
 
 **Absent rungs:** the paid concierge (not running) and a subscription.
 
 **Recommendation targets:** the concierge, as a test. Its absence is `INFERRED`, so **the first action is confirming it:**
 - the founder confirms that no concierge or paid plan is sold anywhere today, including the v1 site;
-- the founder confirms whether v1's creator-payout claim is live or only copy.
+- the founder confirms whether v1's creator-payout claim is live or only copy;
+- the founder confirms whether any of v1's business offers (venues, hosts, packages) is sold. If one is, it's an operated rung and is not recommended as new. The concierge test stays on the traveler side.
 
 No rung the subject already operates is recommended.
 
@@ -95,8 +98,11 @@ Every value in this section is a placeholder and `UNSOURCED` unless it cites a s
 
 ## The offer (built): the [pilot city] beta invitation
 
-1. **Achievement statement:** by the end of your first session, you'll have a saved plan for 2–4 days in [pilot city] where every stop comes from a real traveler's trip and shows why it fits you, what the catch is and whose trip it came from. Or XPMatch tells you plainly which days it couldn't fill well.
-   - **How it's held to account:** the plan's activation metric (a first itinerary within 24 hours of an approved profile) and its "not enough" state (plan §4 step 4).
+1. **Achievement statement:** by the end of your first session, you'll have a saved plan for every day of your 2–4 days in [pilot city]. Every stop comes from a real traveler's trip and shows why it fits you, what the catch is and whose trip it came from.
+   - **How it's held to account:**
+     - the plan's activation metric (a first itinerary within 24 hours of an approved profile);
+     - the share of requested days filled with good options.
+   - **A day XPMatch can't fill well** is shown honestly (plan §4 step 4), but it counts as a miss against this promise, not a success. The first version let either outcome count (`eval.md`).
 
 2. **Likelihood:**
    - **Outcome statement:** Today a short trip means evenings of open tabs and a plan that looks like everyone else's. After one session, you have days that fit how you travel, and you know the catches before you go.
@@ -153,7 +159,7 @@ Send it manually while the list has fewer than 100 people, and automate it after
 >
 > You said the hardest part of your last city trip was **[Q2 answer, in their words: "narrowing it down" / "lists that didn't match what you like" / "knowing who to trust" / "turning places into days" / "agreeing on the plan"]**.
 >
-> That's exactly the part XPMatch does: it builds the days from real trips by travelers with your taste, and every stop shows **[for "trust": whose trip it came from / for "fit": why it fits you / for "days": which area and slot it's in]**.
+> That's exactly the part XPMatch does: it builds the days from what real travelers actually did, matched stop by stop to you, and every stop shows **[for "trust": whose trip it came from / for "fit": why it fits you / for "days": which area and slot it's in]**.
 >
 > The [pilot city] pilot is small, and invitations go out in the order people joined. Want in? [Join the [pilot city] beta →]
 >

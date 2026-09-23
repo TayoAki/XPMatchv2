@@ -26,7 +26,8 @@ PRD v1.1 stays the base document. This revision changes scope and order only; ev
 
 **Promise (PRD v1.1):** Tell XPMatch how you like to travel. It helps you choose relevant travelers' itineraries, contextual reviews and places, explains the tradeoffs, and turns your choices into a private trip board.
 
-**Proposed wording for draft 4 (needs founder approval):** Tell XPMatch how you like to travel. It builds your trip from what travelers like you actually did, shows why each stop fits you, and lets you swap anything in one tap.
+**Proposed wording (needs founder approval; corrected in draft 9):** Tell XPMatch how you like to travel. It builds your trip from what real travelers actually did, matched stop by stop to how you travel, shows why each stop fits you, and lets you swap anything in one tap.
+- **Why it changed:** draft 4 said "what travelers like you actually did". But items are matched to the traveler's own profile, and similarity to the source traveler appears only with consent (§5, AGENTS.md).
 
 - **First customer:** a solo traveler or couple planning a 2–4 day leisure trip to the pilot city, invited into the pilot.
 - **Job to be done:** "Show me what people who travel like me actually did there, tell me honestly what won't suit me, and give me a plan I can use."
@@ -315,7 +316,7 @@ Plan items show similar travelers who picked them (founder decision). So the rel
   - `mutation_receipt` for idempotency.
 
   No outbox until an asynchronous consumer exists.
-- Content and catalog (M03): `place` (operator-entered: name, area, category, coordinates, official or partner URL), the contributor's public profile and consented public taste, `community_content`, `content_revision`, `content_permission`, `published_itinerary`/`day`/`stop`, and `review` with context.
+- Content and catalog (M03): `place` (operator-entered: name, area, category, coordinates, official or partner URL, regular opening days and hours with a last-checked date), the contributor's public profile and consented public taste, `community_content`, `content_revision`, `content_permission`, `published_itinerary`/`day`/`stop`, and `review` with context.
 - Matching (M04): profile and trip context snapshot, `match_model_version`, `planner_version`, `match_run`, `match_assessment` (its typed target is an itinerary item, the primary unit, or a whole itinerary, review or place), and `match_component` with evidence and explanation; `feedback_event`.
 - Trips (M05): `trip`, `trip_revision`, `trip_day`, `trip_stop`, `trip_source` (lineage, including the channel each item came from: generated plan, swap, Explore, activity, partner or contributor update).
 - Visits and reviews (founder addition):
@@ -376,7 +377,7 @@ Scenario: contributor C's 3-day itinerary for the pilot city and two of C's revi
 | T2 | T takes the survey (and, in a separate run, the voice interview), corrects one recap value and approves: exactly one approved version exists, and a retried approval returns the same version. Before approval no options or itinerary are built, and Explore can't be reached. Denying the mic partway through the interview opens the survey with T's answers so far. | AC-REQ-002-01, AC-REQ-002-02, AC-REQ-002-03, AC-REQ-004-03 | Transaction tests; device run |
 | T3 | T has a must-have and types "3 days, slow mornings, lots of seafood" into the chat. The chat answers with options for every slot of 3 days, drawn from C's and other permissioned itineraries. Each option shows its source, how it matches T's profile, a tradeoff (or "no evidenced tradeoff") and its unknowns. No option fails the must-have; if there aren't enough good options, the chat says so. The same inputs and planner version always produce the same options and the same itinerary. | AC-REQ-006-01, AC-REQ-006-02, AC-REQ-006-03, AC-REQ-025-01, AC-REQ-025-02, AC-REQ-029-01 | Deterministic planner and ranking tests; eval cases |
 | T4 | Without C's public-taste consent, no author-similarity claim appears. | AC-REQ-006-02 | Permission test |
-| T5 | T's option choices survive closing and reopening the app. Tapping "Create itinerary" saves one trip to Trips as a single revision, containing exactly the options that were showing, with lineage for every item. A retried tap returns the same receipt instead of creating a second trip. Clashes are flagged on the itinerary. | AC-REQ-008-01, AC-REQ-008-02 | Transaction tests; device run |
+| T5 | T's option choices survive closing and reopening the app. Tapping "Create itinerary" saves one trip to Trips as a single revision, containing exactly the options that were showing, with lineage for every item. A retried tap returns the same receipt instead of creating a second trip. Clashes are flagged on the itinerary: a stop on a day its listed hours say it's closed, or outside the trip dates. A stop without listed hours says "opening days not known" instead. | AC-REQ-008-01, AC-REQ-008-02 | Transaction tests; device run |
 | T6 | After T removes one stop, moves another, force-quits and signs in on a second device, both devices show the same latest revision. Two conflicting edits produce a conflict, not a silent overwrite. | AC-REQ-008-01, AC-REQ-008-02, AC-REQ-001-01 | Concurrency tests; two-device run |
 | T7 | "Check price and availability" opens the allowlisted page and records exactly one outbound event. A tampered URL is refused, and nothing says "booked". | AC-REQ-011-01, AC-REQ-011-02 | Redirect tests; device run |
 | T8 | U requesting T's profile or trip by ID is denied by both the API and row policies. | AC-REQ-001-02, NFR-001 | Two-user negative tests |
@@ -588,7 +589,9 @@ With at most 20 travelers, report counts next to every rate. In the waves, repor
 ### Assumptions (reversible)
 
 - `A-001`: TestFlight and Google Play internal testing are enough for the pilot; both stores cap internal testing at 100 testers. The waves need TestFlight external testing, which goes through Apple's Beta App Review, and Google Play closed testing (§12).
-- `A-002`: Operator-entered place facts (name, address, area, website) are enough for MVP-1; no Places API.
+- `A-002`: Operator-entered place facts (name, address, area, website, and regular opening days and hours with the date they were last checked) are enough for MVP-1; no Places API.
+  - The "closed that day" clash flag (§4 step 5) uses these hours. A place without them shows "opening days not known" instead.
+  - Hours were added in draft 9, after the CMBA review found the clash flag had no data.
 - `A-003`: Each invited traveler plans one pilot-city trip within a 7-day window.
 - `A-004`: Copying one contributor's whole itinerary is dropped. The generated plan replaces it, and source itineraries stay viewable for context. (This replaces draft 3's whole-itinerary shortcut.)
 - `A-005`: A profile needs at least a pace, two interests and must-haves (which may be "none") before matching starts; everything else can stay unknown.
@@ -741,6 +744,8 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
   - trips saved automatically, replacing "Add to my trips" (A-007).
 - **Changed by founder decision (2026-09-23), draft 8:** the chat answers a request with options the traveler swipes or taps arrows through, changes by typing, and can undo. Only then does "Create itinerary" turn the picks into the itinerary, where the same edits keep working (REQ-025, REQ-026, REQ-029, D-036).
 - **Added by founder decision (2026-09-23), draft 9:** travelers can change the app's colors: System, Light or Dark and five contrast-checked accents (REQ-030, slice 2c, T34). The UI plan (`docs/design/XPMatch-UI-plan.md`) keeps v1's design language, uses the PRD's colors and proposes the shadcn-style React Native kit. Its open choices are D-037 to D-040.
+  - **Also corrected:** the proposed product wording (§2) no longer says plans come from "travelers like you".
+  - **Also corrected:** operator-entered places now carry opening days and hours, so "closed that day" clashes have data (A-002, §7, T5).
 - **Unresolved:** D-005 to D-040.
 
 ## 14. Completion check

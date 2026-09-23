@@ -49,7 +49,7 @@ Two emails, for people who join the beta waitlist (`profile.md` form). Magnet su
 >
 > You're on the list for XPMatch in [pilot city].
 >
-> Quick version of who we are: travel lists rank places by how popular they are, and AI planners fill every hour for anywhere. XPMatch builds your days only from real trips by travelers with your taste, and every stop shows why it fits you, what the catch is and whose trip it came from.
+> Quick version of who we are: travel lists rank places by how popular they are, and AI planners fill every hour for anywhere. XPMatch builds your days only from what real travelers actually did, matched stop by stop to how you travel, and every stop shows why it fits you, what the catch is and whose trip it came from.
 >
 > **What you'll get from us, and when:**
 > - **Your invitation:** the day your place in the pilot opens. It comes from Apple's TestFlight or Google Play testing, depending on your phone, and we'll tell you exactly what to tap.
@@ -72,7 +72,7 @@ Two emails, for people who join the beta waitlist (`profile.md` form). Magnet su
 > While you wait, here are the three most useful things we've made. None of them need the app.
 >
 > 1. **The 4-slot day**: plan 2–4 days in a city without wearing yourselves out. [article link]
-> 2. **Check an AI itinerary in 10 minutes**: five checks before you trust any generated plan. [article link]
+> 2. **Check an AI itinerary before you trust it**: five checks, including whose trip each stop came from. [article link]
 > 3. **4 questions about any reviewer**: how to tell if a 5★ came from someone who travels like you. [article link]
 >
 > When your invitation is ready, you'll hear from us the same day.

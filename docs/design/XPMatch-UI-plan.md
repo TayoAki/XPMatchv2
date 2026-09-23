@@ -253,7 +253,7 @@ Method: WCAG 2.x contrast ratios for every foreground and background pair that a
 **Tabs:** Trips, Explore, Inbox, Profile. The tab bar hides on full-screen flows: options, itinerary, voice, survey, check-ins.
 
 **Sign in (step 1):**
-- the wordmark and one line of promise, "Trips planned from travelers who travel like you" (`uvp.md`);
+- the wordmark and one line of promise, "Real travelers' trips, matched to how you travel" (`uvp.md`);
 - "Continue with Apple" and "Continue with Google", each in its platform's required style;
 - a legal line: continuing confirms 18+ and accepts the Terms.
 - There is nothing else on the screen.

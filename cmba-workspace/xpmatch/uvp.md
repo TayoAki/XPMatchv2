@@ -22,7 +22,7 @@ Same verdict as Gate 0 in `idea.md`. It is restated here, not re-derived.
 
 ## Step 1 — Value statement
 
-> XPMatch helps couples and solo travelers planning 2–4 days in one city get a day-by-day plan built only from real trips by travelers with their taste, so they spend minutes instead of evenings planning and every stop fits how they travel.
+> XPMatch helps couples and solo travelers planning 2–4 days in one city get a day-by-day plan built only from what real travelers actually did, matched stop by stop to their own taste, so they spend minutes instead of evenings planning and every stop fits how they travel.
 
 **Self-exclusion test:** these people read it and correctly walk away.
 - **People who enjoy planning and want control:** "Much of my enjoyment of travel is the planning process." (`validation.md`)
@@ -81,7 +81,7 @@ Read from `differentiators.md`, not re-derived. **Verdict: POSITIONAL.**
 
 ## Step 4 — Movement statement
 
-> Travel lists rank places by how popular they are, and AI planners fill every hour, anywhere, in seconds. That means you get the same itinerary as everyone else, stops that don't fit how you travel, and sometimes places that closed long ago. Until now.
+> Travel lists rank places by how popular they are, and AI planners fill every hour, anywhere, in seconds. That means you get the same itinerary as everyone else, stops that don't fit how you travel, and sometimes places that have closed for good. Until now.
 
 - **The enemy:** the popularity default plus fill-every-slot generation. That's an industry habit, not a person or company.
 - **Harm the traveler has felt:**
@@ -91,7 +91,7 @@ Read from `differentiators.md`, not re-derived. **Verdict: POSITIONAL.**
 
 ## Step 5 — Assembled UVP
 
-> **[MOVEMENT]** Travel lists rank places by how popular they are, and AI planners fill every hour, anywhere, in seconds. You end up on the same itinerary as everyone else, with stops that don't fit how you travel and sometimes places that closed long ago. **[ASPIRATION + DEEP DIVE]** XPMatch builds your days from real trips taken by travelers whose taste matches yours, so the plan feels like yours, not everyone's. **[VALUE, TWISTED]** Tell it once how you like to travel, in a short voice chat or a few taps, then type the trip you want. In minutes you have a day-by-day plan where every stop shows why it fits you, what the catch is and whose trip it came from, and you can swipe any stop for another. **[OBJECTIONS]** No long questionnaire, no invented places, and anything closed on the day you'd go is flagged. No ratings from strangers you know nothing about. When it doesn't have enough good options, it tells you instead of padding your day. It starts in one city because real trips take time to collect, and it's free while in beta.
+> **[MOVEMENT]** Travel lists rank places by how popular they are, and AI planners fill every hour, anywhere, in seconds. You end up on the same itinerary as everyone else, with stops that don't fit how you travel and sometimes places that have closed for good. **[ASPIRATION + DEEP DIVE]** XPMatch builds your days only from what real travelers actually did, matched stop by stop to how you travel, so the plan feels like yours, not everyone's. **[VALUE, TWISTED]** Tell it once how you like to travel, in a short voice chat or a few taps, then type the trip you want. In minutes you have a day-by-day plan where every stop shows why it fits you, what the catch is and whose trip it came from, and you can swipe any stop for another. **[OBJECTIONS]** No long questionnaire and no invented places, and anything listed as closed on the day you'd go is flagged. Every review says what kind of trip it came from, so you're never taking a stranger's word blind. When it doesn't have enough good options, it tells you instead of padding your day. It starts in one city because real trips take time to collect, and it's free while in beta.
 
 **Clause 4 (PROOF) is omitted.** XPMatch has no travelers yet, and the skill forbids inventing proof.
 
@@ -100,10 +100,10 @@ Read from `differentiators.md`, not re-derived. **Verdict: POSITIONAL.**
 | Objection | Answered by |
 | --- | --- |
 | O1: free and instant elsewhere | "free while in beta"; "In minutes" |
-| O2: generic | "travelers whose taste matches yours"; "feels like yours, not everyone's" |
-| O3: closed places | "no invented places, and anything closed on the day you'd go is flagged". This is the plan's clash flag (plan §4 step 5). The paragraph doesn't promise more: nothing in the plan detects a permanent closure |
+| O2: generic | "matched stop by stop to how you travel"; "feels like yours, not everyone's" |
+| O3: closed places | "no invented places, and anything listed as closed on the day you'd go is flagged". This is the plan's clash flag (plan §4 step 5). It relies on the opening days the operator records for each place, which plan draft 9 added after `eval.md` found them missing. The paragraph doesn't promise more: nothing in the plan detects a permanent closure |
 | O4: too many questions | "a short voice chat or a few taps"; "No long questionnaire" |
-| O5: strangers' taste | "whose taste matches yours"; "whose trip it came from"; "no ratings from strangers you know nothing about" |
+| O5: strangers' taste | "whose trip it came from"; "Every review says what kind of trip it came from". Stops are matched to the *traveler's* profile, not the source traveler's. Similar travelers appear only with their consent (plan §5, REQ-027), so the paragraph promises nothing about them |
 | O6: coverage | "It starts in one city because real trips take time to collect". The deficit is stated as the reason for trust |
 
 ### Tests
@@ -116,21 +116,30 @@ Read from `differentiators.md`, not re-derived. **Verdict: POSITIONAL.**
   - **v1:** "Ready to stop wasting your weekends?" / "Answer 15 questions and find out why what you do with your free time doesn't fit you, and what to do about it."
   - The new paragraph is more specific: short city trips, real trips, evidence per stop, one city.
   - It also fixes a direct conflict: v1 leads with a 15-question quiz, which the friction evidence (O4) argues against. A reader can tell them apart. **Not capped.**
+  - **Also on the live v1 site** (found by `eval.md`, re-fetched 2026-09-23): an example card already shows a fit reason, a tradeoff and "Elsa, books like you", under the heading "Plans from people whose taste looks like yours."
+    - So per-stop evidence isn't new to XPMatch's own copy.
+    - What's new is the scope (short city trips, one city), the source (only real trips, named), and the refusal (an honest "not enough").
 
 ## Derivatives
 
 `[pilot city]` stays a placeholder until D-006 is decided. Don't publish copy with the placeholder in it.
 
 - **Founder's LinkedIn headline** (≤220 characters; it's the founder's own profile, so their voice is allowed):
-  > Founder, XPMatch · Trip plans built only from real travelers' trips that match your taste. Every stop shows why it fits, the catch, and whose trip it came from. [pilot city] first.
+  > Founder, XPMatch · Trip plans built only from what real travelers actually did, matched stop by stop to your taste. Every stop shows why it fits, the catch, and whose trip it came from. One city first.
 - **Site hero:**
-  - **Headline:** *Trips planned from travelers who travel like you.*
-  - **Subhead:** *XPMatch builds your 2–4 days in [pilot city] from real trips by people with your taste. Every stop shows why it fits, what the catch is and whose trip it came from. Free while in beta.*
+  - **Headline:** *Real travelers' trips, matched to how you travel.*
+  - **Subhead:** *XPMatch builds your 2–4 days in [pilot city] from what real travelers actually did, matched stop by stop to you. Every stop shows why it fits, what the catch is and whose trip it came from. Free while in beta.*
+  - **Ship-today subhead** (no placeholder): *XPMatch builds 2–4 day city plans from what real travelers actually did, matched stop by stop to you. Every stop shows why it fits, what the catch is and whose trip it came from. Starting with one city, free while in beta.*
 - **One-line intro** (podcasts and DMs):
-  > XPMatch plans short city trips only from real travelers' trips that match your taste, and shows you why each stop fits.
+  > XPMatch plans short city trips only from what real travelers actually did, matched to your taste, and shows you why each stop fits.
 
 ## Assumptions & Unknowns
 
+- **Corrected after `eval.md` (2026-09-23):**
+  - **What the first version said:** plans come from "real trips taken by travelers whose taste matches yours".
+  - **Why that was wrong:** it contradicts plan §5 and AGENTS.md. Items are ranked against the traveler's own profile, and similarity to the source traveler appears only with that traveler's consent.
+  - **The fix:** the paragraph and every derivative now say stops are matched to *you*. The same claim was removed from `profile.md`, `journey.md`, `email.md`, `offer.md` and the UI plan.
+  - **The aspiration "whose style resonated with us"** is served by consented "travelers like you" (REQ-027), which the paragraph doesn't promise.
 - **Shelf life of the differentiator:** about 12 months from public launch (`UNSOURCED` estimate, `differentiators.md`).
   - A rival with traveler guides (Wanderlog) could add taste profiles and per-stop reasons.
   - The movement statement doesn't depend on it; the assembly's value clause does.

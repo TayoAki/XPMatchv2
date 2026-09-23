@@ -28,7 +28,7 @@ Skill: `cmba-leadmagnet` (stage 7 of `cmba-run`). Written 2026-09-23. Read first
   - rows are Day 1–4 × Morning, Lunch, Afternoon, Dinner;
   - columns are Area, Place, Why it fits me, The catch, Who recommended it (and do they travel like me?), Open that day?, Backup.
 - **Tab 2, "Your 3 must-haves":** three lines, filled in before searching (content headline #4).
-- **Tab 3, "10-minute check":** the five checks from content post 1 (exists and is open, one area per half-day, count the famous names, why this for me, find the catch), as tick boxes beside each row.
+- **Tab 3, "Five checks":** the checks from content post 1 as tick boxes beside each row: open that day, one area per half-day, whose trip it came from, why it's there for me, the catch.
 - **The video:** fills one day using the method. The example is labeled *illustrative* and uses no real traveler's trip unless that traveler gave web permission (`content.md` rules).
 - **What it isn't:** a cheat sheet or ebook. Those are bottom-half formats the skill never builds from. This is a working tool the traveler fills in.
 
