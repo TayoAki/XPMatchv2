@@ -5,7 +5,7 @@
 | Source | `docs/prds/XPMatch-Build-PRD-v1.1.md` (founder's PRD v1.1, 2026-09-23); read-only review of `TayoAki/XPMatchv1`; founder answers of 2026-09-23 |
 | Method | `mobile-plan-mvp` for scope; `software-factory` for intake, readiness and delivery slices |
 | Readiness | **READY WITH ASSUMPTIONS**: S0 and slices 1–2 can start once this revision is approved. Paid model and voice calls (slices 2b and 5) also need D-009 (spend ceiling), slices 3 onward need D-006 (pilot city and permissioned content), and the first external invite needs D-021 (who answers safety reports) |
-| Approval | **Pending**: founder |
+| Approval | **Pending** for the revision as a whole (D-005). Approved on 2026-09-23: D-041 to D-045 |
 | Revision note | Draft 2 (2026-09-23) adds the social features the founder chose for the first pilot: contributor updates, trip partners with comments, an opt-in named activity feed, ask-a-contributor Q&A and direct messages. Draft 3 (2026-09-23) makes the flow profile-first: every traveler has an approved profile before matching, and matching ranks the individual items in travelers' itineraries. Draft 4 (2026-09-23): the app builds each traveler a complete itinerary from those items, shows how each item matches the profile and which similar travelers picked it, and lets any item be swapped in one tap. Draft 5 (2026-09-23) plans for a 1,000-tester beta, reached in gated waves after the pilot (§12). Draft 6 (2026-09-23): travelers review what they did, through evening check-ins during the trip and a check-in after it. Ratings stay private unless shared as reviews, and whole trips can be published before the first wave. Draft 7 (2026-09-23): one-tap sign-in with Apple or Google, a voice interview or a survey for the profile, plans requested by typing in a chat box, swipes or arrow taps to change items, and trips saved automatically. Draft 8 (2026-09-23): the chat first answers with options the traveler swipes through, changes by typing and can undo, and a "Create itinerary" button then turns the picks into the itinerary. Draft 9 (2026-09-23): travelers can change the app's colors (System, Light or Dark, and five contrast-checked accents, REQ-030), and the UI plan in `docs/design/XPMatch-UI-plan.md` sets the design system: v1's design language with the PRD's colors. Draft 10 (2026-09-23): the data shape in `docs/design/XPMatch-data-shape.md` defines the taste vocabulary (taxonomy 0.1), the contributor capture template, field-level shapes for the core loop, matching and planner rules v0, and the option card contract (D-041 to D-045) |
 
 PRD v1.1 stays the base document. This revision changes scope and order only; everything not mentioned here (trust rules, data conventions, quality thresholds, rollout, rollback) carries over unchanged. Requirement IDs are the PRD's own.
@@ -642,11 +642,11 @@ With at most 20 travelers, report counts next to every rate. In the waves, repor
 | D-038 | Canonical palette | The PRD's tokens are the default Pine theme; v1's "Serene Resort" values are retired; dark-mode values as in the UI plan §4.2 | Founder approval | — (S0.1 proceeds on the default) |
 | D-039 | Appearance options | System, Light or Dark plus five accents (Pine, Ocean, Terracotta, Plum, Graphite), every pair contrast-checked; no free color picker; Android dynamic color later at most | Founder's pick; accent use in the pilot | Slice 2c |
 | D-040 | Place imagery in MVP-1 | Text cards with a category icon, area and time of day. A contributor's photos only where their permission covers photos. No stock, generated or map-provider photos (A-002) | Permission inventory (D-006) | Slice 4 visuals only |
-| D-041 | Taste vocabulary | Taxonomy 0.1: the 15 dimensions and values in the data shape §3.2, used by the survey, voice interview, profile, contributor tags, matching and card lines | Founder review, then the hand-run relevance study (H1) | S0.3 collection, slices 2 and 3 |
-| D-042 | A must-have with unknown evidence | Strict (left out) for dietary needs and step-free access; kept with a "? not known" line for crowds, atmosphere, bookings and budget | Tester feedback and "not enough" rates | Slice 4 |
-| D-043 | Contributors' spending | Matching uses venue price facts and the contributor's range, but only venue price bands are ever shown. A contributor's own spending is never published | Founder | S0.3 template |
-| D-044 | Slots per pace | Relaxed: lunch, afternoon, dinner. Moderate: + morning. Packed: + evening. The day-start and dinner-time preferences set the time windows (A-006) | Planner evaluations and swipe rates | Slice 5 |
-| D-045 | Sensitive preferences | Dietary needs are optional, sensitive, used only by the server's filter, never sent to the model, analytics or logs, and their voice excerpts aren't kept. Allergies aren't collected in MVP-1. Explicit consent before saving; the privacy policy says so | Founder, with a privacy review before the first external invite | Slice 2 |
+| D-041 | Taste vocabulary | Taxonomy 0.1: the 15 dimensions and values in the data shape §3.2, used by the survey, voice interview, profile, contributor tags, matching and card lines | **Approved** (founder, 2026-09-23). Revisit with the hand-run relevance study (H1) | S0.3 collection, slices 2 and 3 |
+| D-042 | A must-have with unknown evidence | Strict (left out) for dietary needs and step-free access; kept with a "? not known" line for crowds, atmosphere, bookings and budget | **Approved** (founder, 2026-09-23). Revisit with tester feedback and "not enough" rates | Slice 4 |
+| D-043 | Contributors' spending | Matching uses venue price facts and the contributor's range, but only venue price bands are ever shown. A contributor's own spending is never published | **Approved** (founder, 2026-09-23) | S0.3 template |
+| D-044 | Slots per pace | Relaxed: lunch, afternoon, dinner. Moderate: + morning. Packed: + evening. The day-start and dinner-time preferences set the time windows (A-006) | **Approved** (founder, 2026-09-23). Tune with planner evaluations and swipe rates | Slice 5 |
+| D-045 | Sensitive preferences | Dietary needs are optional, sensitive, used only by the server's filter, never sent to the model, analytics or logs, and their voice excerpts aren't kept. Allergies aren't collected in MVP-1. Explicit consent before saving; the privacy policy says so | **Approved** (founder, 2026-09-23). A privacy review is still due before the first external invite | Slice 2 |
 
 ## 12. Scaling to 1,000 beta testers
 
@@ -759,7 +759,8 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
   - `docs/design/XPMatch-data-shape.md`: taxonomy 0.1, field-level shapes, matching and planner rules v0, and the option card contract.
   - The contributor capture template for S0.3.
   - Decisions D-041 to D-045.
-- **Unresolved:** D-005 to D-045.
+- **Approved on 2026-09-23:** D-041 to D-045.
+- **Unresolved:** D-005 to D-040.
 
 ## 14. Completion check
 
@@ -773,6 +774,6 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
 
 ## 15. Readiness and next action
 
-**Readiness: READY WITH ASSUMPTIONS.** S0.1 and slices 1–2 can start once D-005 is approved. D-007, D-008, D-010, D-011 and D-017 to D-045 have working defaults. D-009 needs the founder's cap amounts before slices 2b and 5 make paid model and voice calls. Slices 3 onward need D-006, and the first external invite needs D-021 confirmed. Waves beyond the pilot need the §12 work, NFR-008 to NFR-010, and D-025 to D-029 confirmed.
+**Readiness: READY WITH ASSUMPTIONS.** S0.1 and slices 1–2 can start once D-005 is approved. D-007, D-008, D-010, D-011 and D-017 to D-040 have working defaults, and D-041 to D-045 are approved. D-009 needs the founder's cap amounts before slices 2b and 5 make paid model and voice calls. Slices 3 onward need D-006, and the first external invite needs D-021 confirmed. Waves beyond the pilot need the §12 work, NFR-008 to NFR-010, and D-025 to D-029 confirmed.
 
 **Next action (founder):** approve revision v1.2 as written, or list the changes you want. After approval, the factory's next task is S0.1 (project shell) on its own branch, with CI and device evidence.

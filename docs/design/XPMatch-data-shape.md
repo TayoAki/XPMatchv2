@@ -2,7 +2,7 @@
 
 | Field | Value |
 | --- | --- |
-| Status | Proposal, alongside MVP-1 plan draft 10. **Founder approval pending** |
+| Status | Decisions D-041 to D-045 **approved** by the founder on 2026-09-23. The document is part of plan draft 10, which still awaits approval as a whole (D-005) |
 | Date | 2026-09-23 |
 | Inputs | PRD v1.1 §5 (entity groups M01–M08, state and write rules) and REQ-002, REQ-005, REQ-006, REQ-008, REQ-010. Plan §4, §6, §7, A-006 and D-033 to D-036. AGENTS.md. UI plan §6–7 |
 | Defines | The taste vocabulary (taxonomy 0.1); what to collect from contributors; field-level shapes for the tables the core loop uses; the option card contract; matching and planner rules v0 |
@@ -530,11 +530,11 @@ A sample, as fixture data: a fictional city and place, not real.
 
 | ID | Decision | Recommended default | Resolved by | Blocks |
 | --- | --- | --- | --- | --- |
-| D-041 | Taste vocabulary 0.1 | The 15 dimensions and values in §3.2, as `taxonomy_version` "0.1" | Founder review, then the hand-run relevance study (H1) | S0.3 content collection, slices 2 and 3 |
-| D-042 | A must-have with unknown evidence | Strict (left out) for dietary needs and step-free access; flagged with a ? line for crowds, atmosphere, bookings and budget | Tester feedback and "not enough" rates | Slice 4 |
-| D-043 | Contributors' spending | Match on venue price facts and the contributor's range, but publish only venue price bands. A contributor's own spending is never published | Founder | S0.3 template |
-| D-044 | Slots per pace | Relaxed: lunch, afternoon, dinner. Moderate: + morning. Packed: + evening. `day_start` and `dinner_time` set the windows | Planner evaluations and swipe rates | Slice 5 |
-| D-045 | Sensitive preferences | Dietary needs are optional, sensitive, and used only by the server's filter. They're never sent to the model, analytics or logs, and their voice excerpts aren't kept. Allergies aren't collected in MVP-1 ("check allergies with the venue"). The privacy policy says so, and explicit consent is asked before saving them | Founder, with a privacy review before the first external invite | Slice 2 |
+| D-041 | Taste vocabulary 0.1 | The 15 dimensions and values in §3.2, as `taxonomy_version` "0.1" | **Approved** (founder, 2026-09-23). Revisit with the hand-run relevance study (H1) | S0.3 content collection, slices 2 and 3 |
+| D-042 | A must-have with unknown evidence | Strict (left out) for dietary needs and step-free access; flagged with a ? line for crowds, atmosphere, bookings and budget | **Approved** (founder, 2026-09-23). Revisit with tester feedback and "not enough" rates | Slice 4 |
+| D-043 | Contributors' spending | Match on venue price facts and the contributor's range, but publish only venue price bands. A contributor's own spending is never published | **Approved** (founder, 2026-09-23) | S0.3 template |
+| D-044 | Slots per pace | Relaxed: lunch, afternoon, dinner. Moderate: + morning. Packed: + evening. `day_start` and `dinner_time` set the windows | **Approved** (founder, 2026-09-23). Tune with planner evaluations and swipe rates | Slice 5 |
+| D-045 | Sensitive preferences | Dietary needs are optional, sensitive, and used only by the server's filter. They're never sent to the model, analytics or logs, and their voice excerpts aren't kept. Allergies aren't collected in MVP-1 ("check allergies with the venue"). The privacy policy says so, and explicit consent is asked before saving them | **Approved** (founder, 2026-09-23). A privacy review is still due before the first external invite | Slice 2 |
 
 ## 10. Next revision
 

@@ -2,7 +2,7 @@
 
 **Purpose:** collect real travelers' trips for the pilot city in the shape matching needs (`XPMatch-data-shape.md` §4), so nothing has to be collected twice. Use it as a Google Form, a spreadsheet, or a guided 30-minute call where you fill it in.
 
-**Status:** proposal, with taxonomy 0.1 (D-041).
+**Status:** ready to use. The taste vocabulary (D-041) and the spending rule (D-043) were approved on 2026-09-23. The permission wording in Part A is still a draft to have reviewed.
 
 - **Consent wording:** a plain-language draft. Have it reviewed before real use (this isn't legal advice).
 - **What never goes here:** the answers are the contributor's data, so they never go in this public repository. Store them in the founder's private workspace.
