@@ -1,0 +1,12 @@
+# Factory evidence and local task worktrees (never committed)
+.artifacts/
+.worktrees/
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+
+# Dependencies and OS noise
+node_modules/
+.DS_Store
