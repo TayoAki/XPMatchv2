@@ -4,7 +4,7 @@
 | --- | --- |
 | Source | `docs/prds/XPMatch-Build-PRD-v1.1.md` (founder's PRD v1.1, 2026-09-23); read-only review of `TayoAki/XPMatchv1`; founder answers of 2026-09-23 |
 | Method | `mobile-plan-mvp` for scope; `software-factory` for intake, readiness and delivery slices |
-| Readiness | **READY WITH ASSUMPTIONS**: S0 and slices 1–2 can start once this revision is approved; slices 3–7 also need D-006 (pilot city and permissioned content) |
+| Readiness | **READY WITH ASSUMPTIONS**: S0 and slices 1–2 can start once this revision is approved. Slice 2's paid model calls also need D-009 (spend ceiling), and slices 3–7 need D-006 (pilot city and permissioned content) |
 | Approval | **Pending**: founder |
 
 PRD v1.1 stays the base document. This revision changes scope and order only; everything not mentioned here (trust rules, data conventions, quality thresholds, rollout, rollback) carries over unchanged. Requirement IDs are the PRD's own.
@@ -14,6 +14,7 @@ PRD v1.1 stays the base document. This revision changes scope and order only; ev
 - MVP-1 tests the PRD's core bet (H1: relevant human content beats destination-only suggestions) with the fewest moving parts. The loop is: text interview → approved taste → real, permissioned itineraries and reviews with honest reasons → adapt one into a private trip board → partner or official link. It covers one city, invited travelers, and iOS plus Android.
 - Compared with v1.1, the voice interview, the in-app map and offline reading move to MVP-1.1, right after the first 5 invited travelers. Compare, in-app contributor publishing, guest browsing and AI-proposed rearrangements move later. No trust, privacy or cost rule is relaxed.
 - The 10-traveler relevance study moves up to S0–S1 and runs by hand, so H1 is tested before most of the code exists.
+- Several decisions recorded in v1's docs are retired because PRD v1.1 replaced them: web-first, selling the service first, fixed prices, match percentages, and a multi-city beta (§3). Pricing stays open (D-016).
 - Founder input needed: approve this revision (D-005). Choose the pilot city and start collecting content permissions now (D-006); nothing after slice 2 can be shown honestly without them.
 
 ## 2. Product, users and constraints
@@ -22,7 +23,7 @@ PRD v1.1 stays the base document. This revision changes scope and order only; ev
 
 - **First customer:** a solo traveler or couple planning a 2–4 day leisure trip to the pilot city, invited into the pilot.
 - **Job to be done:** "Show me what people who travel like me actually did there, tell me honestly what won't suit me, and give me a plan I can use."
-- **First measurable outcome:** a new invited traveler keeps at least one place on a trip board within 24 hours of the first planning session (PRD §11), and the kept places mostly come from matched traveler content (§10).
+- **First measurable outcome:** a new invited traveler keeps at least one place on a trip board within 24 hours of the first planning session (PRD §11), and most kept places come from matched traveler content (a hypothesis, measured as matched-content share in §10).
 - **Release type:** an unpaid, controlled pilot. It isn't a demo: real people put private data in, so sign-in, data isolation, deletion and spend caps must be production-grade. It isn't a public launch either: no store listing, no payments, and at most 20 invited travelers (team → 5 → up to 20, PRD §13).
 
 **Confirmed constraints (supplied):**
@@ -52,10 +53,26 @@ v1 is a Next.js web prototype. Its code (commit `28c66b6`) and docs were reviewe
   MVP-1 answers each with a server-owned rule: catalog IDs only, server-side scoring, a preview before any bulk change, approved profile versions, and trip revisions with conflict checks.
 - **Provider data needs its own policy.** v1 keeps Google Places data, including review author names, in a catalog shared by all users with no expiry. It also saves the first search hit as a permanent match. MVP-1 uses operator-entered place facts (A-002). When the in-app map arrives in MVP-1.1, it must follow the provider's caching terms and verify matches.
 - **Spend limits must cover every paid call.** v1 caps only some place lookups; model calls and most Google calls are uncapped. MVP-1 checks the budget before every model call (REQ-013).
+- **Cost comes from provider calls, not the model.** In v1, Google place lookups and photos made up most of a trip's cost, and the model only 2–12%. Once its place catalog was in use, a typical trip chat cost about USD 0.35 (v1 `docs/PLACE_CATALOG.md` §1 and §3, `docs/COGS.md` §3). MVP-1's operator-entered catalog avoids that cost. MVP-1.1's map needs its own budget before it ships.
+- **There is no outside traction yet.** v1 records zero paying customers and no outside testers; the one outside sign-up left during onboarding. Its only real usage figure is 387 production requests in 72 hours (v1 `docs/BETA_READINESS.md`). Its pitch line that testers rate "60%+ of picks a hit" has no data behind it (v1 `docs/BUSINESS_PLAN.md`). The pilot's measurements (§10) will be the first real evidence.
+- **Voice is untested.** v1's redesign spec included a microphone, but it was never built (v1 `docs/UI_REDESIGN_PLAN.md` §13). The S0.2 spike is the first real test.
 - **Ideas worth keeping (as behavior, not code):**
   - review answers that cite quotes by index, so the quote shown is always verbatim;
   - prompt rules that require honest downsides;
+  - the "Remember this?" card as the model for approving profile changes;
+  - the "heads-ups" and "Couldn't verify" labels, which already express tradeoffs and unknowns;
+  - the same five preference areas (stays, food, flights, activities, general);
+  - v1's pre-beta checklist: backups, error monitoring, real-phone tests, privacy and terms pages, key rotation;
   - fake-provider test servers, so journeys can be tested without paid APIs. Fixtures must be labeled as fixtures, never recorded into demos as real reviews.
+- **v1 decisions this plan retires**, because PRD v1.1 replaced them:
+  - web-first;
+  - selling the service by hand first;
+  - the fixed prices in v1's September 21 decision log: USD 19 Trip Pass, USD 49 a year for Plus, USD 49 advisor seats, USD 149–399 concierge;
+  - numeric match percentages;
+  - a 10–25-person beta across many cities that included friend groups and advisors;
+  - the advisor and group segments.
+
+  Sources: v1 `docs/BUSINESS_PLAN.md`, `docs/REVENUE_MODEL.md`, `docs/UI_REDESIGN_PLAN.md` §13, `docs/BETA_READINESS.md`. Pricing itself stays an open decision (D-016).
 
 ## 4. Journeys
 
@@ -209,7 +226,7 @@ Each slice is an end-to-end, demonstrable outcome; split it into 0.5–2 day tic
 | 4 Matching and Discover | Traceable matches or an honest empty state; deterministic eval baseline | T3, T4 | 2, 3 |
 | 5 Adapt and board | Adapt, edit, restore, conflict | T5, T6, T9 (trip side) | 4 |
 | 6 Links, feedback, telemetry | Outbound click, reports, reconciled events | T7, T11 | 5 |
-| 7 Pilot hardening | Accessibility pass, release builds on both platforms, kill switches, deletion recheck; then team dogfood, then the first 5 invited travelers | T13, NFR-007 | 1–6 |
+| 7 Pilot hardening | Accessibility pass; release builds on both platforms; kill switches; deletion recheck; database backups proven by a restore; error monitoring; privacy and terms pages. Then team dogfood, then the first 5 invited travelers | T13, NFR-007 | 1–6 |
 | MVP-1.1 | Voice (if S0.2 passed), in-app map, offline reading; then up to 20 travelers | REQ-004, REQ-007, REQ-015 | 7 plus learnings from the first 5 |
 
 ## 10. Measurement plan
@@ -244,16 +261,16 @@ With at most 20 travelers, report counts next to every rate. Staff and test acco
 
 ### Assumptions (reversible)
 
-- `A-01`: TestFlight and Google Play internal testing are enough to reach the first cohort.
-- `A-02`: Operator-entered place facts (name, address, area, website) are enough for MVP-1; no Places API.
-- `A-03`: Each invited traveler plans one pilot-city trip within a 7-day window.
+- `A-001`: TestFlight and Google Play internal testing are enough to reach the first cohort.
+- `A-002`: Operator-entered place facts (name, address, area, website) are enough for MVP-1; no Places API.
+- `A-003`: Each invited traveler plans one pilot-city trip within a 7-day window.
 
 ### Decisions needed
 
 | ID | Decision | Recommended default | Resolved by | Blocks |
 | --- | --- | --- | --- | --- |
 | D-005 | This MVP-1 scope | Approve as written, or name the cuts to reverse | Founder approval | All implementation |
-| D-006 | Pilot city and content supply | The city where permissioned content is fastest to secure. Target 5 contributors, 15 itineraries and 30 reviews, with at least 3 distinct suitable itineraries per invited traveler (PRD §12) | Permission inventory | Slices 3–7 |
+| D-006 | Pilot city and content supply | The city where permissioned content is fastest to secure. Target 5 contributors, 15 itineraries and 30 reviews, with at least 3 distinct suitable itineraries per invited traveler (PRD §12). No city has been chosen; v1 used Rome as its example | Permission inventory | Slices 3–7 |
 | D-007 | Sign-in method | Supabase email one-time code; revisit Apple and Google sign-in before public launch | Slice 1 two-device test | Slice 1 |
 | D-008 | Text model provider | Run 8–12 fixture interviews through 2–3 candidates; compare extraction accuracy and cost | Eval results | Slice 2 |
 | D-009 | Spend ceiling | Founder sets global daily and per-user daily caps | Founder, from available funds | Paid calls in slice 2 |
@@ -262,17 +279,18 @@ With at most 20 travelers, report counts next to every rate. Staff and test acco
 | D-012 | Distribution accounts | Apple Developer Program and Google Play Console, using TestFlight and internal testing | Accounts active | Slice 7 |
 | D-013 | Hotel and flight preference questions | Defer until those categories launch | Evals show matching doesn't need them | — |
 | D-014 | Thanks for contributors | Attribution in the app; any payment handled outside it | Recruiting response | D-006 |
-| D-015 | Team capacity | Keep the slice order; re-estimate after slice 1 | Slice 1 actuals | Dates only |
+| D-015 | Team capacity | Keep the slice order; re-estimate after slice 1. v1's business plan describes a solo founder with contractors, with AI doing research, drafting and code, while PRD §9's 14-week schedule assumes two engineers | Slice 1 actuals | Dates only |
+| D-016 | Revenue model and prices | No pricing or payment work in MVP-1. Before any paid release, reconcile v1's September 21 prices and advisor-first revenue ranking with the PRD, including app-store billing rules | Founder decision after the pilot | Paid release only |
 
 ## 12. Changes from source (v1.1 → v1.2)
 
-- **Clarified:** the release type (unpaid, controlled pilot); the first working transaction (§8); operator-run supply for the pilot.
+- **Clarified:** the release type (unpaid, controlled pilot); the first working transaction (§8); operator-run supply for the pilot; the operational basics slice 7 must prove (backups with a tested restore, error monitoring, privacy and terms pages).
 - **Moved to MVP-1.1:** the voice interview (REQ-004), the in-app map (REQ-007 map part), offline reading (REQ-015 offline part). The S0 voice spike still runs first.
-- **Moved later:** guest browsing (D-004 browse), save and compare (REQ-009), in-app contributor submission, the moderation queue and user blocking (REQ-005 submission path, REQ-010), AI-proposed rearrangements (REQ-003 bulk proposals), hotel and flight interview questions (REQ-002).
+- **Moved later:** guest browsing (PRD D-004, browse part), save and compare (REQ-009), in-app contributor submission, the moderation queue and user blocking (REQ-005 submission path, REQ-010), AI-proposed rearrangements (REQ-003 bulk proposals), hotel and flight interview questions (REQ-002).
 - **Simplified:** import scripts instead of an internal moderation app; adaptation as copy-with-lineage plus flags plus manual edits; daily budget counters instead of the full reservation system; no outbox until an asynchronous consumer exists; "Open in Maps" links instead of an embedded map.
-- **Added:** the matched-content share metric; the `adaptation_accepted`, `match_feedback` and `content_reported` events; the relevance study moved to S0–S1 as a hand-run test.
+- **Added:** the matched-content share metric; the `adaptation_accepted`, `match_feedback` and `content_reported` events; the relevance study moved to S0–S1 as a hand-run test; D-016, which surfaces the conflict between v1's recorded prices and the PRD's "undecided".
 - **Unchanged:** requirement IDs, trust and privacy rules, stack direction (Expo, TypeScript API, Supabase), rollout stages, kill switches and cost hypotheses.
-- **Unresolved:** D-005 to D-015.
+- **Unresolved:** D-005 to D-016.
 
 ## 13. Completion check
 
@@ -282,6 +300,6 @@ With at most 20 travelers, report counts next to every rate. Staff and test acco
 
 ## 14. Readiness and next action
 
-**Readiness: READY WITH ASSUMPTIONS.** S0.1 and slices 1–2 can start once D-005 is approved; D-007 to D-011 have working defaults. Slices 3–7 also need D-006.
+**Readiness: READY WITH ASSUMPTIONS.** S0.1 and slices 1–2 can start once D-005 is approved. D-007, D-008, D-010 and D-011 have working defaults. D-009 needs the founder's cap amounts before slice 2 makes paid model calls, and slices 3–7 need D-006.
 
 **Next action (founder):** approve revision v1.2 as written, or list the changes you want. After approval, the factory's next task is S0.1 (project shell) on its own branch, with CI and device evidence.

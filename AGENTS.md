@@ -7,7 +7,7 @@ The operating contract for any coding agent working here (Claude Code, Codex, Cu
 - `docs/prds/XPMatch-Build-PRD-v1.1.md` is the founder's PRD, preserved as supplied. Do not edit it; record changes as a new revision.
 - `docs/prds/XPMatch-MVP1-plan.md` is the proposed MVP-1 scope (PRD revision v1.2). Check its approval line before implementing anything it changes.
 - Requirement and evidence IDs (`REQ-###`, `AC-REQ-###-##`, `NFR-###`, `EV-###`) are permanent. Cite them in plans, tests, commits and PRs.
-- `TayoAki/XPMatchv1` (the web prototype) is a product reference only. Do not copy its code (founder decision, 2026-09-23).
+- `TayoAki/XPMatchv1` (the web prototype) is a product reference only. Do not copy its code (founder decision, 2026-09-23). Its docs record older decisions, such as prices, match percentages and a web-first plan. Where they conflict with the PRD or an approved revision, the PRD wins.
 
 ## Task contract
 
