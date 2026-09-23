@@ -88,17 +88,21 @@ Each candidate was scored against the strongest one (C), not in the abstract.
 | Idea | Clarity | Usability | Stability | Scalability | Stickiness | Profitability | Total |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | A. Taste-matched real-traveler itineraries | 3 | 4 | 4 | 3 | 2 | 2 | **18** |
-| B. Concierge itinerary service | 5 | 1 | 4 | 1 | 2 | 4 | **17** |
+| B. Concierge itinerary service | 5 | 1 | 4 | 1 | 2 | ~~4~~ 2 `SUPERSEDED` | ~~17~~ **15** |
 | C. Advisor workspace (benchmark only, cut by Q1) | 3 | 2 | 4 | 4 | 5 | 4 | **22** |
 | D. Weekend packages | 4 | 4 | 2 | 4 | 1 | 2 | **17** |
 | E. Trip memory | 3 | 4 | 3 | 4 | 2 | 1 | **17** |
 
-Totals run from 17 to 22, a 5-point span, one short of the skill's 6-point rule. The lenses therefore separate C from the rest but do not separate A, B, D and E by score alone. The rule requires a separating sentence for each close pair:
+Totals ran from 17 to 22, a 5-point span, one short of the skill's 6-point rule. `SUPERSEDED` by `validation.md` (2026-09-23): after B's re-score the totals run from 15 to 22, a 7-point span. The lenses still don't separate A, D and E by score alone, so the separating sentences below remain:
 - **A vs B:** B is a service whose hours grow with every customer (Usability 1, Scalability 1). A is software once the city's supply exists.
 - **A vs D:** D gives everyone the same weekend, which is the generic list the UVP's enemy describes. A exists to be different per person.
 - **A vs E:** E is A's supply side. It can't stand alone, because nobody pays to publish their trip (Profitability 1). Merge E into A.
 
-**Profitability scores are provisional.** A's 2 reflects zero paying customers and an undecided revenue model; B's 4 assumes people already pay for custom itineraries. `validation.md` must confirm or refute both with live prices.
+**Profitability scores were provisional.** A's 2 reflects zero paying customers and an undecided revenue model; B's 4 assumed people already pay for custom itineraries.
+
+**Result from `validation.md` (2026-09-23):**
+- **A's 2 stands:** no spend was observed for 2–4 day city trips.
+- **B's 4 is `SUPERSEDED` and becomes 2:** human planners do charge (USD 250 per travel day; USD 399 or €400 per trip), but only for trips of 5 days or more. The two 3-day guides for sale have 0 ratings.
 
 ## Recommendation
 
@@ -107,6 +111,7 @@ Totals run from 17 to 22, a 5-point span, one short of the skill's 6-point rule.
 It sits in a paying market only if validation shows travelers already spend on planning (apps or custom itineraries). Its weakest lenses are the known risk for consumer travel products: people take only a few leisure trips a year (Stickiness 2), and willingness to pay is unproven (Profitability 2). The plan's post-trip reviews, partner planning and next-trip return metric (PRD H3) are its answers to stickiness. None is proven.
 
 - **Runner-up:** B, the concierge service. It lost on usability and scalability, but it is the fastest way to learn what travelers will pay for. That is why `offer.md` names it as the first paid rung, if the founder chooses to run the PRD's separate experiment.
+  - **Amended by `validation.md`:** paid human planning was seen only for trips of 5+ days, so aim the experiment there. The one short-trip test is the USD 79 presale that `validation.md` names.
 - **The new angle this audit adds:** by the lenses, the consumer premise's weakness is stickiness, not positioning. The benchmark C shows what high stickiness looks like: professionals plan trips every week. The founder has ruled out advisors, so the job is to make A come back more often. That makes post-trip reviews, partner planning and "every trip improves the next plan" core retention work, not nice-to-haves.
 - **Differentiation:** read `differentiators.md` before acting. At the time of scoring it didn't exist; the recommendation above is revisited there.
 - **Kill condition:** this recommendation is wrong if the 10-traveler relevance study (plan §10) shows fewer than 7 of 10 travelers prefer the matched plan over a destination-only one. Then A has no reason to exist and B becomes the business.
@@ -115,5 +120,5 @@ It sits in a paying market only if validation shows travelers already spend on p
 
 - `GAP`: the founder's own origin story (solved-internally) and any inbound requests (none exist yet).
 - `INFERRED`: stickiness scores assume 2–4 leisure trips a year, from v1's segment description (v1 `docs/BUSINESS_PLAN.md` §3), not measured behavior.
-- `UNVERIFIED` until `validation.md`: every profitability score.
+- **Profitability scores, checked in `validation.md`:** A's 2 stands and B's 4 is superseded (now 2). Neither is measured on XPMatch's own travelers yet.
 - The advisor benchmark's stickiness score (5) is reasoning from how often advisors plan trips, not a measurement.
