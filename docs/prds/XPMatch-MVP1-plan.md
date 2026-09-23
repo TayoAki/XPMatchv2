@@ -6,13 +6,13 @@
 | Method | `mobile-plan-mvp` for scope; `software-factory` for intake, readiness and delivery slices |
 | Readiness | **READY WITH ASSUMPTIONS**: S0 and slices 1–2 can start once this revision is approved. Paid model and voice calls (slices 2b and 5) also need D-009 (spend ceiling), slices 3 onward need D-006 (pilot city and permissioned content), and the first external invite needs D-021 (who answers safety reports) |
 | Approval | **Pending**: founder |
-| Revision note | Draft 2 (2026-09-23) adds the social features the founder chose for the first pilot: contributor updates, trip partners with comments, an opt-in named activity feed, ask-a-contributor Q&A and direct messages. Draft 3 (2026-09-23) makes the flow profile-first: every traveler has an approved profile before matching, and matching ranks the individual items in travelers' itineraries. Draft 4 (2026-09-23): the app builds each traveler a complete itinerary from those items, shows how each item matches the profile and which similar travelers picked it, and lets any item be swapped in one tap. Draft 5 (2026-09-23) plans for a 1,000-tester beta, reached in gated waves after the pilot (§12). Draft 6 (2026-09-23): travelers review what they did, through evening check-ins during the trip and a check-in after it. Ratings stay private unless shared as reviews, and whole trips can be published before the first wave. Draft 7 (2026-09-23): one-tap sign-in with Apple or Google, a voice interview or a survey for the profile, plans requested by typing in a chat box, swipes or arrow taps to change items, and trips saved automatically |
+| Revision note | Draft 2 (2026-09-23) adds the social features the founder chose for the first pilot: contributor updates, trip partners with comments, an opt-in named activity feed, ask-a-contributor Q&A and direct messages. Draft 3 (2026-09-23) makes the flow profile-first: every traveler has an approved profile before matching, and matching ranks the individual items in travelers' itineraries. Draft 4 (2026-09-23): the app builds each traveler a complete itinerary from those items, shows how each item matches the profile and which similar travelers picked it, and lets any item be swapped in one tap. Draft 5 (2026-09-23) plans for a 1,000-tester beta, reached in gated waves after the pilot (§12). Draft 6 (2026-09-23): travelers review what they did, through evening check-ins during the trip and a check-in after it. Ratings stay private unless shared as reviews, and whole trips can be published before the first wave. Draft 7 (2026-09-23): one-tap sign-in with Apple or Google, a voice interview or a survey for the profile, plans requested by typing in a chat box, swipes or arrow taps to change items, and trips saved automatically. Draft 8 (2026-09-23): the chat first answers with options the traveler swipes through, changes by typing and can undo, and a "Create itinerary" button then turns the picks into the itinerary |
 
 PRD v1.1 stays the base document. This revision changes scope and order only; everything not mentioned here (trust rules, data conventions, quality thresholds, rollout, rollback) carries over unchanged. Requirement IDs are the PRD's own.
 
 ## 1. Decision summary
 
-- MVP-1 tests the PRD's core bet (H1: relevant human content beats destination-only suggestions) with the fewest moving parts. The loop is: one-tap sign-in → a profile each traveler creates once, by voice interview or survey → the traveler types what they want in a chat box → the app builds a complete day-by-day itinerary from items in real, permissioned travelers' itineraries, shows how each item matches the profile, and saves it automatically → swipe or tap arrows to change anything → partner or official link. It covers one city, invited travelers, and iOS plus Android.
+- MVP-1 tests the PRD's core bet (H1: relevant human content beats destination-only suggestions) with the fewest moving parts. The loop is: one-tap sign-in → a profile each traveler creates once, by voice interview or survey → the traveler types what they want in a chat box → the chat answers with options drawn from real, permissioned travelers' itineraries, each showing how it matches the profile, and the traveler swipes or taps arrows to pick → "Create itinerary" arranges the picks into a day-by-day itinerary and saves it → partner or official link. It covers one city, invited travelers, and iOS plus Android.
 - Compared with v1.1, the in-app map and offline reading move to MVP-1.1, right after the first 5 invited travelers. The voice interview stays in the pilot by founder decision, if the S0.2 device test passes (D-035). Compare, in-app contributor publishing, guest browsing and AI-proposed rearrangements move later. No trust, privacy or cost rule is relaxed.
 - The 10-traveler relevance study moves up to S0–S1 and runs by hand, so H1 is tested before most of the code exists.
 - Several decisions recorded in v1's docs are retired because PRD v1.1 replaced them: web-first, selling the service first, fixed prices, match percentages, and a multi-city beta (§3). Pricing stays open (D-016).
@@ -48,7 +48,7 @@ PRD v1.1 stays the base document. This revision changes scope and order only; ev
   - makes it simple to swap any item.
 - The beta targets 1,000 testers, reached in gated waves after the pilot (founder planning assumption, 2026-09-23).
 - Travelers review what they did, prompted during the trip (evenings) and after it. Anyone who's been to a place can review it, labeled "From an XPMatch trip" or "Self-reported". Reviews and ratings are in the pilot; publishing whole trips comes before the first wave (founder, 2026-09-23).
-- Sign-in is one tap with Apple or Google, with no codes. Profiles come from an AI voice interview or a survey. Travelers ask for trips by typing in a chat box. Plans save to Trips automatically, and items change with a swipe or arrow taps (founder, 2026-09-23).
+- Sign-in is one tap with Apple or Google, with no codes. Profiles come from an AI voice interview or a survey. Travelers ask for trips by typing in a chat box. The chat answers with options they pick from by swiping or tapping arrows, changing by typing, or undoing. "Create itinerary" then builds the itinerary and saves it to Trips (founder, 2026-09-23).
 
 ## 3. What v1 teaches (repository evidence)
 
@@ -113,24 +113,19 @@ Every traveler creates a profile once, and plans are built from it whenever they
 
    Either way, they see a recap, correct anything, mark must-haves and approve it. If voice fails, the mic is denied or the voice budget runs out, the survey opens with the answers so far filled in. Nothing is matched until a profile is approved.
 3. **Ask for a trip:** the traveler types what they want into the chat box on Trips, for example "3 days in [city] with my partner in May, slow mornings, lots of seafood". The AI turns it into a trip request and shows it back as chips: 3 days · couple · May · slow mornings · seafood.
-   - If the length is missing, the plan uses 3 days and says so (D-033).
-   - A city that isn't open yet gets a clear answer and a waitlist instead of a plan.
-4. **Get the plan:** the app builds a complete day-by-day itinerary from items in real travelers' itineraries (places, meals, activities), ranked against the profile and the request. It saves the plan to Trips automatically. Each item shows:
+   - If the length is missing, the options cover 3 days and say so (D-033).
+   - A city that isn't open yet gets a clear answer and a waitlist instead of options.
+4. **Pick from the options:** the chat answers with options for the trip, drawn from items in real travelers' itineraries (places, meals, activities) and ranked against the profile and the request. They're grouped by day and time of day, one card per slot, for example Day 1: morning café, lunch, afternoon, dinner (D-036). Each option shows:
    - how it matches the profile, for example "slow mornings ✓ · seafood ✓ · under €30 ✓";
    - the catch, and what isn't known;
    - whose trip it comes from, with their context (for example "Ana, a couple, 3 days in May");
    - travelers with a similar profile who picked it (only people who agreed to be shown), and reviews from travelers who've been there.
 
-   Items that fail a must-have are never used. If there aren't enough good items, the plan says so instead of filling days with weak ones. Asking for "another version" makes a second plan, which is also saved.
-5. **Adjust by swiping:** swipe an item left or right, or tap its arrows, to move through alternatives for that slot. Whichever item is showing is kept, and it saves as it changes. The traveler can also:
-   - remove an item or move it;
-   - add one from Explore;
-   - type a change into the chat, like "cheaper dinner on day 2".
-
-   Every change can be undone.
+   Swipe a card left or right, or tap its arrows, to move through alternatives for that slot; whichever option is showing is kept. The traveler can also type changes into the chat, like "cheaper dinner on day 2", "more beaches" or "skip museums", and the options update. Every change can be undone. Choices save as a draft, so the traveler can leave and come back. Options that fail a must-have are never shown. If there aren't enough good options, the chat says so instead of filling slots with weak ones.
+5. **Create the itinerary:** tapping "Create itinerary" turns the options showing into a day-by-day itinerary. It orders each day by time and area, flags anything that clashes (closed that day, outside the trip dates), and saves the itinerary to Trips automatically. It stays editable with the same swipes, arrows, typed changes and undo. The traveler can also remove or move items, or add one from Explore. Asking for "another version" starts a new set of options.
 6. On an item, "Check price and availability" or "Official site" opens that page, and the click is recorded.
 7. Quick feedback: "useful / not useful" on items, or a report about a source.
-8. **Profile changes:** editing the profile creates a new version. "Rebuild" on a trip shows the new version with Keep and Undo; unless the traveler taps Keep, the previous version stays. Trip-only preferences from the chat stay on that trip and never change the profile.
+8. **Profile changes:** editing the profile creates a new version. "Rebuild" on a trip offers fresh options in the chat. Creating from them shows the new version with Keep and Undo, and unless the traveler taps Keep, the previous version stays. Trip-only preferences from the chat stay on that trip and never change the profile.
 9. **During and after the trip:** check-ins ask what the traveler did and how it was (see "Reviews: during and after the trip" below). Evening check-ins need dates, given in the chat or added to the trip.
 
 **Explore** lists more matched items and itineraries to browse, plus the Activity feed. Anything there can be added to a day of the plan.
@@ -221,12 +216,12 @@ On a shared trip, each partner gets their own check-ins and ratings.
 | Voice interview | The AI interviews the traveler by voice with 3–5 short questions, once, when the profile is created. Final answers become typed candidates linked to what the traveler said. Interrupting, muting, ending or switching to the survey keeps the answers so far | Journey step 2; founder choice for the pilot, if S0.2 passes (D-035) | REQ-004, REQ-002 |
 | Survey | A few one-tap screens: the alternative to voice, and the fallback when voice fails, the mic is denied or the budget runs out | Journey step 2 | REQ-002 |
 | Taste recap and profile | Editable recap covering general, dining and experience preferences, must-haves and spend ranges. Approval creates an immutable version, and matching needs an approved profile. Trip-only overrides | Journey steps 2 and 8 | REQ-002 |
-| Chat trip request | The traveler types what they want. The model turns it into a structured request (city, length, dates, party, purpose, trip-only preferences), which the API validates and shows back as chips. 3 days when no length is given; a clear answer for cities that aren't open | Journey step 3 | REQ-029, REQ-003 |
+| Chat trip request | The traveler types what they want. The model turns it into a structured request (city, length, dates, party, purpose, trip-only preferences), which the API validates and shows back as chips. The chat answers with options and a "Create itinerary" button. 3 days when no length is given; a clear answer for cities that aren't open | Journey step 3 | REQ-029, REQ-003 |
 | Content import and rights | Operator import script with validation, permission records, publish, withdraw and an audit log; operator-entered pilot-city place catalog | Supply without fake content | REQ-005 |
 | Matching and explanations | Ranks itinerary items against the approved profile: an eligibility filter, then versioned weighted components. A place that appears in several itineraries is grouped into one result. Content fit stays separate from author similarity, which only appears with contributor consent. Every item carries its profile matches, tradeoffs and unknowns. The ranking feeds the plan, swaps and Explore | The core bet (H1) | REQ-006 |
-| Generated plan | A deterministic, versioned planner fills each day's slots from the ranked items, using the request, pace, meal times and area. It never uses an item that fails a must-have, and says so when there aren't enough good items. "Another version" makes a second plan; "Rebuild" offers a new version with Keep and Undo | Journey steps 4 and 8 | REQ-025 |
-| Swipe and edit | Swipe an item or tap its arrows to move through up to three alternatives for the slot; remove, move to another time or day, add from Explore, or type a change into the chat; undo on every change | Journey step 5 | REQ-026, REQ-029 |
-| Automatic saving | Every plan saves to Trips the moment it's built, in one revision with lineage for every item, and every change saves as it happens. Revisions and conflict handling; a rebuild replaces a trip only after Keep | Journey steps 4–5 | REQ-008 |
+| Options and itinerary | A deterministic, versioned planner proposes an option, with alternatives, for each day's slots, using the ranked items, the request, pace, meal times and area. "Create itinerary" arranges the chosen options by day, time and area, flags clashes, and saves the trip. It never uses an item that fails a must-have, and says so when there aren't enough good options. "Rebuild" offers fresh options, with Keep and Undo on the result | Journey steps 4, 5 and 8 | REQ-025 |
+| Swipe and edit | Swipe an option or item, or tap its arrows, to move through up to three alternatives for the slot: in the chat before the itinerary exists, and on the itinerary after. Type changes into the chat; remove, move or add from Explore; undo on every change | Journey steps 4–5 | REQ-026, REQ-029 |
+| Automatic saving | Option choices save as a draft while the traveler picks. "Create itinerary" saves the trip in one revision, with lineage for every item, and every later change saves as it happens. Revisions and conflict handling; a rebuild replaces a trip only after Keep | Journey steps 4–5 | REQ-008 |
 | Explore and item detail | More matched items and itineraries to browse; item detail with the source traveler's context and reviews; the source itinerary one tap away; an "Open in Maps" link per place | Journey steps 4–5 | REQ-007 (list) |
 | Outbound links | Allowlisted redirect; one logical click event; never shown as a booking | Journey step 6; revenue signal | REQ-011 (subset) |
 | Feedback and reports | "Useful / not useful" on matches; "report a problem" goes to an operator list | Trust metric | REQ-010 (report), REQ-012 |
@@ -275,7 +270,8 @@ Bottom navigation: Trips, Explore, Inbox, Profile. Trips is the home screen: a c
 | Survey | Answer a few one-tap questions | Progress shown; skip a question; back; submit |
 | Taste recap (first time, then from Profile) | Correct and approve | Uncertain values flagged; unknowns stay unknown; newer version approved on another device (reload); saving; no plan until approved |
 | Chat box (on Trips and on each plan) | Say what trip you want, or what to change | Understood (shown as chips); one follow-up question if something important is missing; city not open (a clear answer and a waitlist); daily budget reached (saved trips still work); offline |
-| Your plan | Swipe or tap arrows to change items; remove or move them | Building; partial failure; not enough good items for every day (says so); an item's source withdrawn; saved automatically |
+| Trip options (in the chat) | Swipe or tap arrows to pick the option for each slot, type changes, then tap "Create itinerary" | Building options; partial failure; not enough good options for every day (says so); an option's source withdrawn; draft saved as you go |
+| Itinerary | Review the day-by-day plan; swipe, remove or move items | Creating; clashes flagged (closed that day, outside the dates); an item's source withdrawn; saved automatically |
 | Item alternatives (swipe or arrows) | Keep the item showing, or move on to the next alternative | Loading; no more alternatives (says so); undo |
 | Item detail | Does this fit me, what's the catch, whose trip is it from, and who like me picked it? | Profile matches, tradeoffs, unknowns; every source traveler's note; similar travelers shown only with their consent; source withdrawn |
 | Itinerary or review detail | See an item in the context of the trip it came from | Reasons, tradeoffs, unknowns; author similarity hidden without consent; source withdrawn; dated event expired |
@@ -312,7 +308,7 @@ Plan items show similar travelers who picked them (founder decision). So the rel
 - Interview, plans and commands (M02 subset):
   - the interview `conversation` and its messages;
   - `plan_request`, the structured request the model made from the traveler's chat message, as validated by the API, with the message ID;
-  - `plan_proposal`, a generated plan: the request, profile version, planner version, and each day's slots and items with their assessments. A new plan is saved straight into a trip; a rebuild stays a proposal until the traveler taps Keep;
+  - `plan_proposal`, the options draft: the request, profile version, planner version, and each day's slots with the chosen option, its alternatives and their assessments. It saves as the traveler picks, and "Create itinerary" turns it into a trip. For a rebuild of an existing trip, the result stays a proposal until the traveler taps Keep;
   - `mutation_receipt` for idempotency.
 
   No outbox until an asynchronous consumer exists.
@@ -374,10 +370,10 @@ Scenario: contributor C's 3-day itinerary for the pilot city and two of C's revi
 | # | Observable result | PRD criteria | Evidence |
 | --- | --- | --- | --- |
 | T1 | C's content can be published only with a current permission record, and appears in matching once published. | AC-REQ-005-01 | Import tests; public projection check |
-| T2 | T takes the survey (and, in a separate run, the voice interview), corrects one recap value and approves: exactly one approved version exists, and a retried approval returns the same version. Before approval no plan is built and Explore can't be reached. Denying the mic partway through the interview opens the survey with T's answers so far. | AC-REQ-002-01, AC-REQ-002-02, AC-REQ-002-03, AC-REQ-004-03 | Transaction tests; device run |
-| T3 | T has a must-have and types "3 days, slow mornings, lots of seafood" into the chat. T's plan fills 3 days with items from C's and other permissioned itineraries. Each item shows its source, how it matches T's profile, a tradeoff (or "no evidenced tradeoff") and its unknowns. No item fails the must-have; if there aren't enough good items, the plan says so. The same inputs and planner version always produce the same plan. | AC-REQ-006-01, AC-REQ-006-02, AC-REQ-006-03, AC-REQ-025-01, AC-REQ-025-02, AC-REQ-029-01 | Deterministic planner and ranking tests; eval cases |
+| T2 | T takes the survey (and, in a separate run, the voice interview), corrects one recap value and approves: exactly one approved version exists, and a retried approval returns the same version. Before approval no options or itinerary are built, and Explore can't be reached. Denying the mic partway through the interview opens the survey with T's answers so far. | AC-REQ-002-01, AC-REQ-002-02, AC-REQ-002-03, AC-REQ-004-03 | Transaction tests; device run |
+| T3 | T has a must-have and types "3 days, slow mornings, lots of seafood" into the chat. The chat answers with options for every slot of 3 days, drawn from C's and other permissioned itineraries. Each option shows its source, how it matches T's profile, a tradeoff (or "no evidenced tradeoff") and its unknowns. No option fails the must-have; if there aren't enough good options, the chat says so. The same inputs and planner version always produce the same options and the same itinerary. | AC-REQ-006-01, AC-REQ-006-02, AC-REQ-006-03, AC-REQ-025-01, AC-REQ-025-02, AC-REQ-029-01 | Deterministic planner and ranking tests; eval cases |
 | T4 | Without C's public-taste consent, no author-similarity claim appears. | AC-REQ-006-02 | Permission test |
-| T5 | T's plan is saved to Trips automatically the moment it's built, as one revision with lineage for every item. A retried request returns the same receipt instead of creating a second trip. Flagged items are visible in the plan. | AC-REQ-008-01, AC-REQ-008-02 | Transaction tests; device run |
+| T5 | T's option choices survive closing and reopening the app. Tapping "Create itinerary" saves one trip to Trips as a single revision, containing exactly the options that were showing, with lineage for every item. A retried tap returns the same receipt instead of creating a second trip. Clashes are flagged on the itinerary. | AC-REQ-008-01, AC-REQ-008-02 | Transaction tests; device run |
 | T6 | After T removes one stop, moves another, force-quits and signs in on a second device, both devices show the same latest revision. Two conflicting edits produce a conflict, not a silent overwrite. | AC-REQ-008-01, AC-REQ-008-02, AC-REQ-001-01 | Concurrency tests; two-device run |
 | T7 | "Check price and availability" opens the allowlisted page and records exactly one outbound event. A tampered URL is refused, and nothing says "booked". | AC-REQ-011-01, AC-REQ-011-02 | Redirect tests; device run |
 | T8 | U requesting T's profile or trip by ID is denied by both the API and row policies. | AC-REQ-001-02, NFR-001 | Two-user negative tests |
@@ -429,11 +425,11 @@ PRD v1.1 stops at REQ-016. These continue its numbering and are pending approval
 - **REQ-024, notifications.**
   - `AC-REQ-024-01`: Messages, requests, answers, partner edits, contributor updates and trip check-ins create in-app notices with unread counts. Push notifications are sent only after the traveler allows them.
   - `AC-REQ-024-02`: Push previews never contain message or comment text. Each notice type can be turned off, and signing out stops push to that device.
-- **REQ-025, generated plan.** The app builds each traveler a complete day-by-day itinerary from ranked items.
-  - `AC-REQ-025-01`: Given an approved profile and a trip request, a deterministic, versioned planner fills each day's slots with ranked items, using the traveler's pace, meal times and areas. Each item shows how it matches the profile, a tradeoff or "no evidenced tradeoff", its unknowns and its source. The same inputs and planner version produce the same plan.
+- **REQ-025, options and itinerary.** The app proposes options for each traveler's trip and turns the chosen ones into a complete day-by-day itinerary.
+  - `AC-REQ-025-01`: Given an approved profile and a trip request, a deterministic, versioned planner proposes an option, with alternatives, for each day's slots from ranked items, using the traveler's pace, meal times and areas. Each option shows how it matches the profile, a tradeoff or "no evidenced tradeoff", its unknowns and its source. "Create itinerary" arranges the options showing by day, time and area, flags clashes, and saves the trip. The same inputs and planner version produce the same options and itinerary.
   - `AC-REQ-025-02`: No item fails a must-have. When there aren't enough good items, the plan says how many days it could fill instead of padding with weak or unsourced items. The model writes explanation wording only; it never chooses or orders items.
 - **REQ-026, swipe and edit.** Any item can be changed with a swipe or a tap.
-  - `AC-REQ-026-01`: Swiping an item, or tapping its arrows, moves through up to three alternatives for the same slot, each with its profile matches and source. The item showing is kept and saved, and undo restores the previous one. The traveler can also remove an item, move it to another time or day, add one from Explore, or type a change into the chat. Arrows and buttons do everything a swipe does (PRD REQ-015).
+  - `AC-REQ-026-01`: Swiping an option or item, or tapping its arrows, moves through up to three alternatives for the same slot, each with its profile matches and source. This works in the chat before the itinerary is created and on the itinerary after. The one showing is kept and saved, to the draft or the trip, and undo restores the previous one. The traveler can also remove an item, move it to another time or day, add one from Explore, or type a change into the chat. Arrows and buttons do everything a swipe does (PRD REQ-015).
   - `AC-REQ-026-02`: Alternatives never fail a must-have, and when none fit, the item says so. Every edit is one trip revision. A rebuild replaces a trip only after the traveler taps Keep; otherwise the previous version stays.
 - **REQ-027, travelers like you.** Plan items show other travelers with similar profiles who picked the same item.
   - `AC-REQ-027-01`: A traveler appears only if their activity sharing is on and they turned on "Show my picks to travelers with similar taste". A contributor appears only with public-taste consent. Both are shown by display name with "similar taste", never with profile details, dates or companions.
@@ -442,7 +438,7 @@ PRD v1.1 stops at REQ-016. These continue its numbering and are pending approval
   - `AC-REQ-028-01`: On a trip with dates and notifications allowed, the traveler gets one check-in per trip evening, listing that day's items, at 8 pm in the trip city's time zone. The morning after the last date, they get the after-trip check-in, with the evening answers filled in. A trip without dates offers "I'm back" and one reminder 14 days after it was saved. Done or skipped, skip reasons, ratings, notes and added places are saved privately; nothing becomes public without sharing.
   - `AC-REQ-028-02`: Ratings never change the approved profile by themselves. Suggested changes are drafts the traveler approves (PRD REQ-002). Items rated "not for me" aren't used in that traveler's future plans. Check-ins stop when turned off for the trip or when the trip is deleted. Private notes never reach analytics, logs or the model.
 - **REQ-029, chat trip requests.** Travelers ask for plans, and for changes, by typing in a chat box.
-  - `AC-REQ-029-01`: A typed request becomes a structured trip request (city, length, dates, party, purpose, trip-only preferences), shown back as chips, and a full plan is built and saved automatically. A request without a length gets 3 days and says so. A typed change such as "cheaper dinner on day 2" changes only the slots it names.
+  - `AC-REQ-029-01`: A typed request becomes a structured trip request (city, length, dates, party, purpose, trip-only preferences), shown back as chips, and the chat answers with options and a "Create itinerary" button. A request without a length gets 3 days and says so. A typed change such as "cheaper dinner on day 2" changes only the options, or itinerary slots, it names.
   - `AC-REQ-029-02`: The model only turns words into a request; the planner chooses the items. A city that isn't open, or dates in the past, get a clear answer and no plan. Text in the chat can't change permissions, settings or anyone else's data (PRD REQ-003). Trip-only preferences from the chat never change the profile.
 
 ### Social checks
@@ -469,7 +465,7 @@ Scenario: T has an approved profile and a plan. U and V have profiles similar to
 
 | # | Observable result | Criteria | Evidence |
 | --- | --- | --- | --- |
-| T25 | Swiping a dinner in T's plan, or tapping its arrows, shows up to three alternatives for that slot, none of which fails T's must-have. The one showing is kept and saved, and undo restores the previous dinner. When nothing fits, the item says so. With VoiceOver or TalkBack, the arrows do the same. | AC-REQ-026-01, AC-REQ-026-02 | API tests; device run |
+| T25 | Before creating the itinerary, T swipes a dinner option in the chat, or taps its arrows, and sees up to three alternatives for that slot, none of which fails T's must-have. The one showing is kept, and undo restores the previous dinner. When nothing fits, the option says so. After "Create itinerary", the same works on the itinerary. With VoiceOver or TalkBack, the arrows do the same. | AC-REQ-026-01, AC-REQ-026-02 | API tests; device run |
 | T26 | U shares activity, turned on "show my picks" and kept an item in T's plan, so T sees U's display name and "similar taste" on it. V hasn't opted in and never appears, not even as a count. After U turns the setting off, U is gone on T's next load. | AC-REQ-027-01, AC-REQ-027-02 | Consent and similarity tests; device run |
 | T27 | After T edits the profile, "Rebuild" on T's trip shows a new version with Keep and Undo. The trip changes only when T taps Keep; Undo, or leaving, keeps the previous version. | AC-REQ-026-02, AC-REQ-003-01 | Transaction tests; device run |
 
@@ -489,7 +485,7 @@ Scenario: T saved a dated 3-day trip, and U is another invited traveler.
 | # | Observable result | Criteria | Evidence |
 | --- | --- | --- | --- |
 | T32 | T signs in with Apple on an iPhone and U with Google on an Android phone, with no code or password. Signing in again with the same account on a second device opens the same account and trips. After T deletes the account, the Sign in with Apple authorization is revoked. | AC-REQ-001-01, AC-REQ-001-03 | Device runs on both platforms |
-| T33 | T types "3 days with my partner, slow mornings, lots of seafood". The chips read 3 days · couple · slow mornings · seafood, and a full plan is built and saved. "Make dinner on day 2 cheaper" changes only that slot. A request for a city that isn't open gets a clear answer and no plan. Text that tries to reach other travelers' data or change settings has no effect. | AC-REQ-029-01, AC-REQ-029-02, AC-REQ-003-02 | Eval cases; injection tests; device run |
+| T33 | T types "3 days with my partner, slow mornings, lots of seafood". The chips read 3 days · couple · slow mornings · seafood, and the chat answers with options and a "Create itinerary" button. "Make dinner on day 2 cheaper" changes only that option. A request for a city that isn't open gets a clear answer and no options. Text that tries to reach other travelers' data or change settings has no effect. | AC-REQ-029-01, AC-REQ-029-02, AC-REQ-003-02 | Eval cases; injection tests; device run |
 
 ## 9. Delivery slices
 
@@ -505,7 +501,7 @@ Each slice is an end-to-end, demonstrable outcome; split it into 0.5–2 day tic
 | 2b Voice interview | The AI voice interview with interrupt, mute, end and "switch to survey"; falls back to the survey with answers kept; metered and capped | T2 (voice), T10 | 2, S0.2 passed, D-008, D-009, D-035 |
 | 3 Content import and rights | Real permissioned itinerary imported, published and withdrawn | T1, T9 (read gate) | S0.1, D-006 |
 | 4 Item matching and Explore | Items ranked for the profile, grouped by place and traceable to their sources, or an honest empty state; Explore; deterministic eval baseline | T4 | 2, 3 |
-| 5 Chat to plan, swipe and trip | The chat turns a message into a trip request; the planner builds the plan and saves it automatically; swipe or arrows to change items; remove, move, add from Explore; typed changes; rebuild with Keep and Undo; restore on a second device; conflicts | T3, T5, T6, T9 (trip side), T10, T25, T27, T33 | 4, D-008, D-009, D-011, D-023, D-033 |
+| 5 Chat options, itinerary and trip | The chat turns a message into a trip request and answers with options; swipe or arrows to pick; typed changes and undo; the draft saves as it goes; "Create itinerary" arranges and saves the trip; the same edits on the itinerary; remove, move, add from Explore; rebuild with Keep and Undo; restore on a second device; conflicts | T3, T5, T6, T9 (trip side), T10, T25, T27, T33 | 4, D-008, D-009, D-011, D-023, D-033, D-036 |
 | 6 Links, feedback, telemetry | Outbound click, reports, reconciled events | T7, T11 | 5 |
 | 7 Safety foundation | Display names; block and report on every piece of user content; text filter; operator queue with a response owner; community guidelines and contact details; 18+ confirmation; rate limits | T22 | 1, D-021 |
 | 8 Contributor updates and Q&A | Revision diffs, "new" markers and update previews on boards; questions to the operator queue and published answers | T14, T15 | 3, 5, 7 |
@@ -523,10 +519,11 @@ With at most 20 travelers, report counts next to every rate. In the waves, repor
 
 | Metric | Definition | Window | Informs |
 | --- | --- | --- | --- |
-| Plan activation | New travelers who get a first plan within 24 hours of approving their profile ÷ new travelers with an approved profile | 24 hours | Whether the journey delivers value quickly (adapted from PRD §11's first-decision activation) |
-| Kept-item ratio | Items from the plan still on the trip after 7 days ÷ items in the original plan | 7 days | Plan quality: H1 inside the product (added) |
+| Plan activation | New travelers who create a first itinerary within 24 hours of approving their profile ÷ new travelers with an approved profile | 24 hours | Whether the journey delivers value quickly (adapted from PRD §11's first-decision activation) |
+| Kept-item ratio | Items still on the trip 7 days after "Create itinerary" ÷ items in the created itinerary | 7 days | Plan quality: H1 inside the product (added) |
 | Channel mix | Kept items by the channel they came from (generated plan, swap, Explore, activity, partner, contributor update) ÷ all kept items | 7 days | Shows how much the plan itself, rather than edits and social channels, supplies |
-| Swap rate | Swaps ÷ plan items shown, by category and slot | 7 days | Where the plan misses the profile; tunes the planner |
+| Swipe rate | Swipes ÷ options and items shown, by category and slot | 7 days | Where the options miss the profile; tunes the planner |
+| Options to itinerary | Option sets that end in "Create itinerary" ÷ option sets shown | Per request | Whether the options are good enough to commit to |
 | Plan outcome | Items marked done ÷ items in the saved plan; share of done items rated "loved it" | Per trip, after it ends | The strongest signal of plan quality: what travelers actually did and liked |
 | Kept places per started trip | Distinct places on the latest board snapshot ÷ started trips; show zeros and the median | 7 days | Planning depth (PRD §11) |
 | Voice interview accuracy | Candidates accepted unchanged, corrected, rejected or left unknown ÷ reviewed candidates, for voice profiles | Per interview | Whether voice understands travelers well enough |
@@ -546,7 +543,7 @@ With at most 20 travelers, report counts next to every rate. In the waves, repor
 | Review sharing | Ratings shared as reviews ÷ ratings with notes; trips published ÷ trips reviewed (from the first wave) | Pilot and waves | Whether travelers become contributors |
 | Traveler-sourced supply | Published traveler reviews and itineraries per city per week | Weekly | Whether content keeps up with testers (NFR-009) |
 
-**Events:** `signin_completed`, `profile_path_chosen`, `profile_confirmed`, `trip_request_submitted`, `plan_generated`, `trip_started`, `match_exposed` (only on a visible impression), `source_opened`, `item_swapped`, `place_added`, `place_removed`, `retained_snapshot`, `outbound_clicked`, `match_feedback`, `content_reported`, `content_withdrawn`, `checkin_sent`, `checkin_answered`, `visit_recorded`, `profile_suggestion_accepted`, `review_submitted`, `review_published`, `trip_published`. Each carries the event and schema version, server-derived actor and session, trip ID when relevant, request or command ID, content or assessment version, `occurred_at` and `is_internal`. None carries raw chat text, audio, exact budgets or private notes (PRD §11).
+**Events:** `signin_completed`, `profile_path_chosen`, `profile_confirmed`, `trip_request_submitted`, `options_generated`, `trip_started` (sent on "Create itinerary"), `match_exposed` (only on a visible impression), `source_opened`, `item_swapped`, `place_added`, `place_removed`, `retained_snapshot`, `outbound_clicked`, `match_feedback`, `content_reported`, `content_withdrawn`, `checkin_sent`, `checkin_answered`, `visit_recorded`, `profile_suggestion_accepted`, `review_submitted`, `review_published`, `trip_published`. Each carries the event and schema version, server-derived actor and session, trip ID when relevant, request or command ID, content or assessment version, `occurred_at` and `is_internal`. None carries raw chat text, audio, exact budgets or private notes (PRD §11).
 
 **Social events:** `activity_sharing_changed`, `activity_item_viewed`, `peer_pick_setting_changed`, `peer_picks_shown`, `partner_invited`, `partner_joined`, `partner_left`, `stop_comment_posted`, `question_submitted`, `question_answered`, `source_update_shown`, `source_update_accepted`, `message_request_sent`, `message_request_accepted`, `message_sent`, `user_blocked` and `push_opened`. They carry IDs and counts only, never message, comment or question text.
 
@@ -583,7 +580,7 @@ With at most 20 travelers, report counts next to every rate. In the waves, repor
 - `A-004`: Copying one contributor's whole itinerary is dropped. The generated plan replaces it, and source itineraries stay viewable for context. (This replaces draft 3's whole-itinerary shortcut.)
 - `A-005`: A profile needs at least a pace, two interests and must-haves (which may be "none") before matching starts; everything else can stay unknown.
 - `A-006`: Items per day follow pace, counting lunch and dinner: relaxed 3, moderate 4, packed 5. Swap data will tune this.
-- `A-007`: Plans save to Trips automatically, and every change saves as it happens. Rebuilding an existing trip needs one tap on Keep. (This replaces draft 4's "Add to my trips" button.)
+- `A-007`: Option choices save as a draft while the traveler picks. "Create itinerary" saves the itinerary to Trips, and every later change saves as it happens. Rebuilding an existing trip needs one tap on Keep. (This replaces draft 4's "Add to my trips" button.)
 
 ### Decisions needed
 
@@ -620,6 +617,7 @@ With at most 20 travelers, report counts next to every rate. In the waves, repor
 | D-033 | Default trip length | 3 days when the chat request doesn't say, stated in the plan and changeable by typing | Tester requests | Slice 5 |
 | D-034 | Survey length | Five one-tap screens (pace, interests, food, budget, must-haves), each skippable, with a progress bar | Completion rate and time (§10) | Slice 2 |
 | D-035 | Voice in the pilot | Voice ships in the pilot if the S0.2 device test passes on both platforms. Otherwise the pilot starts with the survey only, and voice follows in MVP-1.1 | S0.2 results | Slice 2b |
+| D-036 | How options are laid out | Grouped by day and time of day, with one swipeable card per slot. "Create itinerary" then orders each day by time and area. The alternative is grouping by type (eat, do, stay) and assigning days when the itinerary is created | Tester feedback and the options-to-itinerary rate | Slice 5 |
 
 ## 12. Scaling to 1,000 beta testers
 
@@ -705,7 +703,7 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
 - **Moved to MVP-1.1:** the in-app map (REQ-007 map part) and offline reading (REQ-015 offline part). The voice interview (REQ-004) moved there in draft 1 and came back into the pilot in draft 7, provided the S0.2 spike passes.
 - **Moved later:** guest browsing (PRD D-004, browse part), save and compare (REQ-009), in-app contributor submission (REQ-005 submission path), AI-proposed rearrangements (REQ-003 bulk proposals), hotel and flight interview questions (REQ-002).
 - **Simplified:** import scripts instead of an internal moderation app; plans built by a deterministic planner with manual swaps, instead of AI-proposed rearrangements; daily budget counters instead of the full reservation system; no outbox until an asynchronous consumer exists; "Open in Maps" links instead of an embedded map.
-- **Added:** the plan activation, kept-item ratio and swap-rate metrics; the `plan_generated`, `plan_added`, `item_swapped`, `match_feedback` and `content_reported` events; the relevance study moved to S0–S1 as a hand-run test; D-016, which surfaces the conflict between v1's recorded prices and the PRD's "undecided".
+- **Added:** the plan activation, kept-item ratio, swipe-rate and options-to-itinerary metrics; the `options_generated`, `item_swapped`, `match_feedback` and `content_reported` events; the relevance study moved to S0–S1 as a hand-run test; D-016, which surfaces the conflict between v1's recorded prices and the PRD's "undecided".
 - **Added by founder decision (2026-09-23), in the first pilot:** contributor itinerary updates (REQ-017), opt-in named trip activity (REQ-018), trip partners (REQ-019) with stop comments (REQ-020), ask-a-contributor Q&A (REQ-021), direct messages (REQ-022), the safety controls they need (REQ-023) and notifications (REQ-024). This brings forward PRD v1.1's later timing for feeds and collaborative editing, and moves report and block (REQ-010) back into MVP-1.
 - **Changed by founder decision (2026-09-23):**
   - Every traveler creates a profile once and must have an approved profile before any matching (`AC-REQ-002-03`).
@@ -724,7 +722,8 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
   - plans requested by typing in a chat box (REQ-029), replacing the trip-length picker;
   - swipes or arrow taps to change items, replacing the swap sheet (REQ-026);
   - trips saved automatically, replacing "Add to my trips" (A-007).
-- **Unresolved:** D-005 to D-035.
+- **Changed by founder decision (2026-09-23), draft 8:** the chat answers a request with options the traveler swipes or taps arrows through, changes by typing, and can undo. Only then does "Create itinerary" turn the picks into the itinerary, where the same edits keep working (REQ-025, REQ-026, REQ-029, D-036).
+- **Unresolved:** D-005 to D-036.
 
 ## 14. Completion check
 
@@ -738,6 +737,6 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
 
 ## 15. Readiness and next action
 
-**Readiness: READY WITH ASSUMPTIONS.** S0.1 and slices 1–2 can start once D-005 is approved. D-007, D-008, D-010, D-011 and D-017 to D-035 have working defaults. D-009 needs the founder's cap amounts before slices 2b and 5 make paid model and voice calls. Slices 3 onward need D-006, and the first external invite needs D-021 confirmed. Waves beyond the pilot need the §12 work, NFR-008 to NFR-010, and D-025 to D-029 confirmed.
+**Readiness: READY WITH ASSUMPTIONS.** S0.1 and slices 1–2 can start once D-005 is approved. D-007, D-008, D-010, D-011 and D-017 to D-036 have working defaults. D-009 needs the founder's cap amounts before slices 2b and 5 make paid model and voice calls. Slices 3 onward need D-006, and the first external invite needs D-021 confirmed. Waves beyond the pilot need the §12 work, NFR-008 to NFR-010, and D-025 to D-029 confirmed.
 
 **Next action (founder):** approve revision v1.2 as written, or list the changes you want. After approval, the factory's next task is S0.1 (project shell) on its own branch, with CI and device evidence.
