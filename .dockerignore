@@ -1,0 +1,17 @@
+**/node_modules
+**/dist
+**/.expo
+.git
+.github
+.artifacts
+.worktrees
+.claude
+.agents
+docs
+cmba-workspace
+**/*.md
+.env
+.env.*
+# The app's code isn't part of the API image; only its manifest is.
+apps/mobile/*
+!apps/mobile/package.json

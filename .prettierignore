@@ -1,0 +1,17 @@
+# Prose is edited by hand; formatting covers code only.
+*.md
+docs/
+cmba-workspace/
+.claude/
+.agents/
+
+# Generated or installed
+package-lock.json
+node_modules/
+dist/
+coverage/
+.expo/
+apps/mobile/ios/
+apps/mobile/android/
+apps/mobile/src/uniwind-types.d.ts
+apps/mobile/src/global.css

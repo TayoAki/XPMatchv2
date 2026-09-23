@@ -1,0 +1,39 @@
+{
+  "name": "xpmatch",
+  "private": true,
+  "description": "XPMatch v2: the native mobile rebuild (Expo app, TypeScript API, Postgres on Railway)",
+  "type": "module",
+  "packageManager": "npm@10.9.7",
+  "engines": {
+    "node": ">=22.12.0 <23"
+  },
+  "workspaces": [
+    "apps/*",
+    "services/*",
+    "packages/*",
+    "db"
+  ],
+  "scripts": {
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint . --max-warnings=0 && npm run lint --workspace=@xpmatch/mobile --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "vitest run",
+    "db:migrate": "npm run migrate --workspace=@xpmatch/db --",
+    "tokens:build": "npm run build:css --workspace=@xpmatch/design-tokens",
+    "api:dev": "npm run dev --workspace=@xpmatch/api",
+    "mobile:start": "npm run start --workspace=@xpmatch/mobile"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@types/node": "^22.20.4",
+    "eslint": "^9.39.5",
+    "globals": "^17.12.0",
+    "prettier": "^3.9.9",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.70.1",
+    "vitest": "^5.0.1"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "@xpmatch/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Schemas shared by the app and the API",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "zod": "^4.6.5"
+  }
+}
