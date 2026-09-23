@@ -7,6 +7,7 @@
 | Inputs | PRD v1.1 §4 (screens, tokens, accessibility); plan draft 8 §4 and §6; v1 read-only review (commit `28c66b6`); research on React Native UI kits and theming, checked against live docs and npm on 2026-09-23 |
 | Requirements | REQ-015 (accessibility), REQ-025 and REQ-026 (options, swipe), REQ-029 (chat), **REQ-030 (appearance, new)** |
 | Decisions | D-037 (UI kit), D-038 (palette), D-039 (appearance options), D-040 (place imagery) |
+| Related | Card fields and the taste vocabulary: `XPMatch-data-shape.md` (§3, §7). A prompt for AI-generated mockups of every screen: `XPMatch-mockup-prompt.md` |
 
 **Carried over from v1:** the design language (layout ideas, type pairing, patterns, lessons). **Not carried over:** v1's code (founder decision, AGENTS.md) and v1's colors (the PRD's tokens win).
 

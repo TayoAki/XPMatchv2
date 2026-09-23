@@ -399,7 +399,7 @@ A must-have with **unknown** evidence (D-042):
 | `food_styles` (food stops) | 3 | Overlap: fit. None: mismatch |
 | `budget_meal` / `budget_activity` | 2 | Stop's range within the traveler's: fit. Overlapping: partial. Above: mismatch. No price: unknown |
 | `fame` | 2 | `local_favorites` with a local favorite, or `classics` with a landmark: fit. `local_favorites` with a landmark: mismatch. `mix`: fit for any |
-| `crowds` | 2 | `avoid` with quiet or no queue: fit. A short queue at a known time: partial. Busy or a long queue: mismatch. No report: unknown |
+| `crowds` | 2 | Judged at the slot's planned time when the report says when:<br>• `avoid` with quiet or no queue: fit.<br>• A short queue, or a busy period outside the planned time: partial, with a timing tip ("go at 12:15").<br>• Busy or a long queue at the planned time: mismatch.<br>• No report: unknown |
 | `atmosphere` | 1 | Tag overlap: fit. A conflict (quiet wanted, lively place): mismatch |
 | `day_start` / `dinner_time` | 1 | Open and good inside the slot's window: fit. Closes before the window: excluded from that slot |
 | `walking` | 1 | `minimal` with strenuous: mismatch |
