@@ -91,7 +91,7 @@ Read from `differentiators.md`, not re-derived. **Verdict: POSITIONAL.**
 
 ## Step 5 — Assembled UVP
 
-> **[MOVEMENT]** Travel lists rank places by how popular they are, and AI planners fill every hour, anywhere, in seconds. You end up on the same itinerary as everyone else, with stops that don't fit how you travel and sometimes places that closed long ago. **[ASPIRATION + DEEP DIVE]** XPMatch builds your days from real trips taken by travelers whose taste matches yours, so the plan feels like yours, not everyone's. **[VALUE, TWISTED]** Tell it once how you like to travel, in a short voice chat or a few taps, then type the trip you want. In minutes you have a day-by-day plan where every stop shows why it fits you, what the catch is and whose trip it came from, and you can swipe any stop for another. **[OBJECTIONS]** No long questionnaire, no invented or closed places, no ratings from strangers you know nothing about. When it doesn't have enough good options, it tells you instead of padding your day. It starts in one city because real trips take time to collect, and it's free while in beta.
+> **[MOVEMENT]** Travel lists rank places by how popular they are, and AI planners fill every hour, anywhere, in seconds. You end up on the same itinerary as everyone else, with stops that don't fit how you travel and sometimes places that closed long ago. **[ASPIRATION + DEEP DIVE]** XPMatch builds your days from real trips taken by travelers whose taste matches yours, so the plan feels like yours, not everyone's. **[VALUE, TWISTED]** Tell it once how you like to travel, in a short voice chat or a few taps, then type the trip you want. In minutes you have a day-by-day plan where every stop shows why it fits you, what the catch is and whose trip it came from, and you can swipe any stop for another. **[OBJECTIONS]** No long questionnaire, no invented places, and anything closed on the day you'd go is flagged. No ratings from strangers you know nothing about. When it doesn't have enough good options, it tells you instead of padding your day. It starts in one city because real trips take time to collect, and it's free while in beta.
 
 **Clause 4 (PROOF) is omitted.** XPMatch has no travelers yet, and the skill forbids inventing proof.
 
@@ -101,7 +101,7 @@ Read from `differentiators.md`, not re-derived. **Verdict: POSITIONAL.**
 | --- | --- |
 | O1: free and instant elsewhere | "free while in beta"; "In minutes" |
 | O2: generic | "travelers whose taste matches yours"; "feels like yours, not everyone's" |
-| O3: closed places | "no invented or closed places" |
+| O3: closed places | "no invented places, and anything closed on the day you'd go is flagged". This is the plan's clash flag (plan §4 step 5). The paragraph doesn't promise more: nothing in the plan detects a permanent closure |
 | O4: too many questions | "a short voice chat or a few taps"; "No long questionnaire" |
 | O5: strangers' taste | "whose taste matches yours"; "whose trip it came from"; "no ratings from strangers you know nothing about" |
 | O6: coverage | "It starts in one city because real trips take time to collect". The deficit is stated as the reason for trust |
@@ -139,6 +139,7 @@ Read from `differentiators.md`, not re-derived. **Verdict: POSITIONAL.**
   - Every other objection and aspiration has a verbatim source in `validation.md`.
   - That sample skews toward older travelers who mostly go to Europe (RS) and toward technical readers (HN).
 - **"In minutes"** is a design target (plan §4), not a measurement. Keep it out of public copy until the pilot times it.
+- **"a short voice chat"** holds only if D-035 (decided by the voice spike, S0.2) puts voice in the pilot. If voice slips to MVP-1.1, say "a few taps" in every derivative: here, `profile.md` and `journey.md` email 2.
 - **"free while in beta"** follows the pilot decision (plan §4, "How money moves") and `validation.md`'s pivot. Change it if D-016 sets a price.
 - **Couples:** kept in the audience but not in the lead. The evidence that couples disagree is old and contested (`validation.md`).
 - **Things not to claim:** trip partners and "travelers like you" are real features (plan §4), but they're left out of the UVP. The first is a convenience; the second works only with consent and density that don't exist yet. Don't imply other travelers are visible by default.

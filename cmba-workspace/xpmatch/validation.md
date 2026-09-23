@@ -111,7 +111,7 @@ This is the weakest theme: every direct statement found dates from 2010–2021.
 
 ## Survey instrument
 
-For people who plan short city trips. It runs as the beta waitlist form, where the skill's rule applies: multiple choice first, one open question last. Copy-paste ready.
+For people who plan short city trips. It runs right after the beta waitlist form (`profile.md`), and a 5-question subset with the same wording runs after the lead magnet (`lead-magnet.md`), so the answers pool. The skill's rule applies: multiple choice first, one open question last. Copy-paste ready.
 
 1. **Are you planning a city trip in the next 3 months?** Yes, already booked · Yes, not booked yet · Maybe · No
 2. **Who do you usually travel with on short trips?** Alone · With my partner · With friends · With family including kids · Other
