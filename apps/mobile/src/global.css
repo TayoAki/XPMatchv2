@@ -1,0 +1,78 @@
+/* Generated from packages/design-tokens by `npm run tokens:build`. Do not edit by hand.
+   The default accent is pine; the app swaps accents at runtime (UI plan §4.5). */
+@import 'tailwindcss';
+@import 'uniwind';
+@import 'tw-animate-css';
+
+/* UI plan §5: 12 pt fields and small cards, 16 pt cards, 24 pt sheets. */
+@theme {
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --spacing-hairline: hairlineWidth();
+}
+
+@layer theme {
+  :root {
+    @variant light {
+      --color-background: #F7F8F5;
+      --color-foreground: #182B28;
+      --color-card: #FFFFFF;
+      --color-card-foreground: #182B28;
+      --color-popover: #FFFFFF;
+      --color-popover-foreground: #182B28;
+      --color-secondary: #EDF0EB;
+      --color-secondary-foreground: #182B28;
+      --color-muted: #EDF0EB;
+      --color-muted-foreground: #4D5E5A;
+      --color-accent-foreground: #182B28;
+      --color-border: #D8DDD6;
+      --color-input: #7E8B87;
+      --color-fit: #1E6B47;
+      --color-fit-soft: #E4F2EA;
+      --color-catch: #8A4B00;
+      --color-catch-soft: #FBEEDC;
+      --color-unknown: #4F5B66;
+      --color-unknown-soft: #ECEFF2;
+      --color-destructive: #B3261E;
+      --color-destructive-soft: #FBE9E7;
+      --color-destructive-foreground: #FFFFFF;
+      --color-primary: #174D42;
+      --color-primary-foreground: #FFFFFF;
+      --color-accent: #E2EEEA;
+      --color-ring: #1F7A67;
+    }
+
+    @variant dark {
+      --color-background: #0E1816;
+      --color-foreground: #EEF2EF;
+      --color-card: #162320;
+      --color-card-foreground: #EEF2EF;
+      --color-popover: #162320;
+      --color-popover-foreground: #EEF2EF;
+      --color-secondary: #1F2F2B;
+      --color-secondary-foreground: #EEF2EF;
+      --color-muted: #1F2F2B;
+      --color-muted-foreground: #A7B6B1;
+      --color-accent-foreground: #EEF2EF;
+      --color-border: #2C3C38;
+      --color-input: #6E7F7A;
+      --color-fit: #7FD3A4;
+      --color-fit-soft: #16332A;
+      --color-catch: #F2B878;
+      --color-catch-soft: #3A2A16;
+      --color-unknown: #B7C2CC;
+      --color-unknown-soft: #26303A;
+      --color-destructive: #F2A39B;
+      --color-destructive-soft: #3D1D1A;
+      --color-destructive-foreground: #3D1D1A;
+      --color-primary: #86D1BB;
+      --color-primary-foreground: #0B2B24;
+      --color-accent: #1C3A33;
+      --color-ring: #86D1BB;
+    }
+  }
+}
