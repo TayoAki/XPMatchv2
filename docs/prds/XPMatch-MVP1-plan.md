@@ -6,7 +6,7 @@
 | Method | `mobile-plan-mvp` for scope; `software-factory` for intake, readiness and delivery slices |
 | Readiness | **READY WITH ASSUMPTIONS**: S0 and slices 1–2 can start once this revision is approved. Paid model and voice calls (slices 2b and 5) also need D-009 (spend ceiling), slices 3 onward need D-006 (pilot city and permissioned content), and the first external invite needs D-021 (who answers safety reports) |
 | Approval | **Pending**: founder |
-| Revision note | Draft 2 (2026-09-23) adds the social features the founder chose for the first pilot: contributor updates, trip partners with comments, an opt-in named activity feed, ask-a-contributor Q&A and direct messages. Draft 3 (2026-09-23) makes the flow profile-first: every traveler has an approved profile before matching, and matching ranks the individual items in travelers' itineraries. Draft 4 (2026-09-23): the app builds each traveler a complete itinerary from those items, shows how each item matches the profile and which similar travelers picked it, and lets any item be swapped in one tap. Draft 5 (2026-09-23) plans for a 1,000-tester beta, reached in gated waves after the pilot (§12). Draft 6 (2026-09-23): travelers review what they did, through evening check-ins during the trip and a check-in after it. Ratings stay private unless shared as reviews, and whole trips can be published before the first wave. Draft 7 (2026-09-23): one-tap sign-in with Apple or Google, a voice interview or a survey for the profile, plans requested by typing in a chat box, swipes or arrow taps to change items, and trips saved automatically. Draft 8 (2026-09-23): the chat first answers with options the traveler swipes through, changes by typing and can undo, and a "Create itinerary" button then turns the picks into the itinerary. Draft 9 (2026-09-23): travelers can change the app's colors (System, Light or Dark, and five contrast-checked accents, REQ-030), and the UI plan in `docs/design/XPMatch-UI-plan.md` sets the design system: v1's design language with the PRD's colors |
+| Revision note | Draft 2 (2026-09-23) adds the social features the founder chose for the first pilot: contributor updates, trip partners with comments, an opt-in named activity feed, ask-a-contributor Q&A and direct messages. Draft 3 (2026-09-23) makes the flow profile-first: every traveler has an approved profile before matching, and matching ranks the individual items in travelers' itineraries. Draft 4 (2026-09-23): the app builds each traveler a complete itinerary from those items, shows how each item matches the profile and which similar travelers picked it, and lets any item be swapped in one tap. Draft 5 (2026-09-23) plans for a 1,000-tester beta, reached in gated waves after the pilot (§12). Draft 6 (2026-09-23): travelers review what they did, through evening check-ins during the trip and a check-in after it. Ratings stay private unless shared as reviews, and whole trips can be published before the first wave. Draft 7 (2026-09-23): one-tap sign-in with Apple or Google, a voice interview or a survey for the profile, plans requested by typing in a chat box, swipes or arrow taps to change items, and trips saved automatically. Draft 8 (2026-09-23): the chat first answers with options the traveler swipes through, changes by typing and can undo, and a "Create itinerary" button then turns the picks into the itinerary. Draft 9 (2026-09-23): travelers can change the app's colors (System, Light or Dark, and five contrast-checked accents, REQ-030), and the UI plan in `docs/design/XPMatch-UI-plan.md` sets the design system: v1's design language with the PRD's colors. Draft 10 (2026-09-23): the data shape in `docs/design/XPMatch-data-shape.md` defines the taste vocabulary (taxonomy 0.1), the contributor capture template, field-level shapes for the core loop, matching and planner rules v0, and the option card contract (D-041 to D-045) |
 
 PRD v1.1 stays the base document. This revision changes scope and order only; everything not mentioned here (trust rules, data conventions, quality thresholds, rollout, rollback) carries over unchanged. Requirement IDs are the PRD's own.
 
@@ -306,7 +306,11 @@ Plan items show similar travelers who picked them (founder decision). So the rel
 
 ## 7. Data and access boundaries
 
-**Entities** (subset of PRD §5 groups M01–M08; names follow the PRD):
+**Entities** (subset of PRD §5 groups M01–M08; names follow the PRD).
+- **Field-level detail:** fields, the taste vocabulary (taxonomy 0.1) and matching rules v0 are in `docs/design/XPMatch-data-shape.md` (proposal, draft 10).
+- **Tables it adds to the list below:** `account_settings` (REQ-030), `city`, `area`, `place_hours`, `place_fact`, `proposal_slot`, `proposal_option`, `proposal_event`, `taxonomy_dimension` and `checkin_schedule`.
+
+The entities:
 
 - Identity and profile (M01): `app_user` bound to the auth provider's verified subject, `private_profile`, `private_profile_version` (immutable once approved), `preference_value`, `spend_range` (minor units, currency, basis), `preference_evidence`.
 - Interview, plans and commands (M02 subset):
@@ -508,7 +512,7 @@ Each slice is an end-to-end, demonstrable outcome; split it into 0.5–2 day tic
 | --- | --- | --- | --- |
 | S0.1 Project shell | Expo app opens on iOS and Android development builds; API health endpoint; shared contracts package; migration runner; CI runs typecheck, lint and tests; versions pinned from current official docs; crash and error monitoring; an over-the-air update channel with a minimum-version check; a city on every core table (§12); semantic color tokens with light and dark themes, a CI contrast test and the UI kit checked on both platforms (UI plan §4, §9) | REQ-015 baseline | D-005, D-037 |
 | S0.2 Voice spike (throwaway, time-boxed) | Two-way audio with interruption on a physical iPhone and Android phone; latency and cost per minute measured; decides whether voice is in the pilot (D-035) | REQ-004 feasibility | Devices, development credentials |
-| S0.3 Founder track (no code) | Pilot city chosen, permissions collected, hand-run relevance study, spend ceiling, developer accounts | D-006, D-009, D-012, H1 | — |
+| S0.3 Founder track (no code) | Pilot city chosen; permissions and trips collected with the capture template (`docs/design/XPMatch-contributor-capture-template.md`); hand-run relevance study; spend ceiling; developer accounts | D-006, D-009, D-012, D-041, D-043, H1 | — |
 | 1 Sign-in and ownership | Sign in with Apple and Google on two devices; U can't read T's data; account deletion, including revoking Sign in with Apple | T8, T12, T32 | S0.1, D-007 |
 | 2 Profile: survey and recap | The survey, recap and approval; no plan without an approved profile; trip-only overrides | T2 (survey) | 1, D-034 |
 | 2b Voice interview | The AI voice interview with interrupt, mute, end and "switch to survey"; falls back to the survey with answers kept; metered and capped | T2 (voice), T10 | 2, S0.2 passed, D-008, D-009, D-035 |
@@ -638,6 +642,11 @@ With at most 20 travelers, report counts next to every rate. In the waves, repor
 | D-038 | Canonical palette | The PRD's tokens are the default Pine theme; v1's "Serene Resort" values are retired; dark-mode values as in the UI plan §4.2 | Founder approval | — (S0.1 proceeds on the default) |
 | D-039 | Appearance options | System, Light or Dark plus five accents (Pine, Ocean, Terracotta, Plum, Graphite), every pair contrast-checked; no free color picker; Android dynamic color later at most | Founder's pick; accent use in the pilot | Slice 2c |
 | D-040 | Place imagery in MVP-1 | Text cards with a category icon, area and time of day. A contributor's photos only where their permission covers photos. No stock, generated or map-provider photos (A-002) | Permission inventory (D-006) | Slice 4 visuals only |
+| D-041 | Taste vocabulary | Taxonomy 0.1: the 15 dimensions and values in the data shape §3.2, used by the survey, voice interview, profile, contributor tags, matching and card lines | Founder review, then the hand-run relevance study (H1) | S0.3 collection, slices 2 and 3 |
+| D-042 | A must-have with unknown evidence | Strict (left out) for dietary needs and step-free access; kept with a "? not known" line for crowds, atmosphere, bookings and budget | Tester feedback and "not enough" rates | Slice 4 |
+| D-043 | Contributors' spending | Matching uses venue price facts and the contributor's range, but only venue price bands are ever shown. A contributor's own spending is never published | Founder | S0.3 template |
+| D-044 | Slots per pace | Relaxed: lunch, afternoon, dinner. Moderate: + morning. Packed: + evening. The day-start and dinner-time preferences set the time windows (A-006) | Planner evaluations and swipe rates | Slice 5 |
+| D-045 | Sensitive preferences | Dietary needs are optional, sensitive, used only by the server's filter, never sent to the model, analytics or logs, and their voice excerpts aren't kept. Allergies aren't collected in MVP-1. Explicit consent before saving; the privacy policy says so | Founder, with a privacy review before the first external invite | Slice 2 |
 
 ## 12. Scaling to 1,000 beta testers
 
@@ -746,7 +755,11 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
 - **Added by founder decision (2026-09-23), draft 9:** travelers can change the app's colors: System, Light or Dark and five contrast-checked accents (REQ-030, slice 2c, T34). The UI plan (`docs/design/XPMatch-UI-plan.md`) keeps v1's design language, uses the PRD's colors and proposes the shadcn-style React Native kit. Its open choices are D-037 to D-040.
   - **Also corrected:** the proposed product wording (§2) no longer says plans come from "travelers like you".
   - **Also corrected:** operator-entered places now carry opening days and hours, so "closed that day" clashes have data (A-002, §7, T5).
-- **Unresolved:** D-005 to D-040.
+- **Added in draft 10 (2026-09-23):** the data shape.
+  - `docs/design/XPMatch-data-shape.md`: taxonomy 0.1, field-level shapes, matching and planner rules v0, and the option card contract.
+  - The contributor capture template for S0.3.
+  - Decisions D-041 to D-045.
+- **Unresolved:** D-005 to D-045.
 
 ## 14. Completion check
 
@@ -760,6 +773,6 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
 
 ## 15. Readiness and next action
 
-**Readiness: READY WITH ASSUMPTIONS.** S0.1 and slices 1–2 can start once D-005 is approved. D-007, D-008, D-010, D-011 and D-017 to D-040 have working defaults. D-009 needs the founder's cap amounts before slices 2b and 5 make paid model and voice calls. Slices 3 onward need D-006, and the first external invite needs D-021 confirmed. Waves beyond the pilot need the §12 work, NFR-008 to NFR-010, and D-025 to D-029 confirmed.
+**Readiness: READY WITH ASSUMPTIONS.** S0.1 and slices 1–2 can start once D-005 is approved. D-007, D-008, D-010, D-011 and D-017 to D-045 have working defaults. D-009 needs the founder's cap amounts before slices 2b and 5 make paid model and voice calls. Slices 3 onward need D-006, and the first external invite needs D-021 confirmed. Waves beyond the pilot need the §12 work, NFR-008 to NFR-010, and D-025 to D-029 confirmed.
 
 **Next action (founder):** approve revision v1.2 as written, or list the changes you want. After approval, the factory's next task is S0.1 (project shell) on its own branch, with CI and device evidence.
