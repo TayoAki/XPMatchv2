@@ -611,7 +611,7 @@ With at most 20 travelers, report counts next to every rate. In the waves, repor
 | D-007 | Sign-in method | One tap with Apple or Google, no codes or passwords (founder, 2026-09-23). No email fallback in the pilot; revisit if testers ask | Slice 1 two-device test | Slice 1 |
 | D-008 | Text model provider | Run 8–12 fixture interviews and trip requests through 2–3 candidates; compare accuracy and cost | Eval results | Slices 2b and 5 |
 | D-009 | Spend ceiling | Founder sets global daily and per-user daily caps | Founder, from available funds | Paid calls in slices 2b and 5 |
-| D-010 | API hosting | A host with long-lived WebSockets; Railway is a candidate (v1 is configured to deploy there) | Deploying the S0.1 health endpoint | First deploy |
+| D-010 | API hosting | A host with long-lived WebSockets; Railway is a candidate (v1 is configured to deploy there) | **Chosen:** Railway (founder, 2026-09-23), in a new private project, `xpmatch-v2`, separate from v1's `xpmatch`. Deploying the S0.1 health endpoint still has to confirm long-lived WebSockets | First deploy |
 | D-011 | Chat framework for trip requests | A plain chat box plus one server-side structured-request endpoint. Adopt CopilotKit, with server-side tools only, if the assistant grows beyond requests and changes (v1 ran 19 tools in the browser, only 2 with confirmation) | S0.1 integration effort | Slice 5 |
 | D-012 | Distribution accounts | Apple Developer Program and Google Play Console. Internal testing for the pilot; TestFlight external testing and Google Play closed testing for the waves. The same accounts supply push credentials | Accounts active | Slices 11 and 13 |
 | D-013 | Hotel and flight preference questions | Defer until those categories launch | Evals show matching doesn't need them | — |
@@ -760,6 +760,7 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
   - The contributor capture template for S0.3.
   - Decisions D-041 to D-045.
 - **Approved on 2026-09-23:** this revision as a whole (D-005, draft 10), and D-041 to D-045.
+- **Chosen on 2026-09-23:** Railway for API hosting (D-010). The S0.1 deploy still has to confirm long-lived WebSockets.
 - **Unresolved:** D-006 to D-040 (§15).
 
 ## 14. Completion check
@@ -774,7 +775,7 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
 
 ## 15. Readiness and next action
 
-**Readiness: READY WITH ASSUMPTIONS.** The founder approved this revision on 2026-09-23 (D-005), so S0.1 and slices 1–2 can start. D-007, D-008, D-010, D-011 and D-017 to D-040 have working defaults, and D-041 to D-045 are approved. D-009 needs the founder's cap amounts before slices 2b and 5 make paid model and voice calls. Slices 3 onward need D-006, and the first external invite needs D-021 confirmed. Waves beyond the pilot need the §12 work, NFR-008 to NFR-010, and D-025 to D-029 confirmed.
+**Readiness: READY WITH ASSUMPTIONS.** The founder approved this revision on 2026-09-23 (D-005), so S0.1 and slices 1–2 can start. D-007, D-008, D-011 and D-017 to D-040 have working defaults, Railway is chosen for hosting (D-010), and D-041 to D-045 are approved. D-009 needs the founder's cap amounts before slices 2b and 5 make paid model and voice calls. Slices 3 onward need D-006, and the first external invite needs D-021 confirmed. Waves beyond the pilot need the §12 work, NFR-008 to NFR-010, and D-025 to D-029 confirmed.
 
 **Next action:** the factory's next task is S0.1 (project shell) on its own branch, with CI and device evidence. Any paid provider, account or credential it needs waits for the founder's explicit authorization (AGENTS.md).
 

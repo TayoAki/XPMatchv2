@@ -65,6 +65,7 @@ Planned layout (PRD §5): `apps/mobile` (Expo/React Native), `services/api` (Typ
 - Worktrees: a Claude Code cloud session runs in its own freshly cloned container, which serves as the task's isolated checkout. Parallel local work uses `git worktree add .worktrees/<task> -b <branch> main`.
 - Single-checkout mode (two tasks sharing one local checkout) is not allowed unless the founder authorizes it for that task.
 - Evidence goes in `.artifacts/<task>/`. No external evidence host is approved.
+- Hosting: the Railway project `xpmatch-v2` (plan D-010). v1's Railway project, `xpmatch`, is not ours to deploy to or change. Deploys and new paid services need the founder's authorization.
 - Worktrees do not isolate Supabase projects, API keys and quotas, device builds or test accounts. Use development credentials only, and never put production data in fixtures.
 
 ## Verification and evidence
