@@ -6,7 +6,7 @@
 | Method | `mobile-plan-mvp` for scope; `software-factory` for intake, readiness and delivery slices |
 | Readiness | **READY WITH ASSUMPTIONS**: S0 and slices 1–2 can start once this revision is approved. Slice 2's paid model calls also need D-009 (spend ceiling), slices 3 onward need D-006 (pilot city and permissioned content), and the first external invite needs D-021 (who answers safety reports) |
 | Approval | **Pending**: founder |
-| Revision note | Draft 2 (2026-09-23) adds the social features the founder chose for the first pilot: contributor updates, trip partners with comments, an opt-in named activity feed, ask-a-contributor Q&A and direct messages. Draft 3 (2026-09-23) makes the flow profile-first: every traveler has an approved profile before matching, and matching ranks the individual items in travelers' itineraries. Draft 4 (2026-09-23): the app builds each traveler a complete itinerary from those items, shows how each item matches the profile and which similar travelers picked it, and lets any item be swapped in one tap. Draft 5 (2026-09-23) plans for a 1,000-tester beta, reached in gated waves after the pilot (§12) |
+| Revision note | Draft 2 (2026-09-23) adds the social features the founder chose for the first pilot: contributor updates, trip partners with comments, an opt-in named activity feed, ask-a-contributor Q&A and direct messages. Draft 3 (2026-09-23) makes the flow profile-first: every traveler has an approved profile before matching, and matching ranks the individual items in travelers' itineraries. Draft 4 (2026-09-23): the app builds each traveler a complete itinerary from those items, shows how each item matches the profile and which similar travelers picked it, and lets any item be swapped in one tap. Draft 5 (2026-09-23) plans for a 1,000-tester beta, reached in gated waves after the pilot (§12). Draft 6 (2026-09-23): travelers review what they did, through evening check-ins during the trip and a check-in after it. Ratings stay private unless shared as reviews, and whole trips can be published before the first wave |
 
 PRD v1.1 stays the base document. This revision changes scope and order only; everything not mentioned here (trust rules, data conventions, quality thresholds, rollout, rollback) carries over unchanged. Requirement IDs are the PRD's own.
 
@@ -18,6 +18,7 @@ PRD v1.1 stays the base document. This revision changes scope and order only; ev
 - Several decisions recorded in v1's docs are retired because PRD v1.1 replaced them: web-first, selling the service first, fixed prices, match percentages, and a multi-city beta (§3). Pricing stays open (D-016).
 - The first pilot also carries the social features the founder chose on 2026-09-23: contributor itinerary updates, ask-a-contributor Q&A, trip partners with stop comments, an opt-in named activity feed, and direct messages (§4, §8). They add shared access, public profiles, messaging, push notifications and moderation duties, so the first invites move later. Trips stay private unless their owner turns sharing on, travel dates are never shown to other travelers, and block, report and message requests land before any traveler can reach another.
 - Planning assumption (founder, 2026-09-23): the beta grows to 1,000 testers. At that size the servers aren't the constraint; content per city, moderation and tester management are. MVP-1 builds in the cheap scale choices from day one, and the beta grows in gated waves after the 20-person pilot (§12).
+- Travelers feed the supply side (founder, 2026-09-23). On each evening of the trip and once after it, they tick what they did and rate it. Ratings are private by default and only suggest profile changes for approval. In the pilot, travelers can share ratings as labeled, moderated reviews; before the first wave, they can publish whole trips as itineraries. This is how content keeps up with 1,000 testers.
 - Founder input needed: approve this revision (D-005). Choose the pilot city and start collecting content permissions now (D-006); nothing after slice 2 can be shown honestly without them. Before the first external invite, name who answers safety reports and how fast (D-021).
 
 ## 2. Product, users and constraints
@@ -46,6 +47,7 @@ PRD v1.1 stays the base document. This revision changes scope and order only; ev
   - shows how each item matches the profile, and which travelers with similar profiles picked the same item;
   - makes it simple to swap any item.
 - The beta targets 1,000 testers, reached in gated waves after the pilot (founder planning assumption, 2026-09-23).
+- Travelers review what they did, prompted during the trip (evenings) and after it. Anyone who's been to a place can review it, labeled "From an XPMatch trip" or "Self-reported". Reviews and ratings are in the pilot; publishing whole trips comes before the first wave (founder, 2026-09-23).
 
 ## 3. What v1 teaches (repository evidence)
 
@@ -97,7 +99,7 @@ v1 is a Next.js web prototype. Its code (commit `28c66b6`) and docs were reviewe
 5. The operator publishes it. It is matchable only while its permission is current.
 6. When a contributor asks to withdraw, the operator runs the withdraw command and new reads stop immediately.
 
-Contributors are not paid in-app during the pilot; any thank-you is handled outside the app (D-014). Self-serve submission, preview and a moderation queue come later.
+Contributors are not paid in-app during the pilot; any thank-you is handled outside the app (D-014). Self-serve submission, preview and a moderation queue arrive before the first wave (§12). By then, travelers who publish their own trips become contributors through the same flow (see "Reviews: during and after the trip" below).
 
 ### Traveler (the value journey)
 
@@ -117,8 +119,40 @@ Every traveler creates a profile once, and the app builds their itinerary from i
 6. On an item, "Check price and availability" or "Official site" opens that page, and the click is recorded.
 7. Quick feedback: "useful / not useful" on items, or a report about a source.
 8. **Profile changes:** editing the profile creates a new version, and "New plan" rebuilds the itinerary from it. A saved trip is only replaced after the traveler previews the new plan and accepts it. Trip-only preferences stay on that trip and never change the profile.
+9. **During and after the trip:** check-ins ask what the traveler did and how it was (see "Reviews: during and after the trip" below).
 
 **Explore** lists more matched items and itineraries to browse, plus the Activity feed. Anything there can be added to a day of the plan.
+
+### Reviews: during and after the trip (founder addition, 2026-09-23)
+
+Travelers are the main source of new reviews. Nothing they rate becomes public unless they choose to share it.
+
+**During the trip** (needs trip dates and notifications turned on):
+
+1. Each evening of the trip, at 8 pm in the trip city's time zone, a notification asks "How was today?" and lists that day's plan items (D-030).
+2. The traveler taps what they did and rates each item: loved it, fine, or not for me. They can add a short note, or add something they did that wasn't in the plan. Skipping is always fine, and check-ins can be turned off for the trip.
+
+**After the trip:**
+
+1. The morning after the last trip date, the app asks "How was the trip?" If the trip has no dates, it shows an "I'm back, review my trip" button, and the app asks once, 14 days after the trip was saved (D-030).
+2. The recap shows the whole plan, with the evening answers already filled in. The traveler ticks what else they did, gives a quick reason for anything skipped (ran out of time, closed, didn't appeal), rates the rest, and adds anything missing.
+3. They choose what happens next:
+   - **Keep private** (the default). Ratings shape their own future plans: items rated "not for me" aren't used again, and similar ones rank lower. Any profile change the ratings suggest ("You loved every seafood place. Add seafood to your profile?") waits for their approval.
+   - **Share as reviews.** Each rated item with a note becomes a public review under their display name. It shows the month and trip type (solo or couple, and purpose), never exact dates or companions. The traveler sees a preview first, and a moderator approves each review before it goes public (D-032).
+   - **Share the whole trip**, available before the first wave. What they actually did, in order, becomes an itinerary other travelers can be matched with. It goes through a preview, a rights confirmation and moderation, and can be withdrawn any time. The traveler becomes a contributor.
+
+On a shared trip, each partner gets their own check-ins and ratings.
+
+**Any time:**
+
+- "I've been here" on any place, to rate and review places from trips taken before XPMatch.
+- "Add a past trip" in Profile, before the first wave, to publish an earlier trip as an itinerary.
+
+**Labels:**
+
+- Reviews made in a check-in on a trip saved in XPMatch say "From an XPMatch trip".
+- All other reviews say "Self-reported".
+- Both are the traveler's own account: nothing tracks location, a partner click never counts as a visit, and no review is called "verified" (PRD REQ-010, D-031).
 
 **How money moves:** travelers pay nothing in the pilot. The revenue path is partner outbound links. Clicks are recorded, and no commission is claimed until a partner confirms one.
 
@@ -193,7 +227,8 @@ Every traveler creates a profile once, and the app builds their itinerary from i
 | Opt-in trip activity | Per-trip sharing with a preview, the Activity tab, place badges, removal | Founder addition; lets travelers see what others are adding | REQ-018 |
 | Travelers like you | Plan items show, by display name, similar travelers who picked the same item, only with their consent; contributors only with public-taste consent | Founder addition; social proof from people with similar profiles | REQ-027 |
 | Direct messages | Message requests, inbox, text messages, an allow-messages setting, block and report in conversations | Founder addition | REQ-022 |
-| Notifications | In-app notices and unread counts; push notifications that never include message text | Messages, answers, partner edits and updates need to reach people | REQ-024 |
+| Notifications | In-app notices and unread counts; push notifications that never include message text | Messages, answers, partner edits, updates and check-ins need to reach people | REQ-024 |
+| Check-ins and reviews | Evening check-ins on trip days and an after-trip check-in; tick, rate, note, add; private by default; suggested profile updates for approval; share as moderated, labeled reviews; "I've been here" on any place | Founder addition; travelers become the main source of new reviews | REQ-028, REQ-010 |
 | Scale foundations | The day-one choices listed in §12 | Lets the same app grow to 1,000 testers without rework | NFR-008 |
 
 ### Next (MVP-1.1, before inviting more than the first 5 travelers)
@@ -245,6 +280,12 @@ Bottom navigation: Trips, Explore, Inbox, Profile. Trips opens on the traveler's
 | Conversation | Read and send messages | Request pending; accepted; blocked; reported; blocked by the filter; rate-limited; other person deleted their account |
 | Report or block | Report content or a person, or block them | Submitted; already blocked; unblock from Profile |
 | Community guidelines and contact | What's allowed and how to reach the team | — |
+| Evening check-in (opened from the notification) | Mark what you did today and rate it | Nothing planned today; already answered; skipped; offline (answer later, and the after-trip check-in picks it up) |
+| After-trip check-in | Tick what you did, rate it, add anything missing, then keep private or share | Evening answers filled in; half done (resume later); nothing ticked; trip has no dates ("I'm back") |
+| Review preview | Confirm exactly what the public review shows | Preview; submitted; published; rejected with a reason; withdrawn |
+| I've been here (on any place) | Rate and review a place you've visited | Already reviewed (edit instead); labeled "Self-reported" |
+| Profile suggestion | Approve or dismiss a change suggested by your ratings | Approved (new profile version); dismissed |
+| Publish my trip (before the first wave) | Turn a trip you took into a public itinerary | Preview; rights confirmation; submitted; published; rejected with a reason; withdrawn |
 
 Plan items show similar travelers who picked them (founder decision). So the relevance study runs by hand, before that feature exists. The app also records which items showed similar travelers, so their effect can be measured separately (§10).
 
@@ -262,6 +303,11 @@ Plan items show similar travelers who picked them (founder decision). So the rel
 - Content and catalog (M03): `place` (operator-entered: name, area, category, coordinates, official or partner URL), the contributor's public profile and consented public taste, `community_content`, `content_revision`, `content_permission`, `published_itinerary`/`day`/`stop`, and `review` with context.
 - Matching (M04): profile and trip context snapshot, `match_model_version`, `planner_version`, `match_run`, `match_assessment` (its typed target is an itinerary item, the primary unit, or a whole itinerary, review or place), and `match_component` with evidence and explanation; `feedback_event`.
 - Trips (M05): `trip`, `trip_revision`, `trip_day`, `trip_stop`, `trip_source` (lineage, including the channel each item came from: generated plan, swap, Explore, activity, partner or contributor update).
+- Visits and reviews (founder addition):
+  - `visit` is private to its owner: place, trip item (if any), done or skipped, skip reason, rating (loved it, fine, not for me), private note, source (evening check-in, after-trip, "I've been here") and local date.
+  - A shared review is the PRD's `review` community content, with `content_permission` (the traveler's consent), `content_revision` and moderation status. It carries the label, month and trip type, never the visit date.
+  - Profile suggestions from ratings reuse the PRD's draft-candidate flow: a candidate, then approval, then a new `private_profile_version`.
+  - Check-in notices are scheduled per trip day, in the trip city's IANA time zone.
 - Operations (M07/M08 subset): `partner_handoff`, `usage_event`, budget counters, `decision_event`, `content_report`, `moderation_action`, deletion record.
 - Social (founder additions):
   - a traveler `public_profile` (display name and allow-messages setting; no photo);
@@ -282,11 +328,11 @@ Plan items show similar travelers who picked them (founder decision). So the rel
 
 | Actor | Reads | Writes | Enforced by |
 | --- | --- | --- | --- |
-| Traveler | Own profile, versions, trips and receipts; published content with a current permission | Own profile, trips, feedback and reports | API authorization plus row policies |
+| Traveler | Own profile, versions, trips, receipts, visits, ratings and private notes; published content with a current permission, including other travelers' published reviews | Own profile, trips, visits, reviews, feedback and reports | API authorization plus row policies |
 | Trip partner | The shared trip: its stops, comments, change history and the other member's display name | Stops and comments on that trip | Row policies on current membership |
 | Other travelers | Display names; shared activity; similar travelers' picks, only with those travelers' consent; published Q&A; conversations they take part in. Nothing from anyone who blocked them | Message requests (only to people who allow them), reports, blocks | API authorization plus row policies; blocks apply everywhere |
 | Operator (founder) | Content, permissions, reports, and the reported items attached to each report | Import, publish, withdraw, publish answers, hide content, suspend accounts | Service scripts with an audit log; operator tools never read private profiles, trips or unreported conversations |
-| Model | Only what the API passes for one request: a profile summary and candidate content. Never messages, comments, questions or activity | Nothing directly; returns schema-validated wording that the API checks. It never chooses or orders plan items | API boundary; no database credentials |
+| Model | Only what the API passes for one request: a profile summary and candidate content. Never messages, comments, questions, activity or private review notes | Nothing directly; returns schema-validated wording that the API checks. It never chooses or orders plan items | API boundary; no database credentials |
 
 **External services:**
 
@@ -296,7 +342,7 @@ Plan items show similar travelers who picked them (founder decision). So the rel
 | Text model provider | Interview extraction, explanation wording | Chosen in S0 (D-008); metered and capped |
 | Expo EAS | Builds and internal distribution | Needs Apple and Google developer accounts (D-012) |
 | API host | `services/api` | Must support long-lived WebSockets later for voice (D-010) |
-| Push notifications | Messages, requests, answers, partner edits, updates | Expo's push service with APNs and FCM credentials (D-012); previews never include message text (D-018) |
+| Push notifications | Messages, requests, answers, partner edits, updates, trip check-ins | Expo's push service with APNs and FCM credentials (D-012); previews never include message text (D-018) |
 | Real-time delivery | Messages and shared boards | Supabase Realtime is the candidate; confirm in S0.1 that it enforces row policies, with polling as the fallback (D-020) |
 | Email sender | Sign-in codes | A production provider; Supabase's built-in sender is for testing and heavily rate-limited (D-007) |
 | Crash and error monitoring | App and API errors | Chosen in S0.1 |
@@ -334,10 +380,11 @@ Scenario: contributor C's 3-day itinerary for the pilot city and two of C's revi
   - lists its unknowns.
 
   A place that appears in several itineraries is one result that lists every source.
+- `AC-REQ-010-03`: A traveler can share a rating with a note as a review, from a check-in or from "I've been here". It shows their display name, rating, note, the month and trip type, never exact dates or companions. It's labeled "From an XPMatch trip" only when made in a check-in on a trip saved in XPMatch, and "Self-reported" otherwise. It is published only after a preview and moderation, and the author can edit or withdraw it at any time.
 
 ### New requirements (REQ-017 onward)
 
-PRD v1.1 stops at REQ-016. These continue its numbering and are pending approval with this revision. REQ-017 to REQ-024 cover the social features, and REQ-025 to REQ-027 cover the generated plan.
+PRD v1.1 stops at REQ-016. These continue its numbering and are pending approval with this revision. REQ-017 to REQ-024 cover the social features, REQ-025 to REQ-027 cover the generated plan, and REQ-028 covers trip check-ins.
 
 - **REQ-017, contributor itinerary updates.** A new revision of a published itinerary shows what changed, and travelers whose trips use its items can choose whether to add the new stops.
   - `AC-REQ-017-01`: When revision 2 of C's itinerary adds a stop, viewers see it marked new, and a traveler whose trip uses items from C's itinerary gets a notice. Adding the stop to a day records lineage to revision 2 as one trip revision; dismissing changes nothing.
@@ -361,7 +408,7 @@ PRD v1.1 stops at REQ-016. These continue its numbering and are pending approval
   - `AC-REQ-023-01`: Every display name, activity item, comment, question and message can be reported from where it appears, and every traveler can be blocked. Reports reach the operator queue, which has a named response owner.
   - `AC-REQ-023-02`: A server-side filter blocks listed terms in names, comments, questions and messages. Rate limits cap invites, questions, new conversations and messages. Sign-up confirms the traveler is 18 or older. Community guidelines and contact details are reachable in the app.
 - **REQ-024, notifications.**
-  - `AC-REQ-024-01`: Messages, requests, answers, partner edits and contributor updates create in-app notices with unread counts. Push notifications are sent only after the traveler allows them.
+  - `AC-REQ-024-01`: Messages, requests, answers, partner edits, contributor updates and trip check-ins create in-app notices with unread counts. Push notifications are sent only after the traveler allows them.
   - `AC-REQ-024-02`: Push previews never contain message or comment text. Each notice type can be turned off, and signing out stops push to that device.
 - **REQ-025, generated plan.** The app builds each traveler a complete day-by-day itinerary from ranked items.
   - `AC-REQ-025-01`: Given an approved profile and a trip length, a deterministic, versioned planner fills each day's slots with ranked items, using the traveler's pace, meal times and areas. Each item shows how it matches the profile, a tradeoff or "no evidenced tradeoff", its unknowns and its source. The same inputs and planner version produce the same plan.
@@ -372,6 +419,9 @@ PRD v1.1 stops at REQ-016. These continue its numbering and are pending approval
 - **REQ-027, travelers like you.** Plan items show other travelers with similar profiles who picked the same item.
   - `AC-REQ-027-01`: A traveler appears only if their activity sharing is on and they turned on "Show my picks to travelers with similar taste". A contributor appears only with public-taste consent. Both are shown by display name with "similar taste", never with profile details, dates or companions.
   - `AC-REQ-027-02`: Travelers who haven't opted in are never shown, not even as a count. Blocking hides both people from each other. Turning the setting off, or deleting the account, removes the person from every item immediately.
+- **REQ-028, trip check-ins and private ratings.** Travelers record what they did and how it was, during and after the trip.
+  - `AC-REQ-028-01`: On a trip with dates and notifications allowed, the traveler gets one check-in per trip evening, listing that day's items, at 8 pm in the trip city's time zone. The morning after the last date, they get the after-trip check-in, with the evening answers filled in. A trip without dates offers "I'm back" and one reminder 14 days after it was saved. Done or skipped, skip reasons, ratings, notes and added places are saved privately; nothing becomes public without sharing.
+  - `AC-REQ-028-02`: Ratings never change the approved profile by themselves. Suggested changes are drafts the traveler approves (PRD REQ-002). Items rated "not for me" aren't used in that traveler's future plans. Check-ins stop when turned off for the trip or when the trip is deleted. Private notes never reach analytics, logs or the model.
 
 ### Social checks
 
@@ -401,6 +451,17 @@ Scenario: T has an approved profile and a plan. U and V have profiles similar to
 | T26 | U shares activity, turned on "show my picks" and kept an item in T's plan, so T sees U's display name and "similar taste" on it. V hasn't opted in and never appears, not even as a count. After U turns the setting off, U is gone on T's next load. | AC-REQ-027-01, AC-REQ-027-02 | Consent and similarity tests; device run |
 | T27 | After T edits the profile, "New plan" builds a fresh plan. T's saved trip changes only after T previews the new plan and accepts it; rejecting keeps the trip as it was. | AC-REQ-026-02, AC-REQ-003-01 | Transaction tests; device run |
 
+### Review checks
+
+Scenario: T saved a dated 3-day trip, and U is another invited traveler.
+
+| # | Observable result | Criteria | Evidence |
+| --- | --- | --- | --- |
+| T28 | On each trip evening at 8 pm city time, T gets one check-in listing that day's items. T marks two as done (loved it, fine) and one as skipped (closed), and nothing about them is public. The next morning, the after-trip check-in shows those answers already filled in. | AC-REQ-028-01 | Scheduling tests across time zones; device run |
+| T29 | After T rates three seafood places "loved it", T sees "Add seafood to your profile?" The profile changes only after T approves, as a new version. An item T rated "not for me" doesn't appear in T's next plan. | AC-REQ-028-02, AC-REQ-002-01 | Transaction and planner tests |
+| T30 | T shares one rating with a note. The preview shows T's display name, the rating, note, month, "couple" and "From an XPMatch trip", and no dates or companions. The review goes public only after moderation, and then U sees it on the item. When T withdraws it, it disappears immediately. A review from "I've been here" is labeled "Self-reported". | AC-REQ-010-01, AC-REQ-010-02, AC-REQ-010-03 | Projection and moderation tests; device run |
+| T31 | Before wave 1: T publishes the trip they took. After a preview, a rights confirmation and moderation, it becomes an itinerary other travelers can be matched with, with T as its contributor. Withdrawing it removes it from new plans immediately. | AC-REQ-005-01, AC-REQ-005-02 | Submission and withdrawal tests |
+
 ## 9. Delivery slices
 
 Each slice is an end-to-end, demonstrable outcome; split it into 0.5–2 day tickets when it becomes Ready (PRD §9). No dates until slice 1 has been measured.
@@ -421,9 +482,10 @@ Each slice is an end-to-end, demonstrable outcome; split it into 0.5–2 day tic
 | 9 Trip partners and comments | Invites, shared board with attribution and "what's changed", comments, remove and leave | T16, T17 | 5, 7, D-019, D-022 |
 | 10 Opt-in activity and travelers like you | Per-trip sharing with a preview, the Activity tab, place badges, removal; similar travelers who picked the same item, with their consent | T18, T19, T26 | 5, 7, D-024 |
 | 11 Messages and notifications | Requests, inbox, real-time delivery, block and report in conversations, push without message text | T20, T21, T23 | 7, D-012, D-017, D-018, D-020 |
-| 12 Pilot hardening | Accessibility pass; release builds on both platforms; kill switches for every feature, including `activity_feed`, `travelers_like_you`, `trip_partners`, `direct_messages`, `contributor_qa` and `push_notifications`; deletion recheck across all social data; database backups proven by a restore; error monitoring; privacy, terms and community pages; a check against current app-store rules for user content. Then team dogfood, then the first 5 invited travelers | T13, T24, NFR-007 | 1–11 |
-| MVP-1.1 | Voice (if S0.2 passed), in-app map, offline reading; then up to 20 travelers | REQ-004, REQ-007, REQ-015 | 12 plus learnings from the first 5 |
-| Beta expansion | The work needed before the first wave (§12), then waves of 100, 300 and 1,000 testers, each opening only when the previous one met its gates | NFR-008, NFR-009, NFR-010 | MVP-1.1 plus the pilot's results; D-025 to D-029 |
+| 12 Check-ins and reviews | Evening check-ins on trip days and an after-trip check-in; private ratings and notes; "I've been here"; suggested profile updates for approval; sharing as moderated, labeled reviews | T28, T29, T30 | 5, 7, 11, D-030 to D-032 |
+| 13 Pilot hardening | Accessibility pass; release builds on both platforms; kill switches for every feature, including `activity_feed`, `travelers_like_you`, `trip_partners`, `direct_messages`, `contributor_qa`, `trip_checkins`, `traveler_reviews` and `push_notifications`; deletion recheck across all social and review data; database backups proven by a restore; error monitoring; privacy, terms and community pages; a check against current app-store rules for user content. Then team dogfood, then the first 5 invited travelers | T13, T24, NFR-007 | 1–12 |
+| MVP-1.1 | Voice (if S0.2 passed), in-app map, offline reading; then up to 20 travelers | REQ-004, REQ-007, REQ-015 | 13 plus learnings from the first 5 |
+| Beta expansion | The work needed before the first wave (§12), including travelers publishing whole trips; then waves of 100, 300 and 1,000 testers, each opening only when the previous one met its gates | NFR-008, NFR-009, NFR-010, T31 | MVP-1.1 plus the pilot's results; D-025 to D-029 |
 
 ## 10. Measurement plan
 
@@ -435,6 +497,7 @@ With at most 20 travelers, report counts next to every rate. In the waves, repor
 | Kept-item ratio | Items from the added plan still on the trip after 7 days ÷ items in the added plan | 7 days | Plan quality: H1 inside the product (added) |
 | Channel mix | Kept items by the channel they came from (generated plan, swap, Explore, activity, partner, contributor update) ÷ all kept items | 7 days | Shows how much the plan itself, rather than edits and social channels, supplies |
 | Swap rate | Swaps ÷ plan items shown, by category and slot | 7 days | Where the plan misses the profile; tunes the planner |
+| Plan outcome | Items marked done ÷ items in the added plan; share of done items rated "loved it" | Per trip, after it ends | The strongest signal of plan quality: what travelers actually did and liked |
 | Kept places per started trip | Distinct places on the latest board snapshot ÷ started trips; show zeros and the median | 7 days | Planning depth (PRD §11) |
 | Interview accuracy | Candidates accepted unchanged, corrected, rejected or left unknown ÷ reviewed candidates | Per interview | Extraction quality; the baseline voice must beat |
 | Outbound intent | Distinct trip, place, provider and day clicks ÷ started trips | 7 days | Revenue-path signal (a click is not a booking) |
@@ -447,8 +510,11 @@ With at most 20 travelers, report counts next to every rate. In the waves, repor
 | Q&A demand | Questions ÷ itinerary opens; answer rate; median time to answer | Pilot | Whether travelers want contact with contributors |
 | Messaging use | Travelers who send at least one message ÷ active travelers; share of requests accepted | Pilot | Whether open messaging earns its safety cost |
 | Safety load | Reports and blocks per 100 active travelers; median time to resolve a report | Weekly | Moderation capacity; a spike pauses messaging |
+| Check-in response | Evening check-ins answered ÷ sent; after-trip check-ins completed ÷ trips that ended; check-ins turned off | Per trip | Whether the prompts help or annoy |
+| Review sharing | Ratings shared as reviews ÷ ratings with notes; trips published ÷ trips reviewed (from the first wave) | Pilot and waves | Whether travelers become contributors |
+| Traveler-sourced supply | Published traveler reviews and itineraries per city per week | Weekly | Whether content keeps up with testers (NFR-009) |
 
-**Events:** `profile_confirmed`, `plan_generated`, `plan_added`, `trip_started`, `match_exposed` (only on a visible impression), `source_opened`, `item_swapped`, `place_added`, `place_removed`, `retained_snapshot`, `outbound_clicked`, `match_feedback`, `content_reported`, `content_withdrawn`. Each carries the event and schema version, server-derived actor and session, trip ID when relevant, request or command ID, content or assessment version, `occurred_at` and `is_internal`. None carries raw chat text, audio or exact budgets (PRD §11).
+**Events:** `profile_confirmed`, `plan_generated`, `plan_added`, `trip_started`, `match_exposed` (only on a visible impression), `source_opened`, `item_swapped`, `place_added`, `place_removed`, `retained_snapshot`, `outbound_clicked`, `match_feedback`, `content_reported`, `content_withdrawn`, `checkin_sent`, `checkin_answered`, `visit_recorded`, `profile_suggestion_accepted`, `review_submitted`, `review_published`, `trip_published`. Each carries the event and schema version, server-derived actor and session, trip ID when relevant, request or command ID, content or assessment version, `occurred_at` and `is_internal`. None carries raw chat text, audio, exact budgets or private notes (PRD §11).
 
 **Social events:** `activity_sharing_changed`, `activity_item_viewed`, `peer_pick_setting_changed`, `peer_picks_shown`, `partner_invited`, `partner_joined`, `partner_left`, `stop_comment_posted`, `question_submitted`, `question_answered`, `source_update_shown`, `source_update_accepted`, `message_request_sent`, `message_request_accepted`, `message_sent`, `user_blocked` and `push_opened`. They carry IDs and counts only, never message, comment or question text.
 
@@ -471,6 +537,9 @@ With at most 20 travelers, report counts next to every rate. In the waves, repor
 | Generated plans feel generic or miss the profile | Travelers don't add or keep plans | Per-item profile matches, one-tap swaps, a relevance study before the build, and swap data to tune the planner | Kept-item ratio and swap rate |
 | Thin supply leaves short plans | The plan looks empty | The plan says how many days it could fill; recruit contributors to fill the gaps that swaps reveal | D-006 |
 | "Travelers like you" exposes people | Privacy harm | Off by default and needs activity sharing too; display name only; no counts of people who didn't opt in; instant removal | AC-REQ-027-02 in the release eval |
+| Check-in prompts feel like nagging | Notifications turned off, or the app deleted | At most one prompt per trip evening; off for the trip in one tap; skipping is fine; turn-off rate tracked | Check-in response (§10) |
+| Fake or low-effort reviews | Travelers act on misleading reviews | Honest labels; moderation before publishing; rate limits; reporting; a note is required to share | NFR-010 |
+| Private notes leak | Privacy harm | Notes stay private unless the traveler shares them; never in analytics, logs or the model | AC-REQ-028-02 in the release eval |
 | MVP-1 grows substantially before the first invite | Learning starts later | Core loop (slices 1–6) first; each social feature behind its own kill switch; re-estimate after slice 1 | D-015 |
 | Moderation load on the founder | Slow responses leave harmful content up | Named response owner and target time; pause switches for when nobody is available | D-021 before the first external invite |
 
@@ -495,7 +564,7 @@ With at most 20 travelers, report counts next to every rate. In the waves, repor
 | D-009 | Spend ceiling | Founder sets global daily and per-user daily caps | Founder, from available funds | Paid calls in slice 2 |
 | D-010 | API hosting | A host with long-lived WebSockets; Railway is a candidate (v1 is configured to deploy there) | Deploying the S0.1 health endpoint | First deploy |
 | D-011 | Chat framework for the interview | A plain chat screen plus one server-side structured-extraction endpoint. Adopt CopilotKit, with server-side tools only, when the assistant does more than the interview (v1 ran 19 tools in the browser, only 2 with confirmation) | S0.1 integration effort | Slice 2 |
-| D-012 | Distribution accounts | Apple Developer Program and Google Play Console. Internal testing for the pilot; TestFlight external testing and Google Play closed testing for the waves. The same accounts supply push credentials | Accounts active | Slices 11–12 |
+| D-012 | Distribution accounts | Apple Developer Program and Google Play Console. Internal testing for the pilot; TestFlight external testing and Google Play closed testing for the waves. The same accounts supply push credentials | Accounts active | Slices 11 and 13 |
 | D-013 | Hotel and flight preference questions | Defer until those categories launch | Evals show matching doesn't need them | — |
 | D-014 | Thanks for contributors | Attribution in the app; any payment handled outside it | Recruiting response | D-006 |
 | D-015 | Team capacity | Keep the slice order; re-estimate after slice 1. v1's business plan describes a solo founder with contractors, with AI doing research, drafting and code, while PRD §9's 14-week schedule assumes two engineers | Slice 1 actuals | Dates only |
@@ -513,12 +582,15 @@ With at most 20 travelers, report counts next to every rate. In the waves, repor
 | D-027 | Anonymous counts | Add a separate opt-in, "count my picks anonymously", shown as "kept by N travelers with similar taste" only when N is 5 or more. Making it opt-out would mean relaxing the current opt-in rule | Opt-in rate in wave 1 | Wave 2 |
 | D-028 | Who gets invited | People who say they're planning a trip to an open city within the next 8 weeks. Others wait on the waitlist, and metrics report planners separately | Waitlist answers; planner versus non-planner metrics | Wave 1 |
 | D-029 | Messaging by wave | Planning features open to every wave. Direct messages open to a wave only after the previous wave met NFR-010 | Moderation metrics per wave | Each wave |
+| D-030 | Check-in timing | 8 pm in the trip city's time zone on each trip day, and the after-trip check-in the next morning. Without dates: "I'm back" plus one reminder 14 days after saving | Response and turn-off rates | Slice 12 |
+| D-031 | Review labels | "From an XPMatch trip" for ratings made in a check-in on a trip saved in XPMatch; "Self-reported" for everything else. Nothing is called "verified" until there's real evidence (PRD REQ-010) | Whether testers understand the labels | Slice 12 |
+| D-032 | What can be shared as a review | A rating with at least a short note; ratings without notes stay private | Share rate and review usefulness | Slice 12 |
 
 ## 12. Scaling to 1,000 beta testers
 
 Planning assumption (founder, 2026-09-23): the beta grows to 1,000 testers. The pilot still starts with the team, then 5, then 20 travelers (§2). This section covers what the design needs so the same app can grow to 1,000 in gated waves.
 
-For this stack, 1,000 testers is a small load. What doesn't scale is the work done by hand in the pilot: entering content, relaying questions, handling reports and managing testers. So the design keeps the PRD's architecture, builds cheap scale choices in from day one, and replaces the hand-run jobs with tools before the waves grow.
+For this stack, 1,000 testers is a small load. What doesn't scale is the work done by hand in the pilot: entering content, relaying questions, handling reports and managing testers. So the design keeps the PRD's architecture, builds cheap scale choices in from day one, and replaces the hand-run jobs with tools before the waves grow. Traveler check-ins and reviews (§4) are the main way content grows with the testers.
 
 ### Capacity
 
@@ -544,7 +616,7 @@ At that size, one Postgres database on Supabase and one stateless API, with a se
 | Cursor pagination on every list; an index on every column a row policy filters on | Activity, Inbox, conversations and Explore stay fast as data grows | Every slice |
 | Real-time connections only while a conversation or shared board is open; push and refresh elsewhere | Keeps concurrent connections low | Slice 11 |
 | Per-user and per-device rate limits on invites, questions, message requests, messages and plan builds | Controls abuse and cost | Slice 7 |
-| Feature flags per cohort, on top of the kill switches | A feature can open to one wave at a time | Slice 12 |
+| Feature flags per cohort, on top of the kill switches | A feature can open to one wave at a time | Slice 13 |
 
 ### Needed before inviting beyond the 20-person pilot
 
@@ -552,7 +624,7 @@ These replace the pilot's hand-run jobs:
 
 | Capability | Why | Covers |
 | --- | --- | --- |
-| Contributor self-serve submission with a preview, rights and an operator review queue | 1,000 testers need far more content than the founder can enter by hand | REQ-005 (submission path) |
+| Contributor self-serve submission with a preview, rights and an operator review queue, including travelers publishing trips they took and adding past trips | 1,000 testers need far more content than the founder can enter by hand, and traveler reviews and trips are the main way supply grows | REQ-005 (submission path), T31 |
 | Contributors answer questions in the app | Relaying every question by hand doesn't scale | REQ-021 |
 | A moderation console with a report queue, auto-hide once several people report the same item, account restrictions and an audit log | Scripts don't scale to 1,000 people | REQ-023, NFR-010 |
 | Contact anti-abuse: message requests only from accounts with an approved profile that are at least a day old; links blocked in message requests; senders throttled after reports | Travel apps attract scams | REQ-022, REQ-023 |
@@ -569,7 +641,7 @@ Nothing expands by calendar (PRD §13). Each wave opens only after the previous 
 
 | Wave | Testers | Opens when (proposed thresholds) |
 | --- | --- | --- |
-| Pilot | Team, then 5, then 20 | Slices 1–12 pass (§9) |
+| Pilot | Team, then 5, then 20 | Slices 1–13 pass (§9) |
 | Wave 1 | 100 | The work above is done; the relevance study passed (at least 7 of 10); no cross-user exposure (PRD NFR-001); reports handled within NFR-010 |
 | Wave 2 | 300 | Wave 1 had crash-free sessions of at least 99%, p95 latency within PRD NFR-003, model cost per started trip under USD 3, and every open city passing NFR-009 |
 | Wave 3 | 1,000 | Wave 2 met the same gates, and moderation kept to NFR-010 at the higher volume |
@@ -594,7 +666,7 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
 
 ## 13. Changes from source (v1.1 → v1.2)
 
-- **Clarified:** the release type (unpaid, controlled pilot); the first working transaction (§8); operator-run supply for the pilot; the operational basics slice 12 must prove (backups with a tested restore, error monitoring, privacy and terms pages).
+- **Clarified:** the release type (unpaid, controlled pilot); the first working transaction (§8); operator-run supply for the pilot; the operational basics slice 13 must prove (backups with a tested restore, error monitoring, privacy and terms pages).
 - **Moved to MVP-1.1:** the voice interview (REQ-004), the in-app map (REQ-007 map part), offline reading (REQ-015 offline part). The S0 voice spike still runs first.
 - **Moved later:** guest browsing (PRD D-004, browse part), save and compare (REQ-009), in-app contributor submission (REQ-005 submission path), AI-proposed rearrangements (REQ-003 bulk proposals), hotel and flight interview questions (REQ-002).
 - **Simplified:** import scripts instead of an internal moderation app; plans built by a deterministic planner with manual swaps, instead of AI-proposed rearrangements; daily budget counters instead of the full reservation system; no outbox until an asynchronous consumer exists; "Open in Maps" links instead of an embedded map.
@@ -607,7 +679,11 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
   - "Add to my trips" saves the plan (A-007). Copying one contributor's whole itinerary is dropped (A-004). The similar-taste labels that draft 2 listed as later move into MVP-1.
 - **Unchanged:** requirement IDs, trust and privacy rules, stack direction (Expo, TypeScript API, Supabase), rollout stages, kill switches and cost hypotheses.
 - **Added for the 1,000-tester beta (founder planning assumption, 2026-09-23):** gated waves of 100, 300 and 1,000 testers after the pilot, the day-one scale choices, and NFR-008 to NFR-010 (§12). Contributor self-serve submission and in-app answers move up from later to before the first wave.
-- **Unresolved:** D-005 to D-029.
+- **Added by founder decision (2026-09-23), reviews:**
+  - trip check-ins during and after the trip, with private ratings (REQ-028);
+  - sharing ratings as labeled, moderated reviews in the pilot (AC-REQ-010-03), which brings REQ-010's review writing into the pilot;
+  - travelers publishing whole trips and adding past trips before the first wave (REQ-005 submission path).
+- **Unresolved:** D-005 to D-032.
 
 ## 14. Completion check
 
@@ -616,11 +692,11 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
   - There are no payments, and links say "check price and availability".
   - Demand isn't fabricated. There is only permissioned real content, honest empty states, and real travelers in the relevance study. No activity, messages or questions are seeded, and team activity is labeled as the team's.
   - Access control isn't left for later. Isolation lands in slice 1, before any real data. Each social feature's access rules land with that feature, after the safety foundation in slice 7.
-- **Scope:** the founder's social additions roughly double what must work before the first invite. The core loop still comes first (slices 1–6), and each social feature has its own kill switch.
+- **Scope:** the founder's social and review additions more than double what must work before the first invite. The core loop still comes first (slices 1–6), and each social feature has its own kill switch.
 - **Demo versus production:** MVP-1 is production-grade for the 20-person pilot, and the §12 work readies it for waves up to 1,000 testers. It is not store-ready; store review, privacy disclosures and commercial decisions come before any public release (PRD §10).
 
 ## 15. Readiness and next action
 
-**Readiness: READY WITH ASSUMPTIONS.** S0.1 and slices 1–2 can start once D-005 is approved. D-007, D-008, D-010, D-011 and D-017 to D-029 have working defaults. D-009 needs the founder's cap amounts before slice 2 makes paid model calls. Slices 3 onward need D-006, and the first external invite needs D-021 confirmed. Waves beyond the pilot need the §12 work, NFR-008 to NFR-010, and D-025 to D-029 confirmed.
+**Readiness: READY WITH ASSUMPTIONS.** S0.1 and slices 1–2 can start once D-005 is approved. D-007, D-008, D-010, D-011 and D-017 to D-032 have working defaults. D-009 needs the founder's cap amounts before slice 2 makes paid model calls. Slices 3 onward need D-006, and the first external invite needs D-021 confirmed. Waves beyond the pilot need the §12 work, NFR-008 to NFR-010, and D-025 to D-029 confirmed.
 
 **Next action (founder):** approve revision v1.2 as written, or list the changes you want. After approval, the factory's next task is S0.1 (project shell) on its own branch, with CI and device evidence.

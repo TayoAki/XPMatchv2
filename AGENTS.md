@@ -50,7 +50,7 @@ Planned layout (PRD §5): `apps/mobile` (Expo/React Native), `services/api` (Typ
 - Never present fabricated travelers, reviews, itineraries or activity as real. Label synthetic test data as fixtures.
 - Plans are built by a deterministic, versioned planner from ranked items. The model writes explanation wording only; it never chooses or orders plan items.
 - Nothing about a traveler becomes visible to other travelers without an explicit opt-in. Shared activity and "travelers like you" never include trip dates, companions, spending, notes or profile details, and people who haven't opted in are never shown, not even as a count.
-- Messages, comments and questions are private user content. Never send them to the model, analytics or logs; the operator sees only reported items.
+- Messages, comments, questions and private review notes are private user content. Never send them to the model, analytics or logs. The operator sees only reported items and reviews submitted for publishing.
 - Community content is readable only while it is published and its permission is current. Withdrawal blocks reads immediately.
 - Writes carry a server-derived actor, request ID, command name, schema version, idempotency key and expected revision. A repeated key with the same payload returns the original receipt; a different payload is a conflict.
 - Data conventions: UUIDs; UTC timestamps plus IANA time zones; local trip dates; money as integer minor units with currency and price basis.
