@@ -740,7 +740,7 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
   - swipes or arrow taps to change items, replacing the swap sheet (REQ-026);
   - trips saved automatically, replacing "Add to my trips" (A-007).
 - **Changed by founder decision (2026-09-23), draft 8:** the chat answers a request with options the traveler swipes or taps arrows through, changes by typing, and can undo. Only then does "Create itinerary" turn the picks into the itinerary, where the same edits keep working (REQ-025, REQ-026, REQ-029, D-036).
-- **Added by founder decision (2026-09-23), draft 9:** travelers can change the app's colors: System, Light or Dark and five contrast-checked accents (REQ-030, slice 2c, T34). The UI plan (`docs/design/XPMatch-UI-plan.md`) keeps v1's design language, uses the PRD's colors, and chooses the shadcn-style React Native kit (D-037 to D-040).
+- **Added by founder decision (2026-09-23), draft 9:** travelers can change the app's colors: System, Light or Dark and five contrast-checked accents (REQ-030, slice 2c, T34). The UI plan (`docs/design/XPMatch-UI-plan.md`) keeps v1's design language, uses the PRD's colors and proposes the shadcn-style React Native kit. Its open choices are D-037 to D-040.
 - **Unresolved:** D-005 to D-040.
 
 ## 14. Completion check

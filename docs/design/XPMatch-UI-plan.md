@@ -14,7 +14,7 @@
 
 - The founder asked for the `site-clone` skill. It isn't installed in this session, so the same job was done by hand:
   - v1's tokens were read (`src/app/globals.css`), along with its UI redesign plan (`docs/UI_REDESIGN_PLAN.md`), its mobile plan (`docs/MOBILE_PLAN.md`) and its reference mockup (`docs/design/discover-reference.webp`);
-  - **68 screens were captured at 390 × 844** from v1's own offline test stack, with its stand-in model and stubs and no API keys;
+  - **67 phone screens were captured at 390 × 844**, plus one desktop view, from v1's own offline test stack, with its stand-in model and stubs and no API keys;
   - type, spacing and tap targets were measured with the browser's computed styles.
 - **The captures stay out of this public repository.** v1's test fixtures pair real businesses with invented reviews, and those appear on screen.
 
@@ -368,7 +368,7 @@ Method: WCAG 2.x contrast ratios for every foreground and background pair that a
 - shadcn/ui builds web pages. Its docs list Next.js, Vite, Laravel, React Router, Astro and TanStack Start, and its components now default to Base UI, with Radix and React Aria as options. All three are web (DOM) libraries, and nothing in the docs mentions React Native or Expo (checked 2026-09-23).
 
 **Its React Native counterpart:** React Native Reusables (MIT, `founded-labs/react-native-reusables`).
-- **What it is:** a copy-in port of shadcn/ui, with the same component names and the same `components.json`-style workflow.
+- **What it is:** a copy-in port of shadcn/ui, with the same component names and the same copy-in workflow.
 - **How it installs:** through the shadcn CLI, from its own registry.
 - **What it's built on:** the accessible `@rn-primitives`.
 - **Theming engines:** NativeWind v4 or Uniwind.
@@ -421,7 +421,7 @@ Method: WCAG 2.x contrast ratios for every foreground and background pair that a
 ## 12. Evidence and what's untested
 
 **Evidence:**
-- **v1 captures:** 68 PNGs at 390 × 844 (and one at 1440 × 900) from v1's own test stack at commit `28c66b6`, run on 2026-09-23.
+- **v1 captures:** 68 PNGs, 67 at 390 × 844 and one at 1440 × 900, from v1's own test stack at commit `28c66b6`, run on 2026-09-23.
   - Blocked: all outside requests, including the model provider (a local stand-in answered) and maps.
   - Photos are v1's placeholders.
   - Kept in the session scratchpad, not committed: the fixtures show real businesses with invented reviews.
