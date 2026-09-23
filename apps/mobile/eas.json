@@ -5,18 +5,29 @@
   },
   "build": {
     "base": {
-      "node": "22.22.2"
+      "node": "22.22.2",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://api-production-eb96.up.railway.app"
+      }
     },
     "development": {
       "extends": "base",
       "developmentClient": true,
       "distribution": "internal",
-      "channel": "development"
+      "channel": "development",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://api-production-eb96.up.railway.app",
+        "EXPO_PUBLIC_SHOW_DEV_SCREENS": "true"
+      }
     },
     "preview": {
       "extends": "base",
       "distribution": "internal",
-      "channel": "preview"
+      "channel": "preview",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://api-production-eb96.up.railway.app",
+        "EXPO_PUBLIC_SHOW_DEV_SCREENS": "true"
+      }
     },
     "production": {
       "extends": "base",

@@ -31,15 +31,18 @@ The operating contract for any coding agent working here (Claude Code, Codex, Cu
 
 ## Repository commands
 
-There is no application code yet. Sprint 0 ticket S0.1 (the project shell) establishes these commands. Until it lands, never claim any of them ran.
+S0.1 (the project shell) set these. Run them from the repository root unless noted.
 
-- Runtime/toolchain: set in S0.1 (Node 22 is available in cloud sessions)
-- Install: set in S0.1
-- Format/lint: set in S0.1
-- Typecheck: set in S0.1
-- Tests: set in S0.1
-- Build (including native builds): set in S0.1
-- Development server: set in S0.1
+- Runtime/toolchain: Node 22 (`.nvmrc`), npm workspaces, TypeScript 6
+- Install: `npm install` (CI uses `npm ci`)
+- Format/lint: `npm run format:check` and `npm run lint` (`npm run format` fixes formatting)
+- Typecheck: `npm run typecheck`
+- Tests: `npm test`. Database tests need `TEST_DATABASE_URL` pointing at a throwaway local or CI server; CI sets it and fails without it
+- Format, lint, typecheck and tests in one go: `npm run check` (CI also checks migrations, token freshness and bundles)
+- Migrations: `npm run db:migrate -- up|status|new <name>` (see `db/README.md`)
+- Design tokens: `npm run tokens:build` after editing `packages/design-tokens`
+- Build: `npm run build --workspace=@xpmatch/api`. App bundles: `npx expo export --platform ios --platform android` in `apps/mobile`. Native builds use EAS from `apps/mobile` (see `apps/mobile/README.md`)
+- Development servers: `npm run api:dev` (needs `DATABASE_URL`) and `npm run mobile:start`
 
 ## Architecture and invariants
 
@@ -88,7 +91,7 @@ Before opening or updating a PR:
 4. Include the outcome, scope, acceptance-criterion status, verification, evidence, risks and rollback or follow-up notes.
 
 - Automated reviewer: none configured.
-- Required CI: none yet; S0.1 adds typecheck, lint, tests and migration checks.
+- CI: `.github/workflows/ci.yml` runs format, lint, typecheck, tests, migrations, design-token freshness and both bundles on every push and pull request. Making it a required check in branch protection is the founder's call.
 - Maximum review cycles: 5.
 - Required human approver: the founder (repository owner).
 

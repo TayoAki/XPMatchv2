@@ -15,6 +15,7 @@ COPY services/api/package.json services/api/
 
 FROM manifests AS build
 RUN npm ci --workspace=@xpmatch/api --include-workspace-root=false --ignore-scripts --no-audit --no-fund
+COPY tsconfig.base.json ./
 COPY packages/contracts packages/contracts
 COPY db db
 COPY services/api services/api
