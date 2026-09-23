@@ -611,7 +611,7 @@ With at most 20 travelers, report counts next to every rate. In the waves, repor
 | D-007 | Sign-in method | One tap with Apple or Google, no codes or passwords (founder, 2026-09-23). No email fallback in the pilot; revisit if testers ask | **Reopened** (founder, 2026-09-23): a simpler sign-in for the beta; the method is the founder's pick. Then the slice 1 two-device test | Slice 1 |
 | D-008 | Text model provider | Run 8–12 fixture interviews and trip requests through 2–3 candidates; compare accuracy and cost | Eval results | Slices 2b and 5 |
 | D-009 | Spend ceiling | Founder sets global daily and per-user daily caps | Founder, from available funds | Paid calls in slices 2b and 5 |
-| D-010 | API hosting | A host with long-lived WebSockets; Railway is a candidate (v1 is configured to deploy there) | **Chosen:** Railway (founder, 2026-09-23), in a new private project, `xpmatch-v2`, separate from v1's `xpmatch`. Deploying the S0.1 health endpoint still has to confirm long-lived WebSockets | First deploy |
+| D-010 | API hosting | A host with long-lived WebSockets; Railway is a candidate (v1 is configured to deploy there) | **Chosen:** Railway (founder, 2026-09-23), in a new private project, `xpmatch-v2`, separate from v1's `xpmatch`. **Checked** 2026-09-23 on the S0.1 deploy: a WebSocket to the API held open for 12 minutes with no drop. Railway's documentation says WebSockets have no duration or idle limit, but a deploy closes open connections, so clients must reconnect | First deploy |
 | D-011 | Chat framework for trip requests | A plain chat box plus one server-side structured-request endpoint. Adopt CopilotKit, with server-side tools only, if the assistant grows beyond requests and changes (v1 ran 19 tools in the browser, only 2 with confirmation) | S0.1 integration effort | Slice 5 |
 | D-012 | Distribution accounts | Apple Developer Program and Google Play Console. Internal testing for the pilot; TestFlight external testing and Google Play closed testing for the waves. The same accounts supply push credentials | Accounts active | Slices 11 and 13 |
 | D-013 | Hotel and flight preference questions | Defer until those categories launch | Evals show matching doesn't need them | — |
@@ -761,7 +761,7 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
   - The contributor capture template for S0.3.
   - Decisions D-041 to D-045.
 - **Approved on 2026-09-23:** this revision as a whole (D-005, draft 10), and D-041 to D-045.
-- **Chosen on 2026-09-23:** Railway for API hosting (D-010). The S0.1 deploy still has to confirm long-lived WebSockets.
+- **Chosen on 2026-09-23:** Railway for API hosting (D-010). The S0.1 deploy held a WebSocket open for 12 minutes, which confirms long-lived connections.
 - **Changed by founder decision after approval (2026-09-23):**
   - Postgres runs on Railway instead of Supabase (D-046). The API now owns sign-in, sessions and the signed-in user that row policies read, and real-time starts as polling (D-020).
   - Sign-in is reopened for a simpler beta method (D-007). `AC-REQ-001-03` and T32 follow the method the founder picks.
