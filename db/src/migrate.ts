@@ -208,7 +208,11 @@ export async function migrate(options: MigrateOptions): Promise<{ applied: strin
       }
       if (appliedNow.length === 0) log('Database is up to date');
     } finally {
-      await client.query('SELECT pg_advisory_unlock($1::bigint)', [LOCK_KEY]);
+      // Ending the session releases the lock anyway; never let a failed
+      // unlock hide the error that got us here.
+      await client
+        .query('SELECT pg_advisory_unlock($1::bigint)', [LOCK_KEY])
+        .catch(() => undefined);
     }
   } finally {
     await client.end();
