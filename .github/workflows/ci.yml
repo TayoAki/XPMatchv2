@@ -1,0 +1,65 @@
+# Required checks (AGENTS.md): format, lint, typecheck, tests, migrations,
+# design-token contrast and freshness, and both bundles.
+name: CI
+
+on:
+  push:
+    branches: [main, 'claude/**']
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    services:
+      postgres:
+        # Railway's Postgres template runs major version 18.
+        image: postgres:18
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      CI: 'true'
+      # Throwaway databases only: tests create and drop their own.
+      TEST_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - name: Migrations apply cleanly to an empty database
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/ci_migrations
+        run: |
+          psql "$TEST_DATABASE_URL" -c 'CREATE DATABASE ci_migrations'
+          npm run db:migrate -- up
+          npm run db:migrate -- status
+          npm run db:migrate -- up
+      - name: Generated theme CSS matches the tokens
+        run: |
+          npm run tokens:build
+          git diff --exit-code -- apps/mobile/src/global.css
+      - name: API bundle builds
+        run: npm run build --workspace=@xpmatch/api
+      - name: App bundles for iOS and Android
+        working-directory: apps/mobile
+        run: npx expo export --platform ios --platform android --output-dir ../../.artifacts/ci-export
