@@ -48,7 +48,8 @@ Planned layout (PRD §5): `apps/mobile` (Expo/React Native), `services/api` (Typ
 - The model interprets and phrases. Server code owns authorization, eligibility, scoring, persistence, source freshness and spend limits. Never expose model-generated SQL or an open-ended HTTP tool.
 - Keep itinerary and content fit separate from author similarity. Commission is never a ranking input. Missing evidence lowers coverage; it never counts as a good fit.
 - Never present fabricated travelers, reviews, itineraries or activity as real. Label synthetic test data as fixtures.
-- Nothing about a traveler becomes visible to other travelers without an explicit opt-in. Shared activity never includes trip dates, companions, spending or notes.
+- Plans are built by a deterministic, versioned planner from ranked items. The model writes explanation wording only; it never chooses or orders plan items.
+- Nothing about a traveler becomes visible to other travelers without an explicit opt-in. Shared activity and "travelers like you" never include trip dates, companions, spending, notes or profile details, and people who haven't opted in are never shown, not even as a count.
 - Messages, comments and questions are private user content. Never send them to the model, analytics or logs; the operator sees only reported items.
 - Community content is readable only while it is published and its permission is current. Withdrawal blocks reads immediately.
 - Writes carry a server-derived actor, request ID, command name, schema version, idempotency key and expected revision. A repeated key with the same payload returns the original receipt; a different payload is a conflict.
