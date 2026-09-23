@@ -6,13 +6,13 @@
 | Method | `mobile-plan-mvp` for scope; `software-factory` for intake, readiness and delivery slices |
 | Readiness | **READY WITH ASSUMPTIONS**: S0 and slices 1–2 can start once this revision is approved. Slice 2's paid model calls also need D-009 (spend ceiling), slices 3 onward need D-006 (pilot city and permissioned content), and the first external invite needs D-021 (who answers safety reports) |
 | Approval | **Pending**: founder |
-| Revision note | Draft 2 (2026-09-23) adds the social features the founder chose for the first pilot: contributor updates, trip partners with comments, an opt-in named activity feed, ask-a-contributor Q&A and direct messages |
+| Revision note | Draft 2 (2026-09-23) adds the social features the founder chose for the first pilot: contributor updates, trip partners with comments, an opt-in named activity feed, ask-a-contributor Q&A and direct messages. Draft 3 (2026-09-23) makes the flow profile-first: every traveler has an approved profile before matching, and matching ranks the individual items in travelers' itineraries |
 
 PRD v1.1 stays the base document. This revision changes scope and order only; everything not mentioned here (trust rules, data conventions, quality thresholds, rollout, rollback) carries over unchanged. Requirement IDs are the PRD's own.
 
 ## 1. Decision summary
 
-- MVP-1 tests the PRD's core bet (H1: relevant human content beats destination-only suggestions) with the fewest moving parts. The loop is: text interview → approved taste → real, permissioned itineraries and reviews with honest reasons → adapt one into a private trip board → partner or official link. It covers one city, invited travelers, and iOS plus Android.
+- MVP-1 tests the PRD's core bet (H1: relevant human content beats destination-only suggestions) with the fewest moving parts. The loop is: a profile each traveler creates once → items from real, permissioned travelers' itineraries (places, meals, activities) matched to that profile, with honest reasons → add the ones you want to a private trip board → partner or official link. It covers one city, invited travelers, and iOS plus Android.
 - Compared with v1.1, the voice interview, the in-app map and offline reading move to MVP-1.1, right after the first 5 invited travelers. Compare, in-app contributor publishing, guest browsing and AI-proposed rearrangements move later. No trust, privacy or cost rule is relaxed.
 - The 10-traveler relevance study moves up to S0–S1 and runs by hand, so H1 is tested before most of the code exists.
 - Several decisions recorded in v1's docs are retired because PRD v1.1 replaced them: web-first, selling the service first, fixed prices, match percentages, and a multi-city beta (§3). Pricing stays open (D-016).
@@ -37,6 +37,7 @@ PRD v1.1 stays the base document. This revision changes scope and order only; ev
 - v2 is a fresh codebase; v1 is a product reference only (founder, 2026-09-23).
 - The repository is public, and the PRD and plans may be public (founder, 2026-09-23).
 - The first pilot includes contributor itinerary updates, trip partners with stop comments, an opt-in named activity feed, ask-a-contributor Q&A and direct messages (founder, 2026-09-23). This brings forward PRD v1.1's later timing for feeds and collaborative editing (PRD §3). Activity sharing is an explicit per-trip opt-in. That keeps it within the PRD's rules that nothing is published implicitly (PRD §4) and that there is no automatic social posting (PRD §3).
+- Every traveler has an approved profile before any matching, and matching ranks itinerary items, meaning the stops in real travelers' itineraries, against that profile (founder, 2026-09-23).
 
 ## 3. What v1 teaches (repository evidence)
 
@@ -92,16 +93,21 @@ Contributors are not paid in-app during the pilot; any thank-you is handled outs
 
 ### Traveler (the value journey)
 
-1. Install from the invite and sign in with an email code.
-2. A short text interview asks one useful question at a time; the traveler can skip at any point.
-3. Recap: the traveler corrects values, marks must-haves, and chooses "remember" or "this trip only", then approves.
-4. Trip context: the pilot city is fixed. The traveler sets dates (or "not sure yet"), who's going and the purpose.
-5. Discover: matched itineraries and reviews, each showing why it fits, its tradeoffs and its unknowns. Blocked items say why.
-6. Open an itinerary: its days and stops, the contributor's context and notes, and reviews of those places.
-7. Adapt: a preview shows what will be copied and what's flagged (expired dated events, must-have conflicts); the traveler accepts.
-8. Trip board: remove stops, move them up or down, and add places from matched content. It saves automatically and looks the same after relaunch or on a second device.
-9. On a stop, "Check price and availability" or "Official site" opens that page, and the click is recorded.
-10. Quick feedback: "useful / not useful" on matches, or a report about a source.
+Every traveler creates a profile once, and matching always works from it (founder, 2026-09-23).
+
+1. **First time only:** install from the invite, sign in with an email code, and create a profile. A short chat asks one useful question at a time, or the traveler can skip it and fill in the form instead. They correct the recap, mark must-haves and approve it. Nothing is matched until a profile is approved.
+2. **Every visit:** Discover opens on items from real travelers' itineraries (places, meals, activities), ranked for this traveler's profile. Each card shows:
+   - the item;
+   - whose itinerary it comes from, with their context (for example "Ana, a couple, 3 days in May");
+   - why it fits, the catch, and what isn't known.
+
+   A place that appears in several itineraries shows once, with each traveler's note. Items that fail a must-have are labeled, never ranked as fits.
+3. Open an item for the contributor's full note and reviews, or open the itinerary it came from to see it in context.
+4. **Add to trip:** the item goes on the traveler's private trip board, which is created with the first item. Adding a whole itinerary at once stays available as a shortcut, with a preview of what will be copied and what's flagged.
+5. **Trip board:** remove items or move them up or down. Dates, who's going and the purpose are optional; adding dates flags events that fall outside them. The board saves automatically and looks the same after relaunch or on a second device.
+6. On an item, "Check price and availability" or "Official site" opens that page, and the click is recorded.
+7. Quick feedback: "useful / not useful" on matches, or a report about a source.
+8. **Profile changes:** editing the profile creates a new version, and Discover re-ranks on the next visit. Trip-only preferences stay on that trip and never change the profile.
 
 **How money moves:** travelers pay nothing in the pilot. The revenue path is partner outbound links. Clicks are recorded, and no commission is claimed until a partner confirms one.
 
@@ -124,7 +130,7 @@ Contributors are not paid in-app during the pilot; any thank-you is handled outs
 **Contributor updates**
 
 1. The operator publishes a new revision of C's itinerary that adds a stop.
-2. Anyone viewing the itinerary sees the stop marked new, and the update appears in Activity.
+2. Anyone viewing the itinerary sees the stop marked new, the update appears in Activity, and the stop enters Discover for travelers it fits.
 3. Travelers who adapted the itinerary see "1 new stop" on their board, preview it and decide whether to add it. Nothing changes by itself.
 
 **Ask a contributor**
@@ -149,14 +155,14 @@ Contributors are not paid in-app during the pilot; any thank-you is handled outs
 | --- | --- | --- | --- |
 | Sign-in and isolation | One method (D-007); owner-only data; second-device restore; sign-out clears local data | Real private data | REQ-001 |
 | Account deletion | In-app delete that revokes access and removes owned rows, with a deletion record | Real users | REQ-014 (subset) |
-| Text interview | Chat asking 3–5 short questions (v1's evidence argues for fewer); extracts typed candidates linked to the user's own answers; skip to a manual recap; manual recap if the model fails | Journey step 2; baseline for voice | REQ-002, REQ-003 (subset) |
-| Taste recap and profile | Editable recap covering general, dining and experience preferences, must-haves and spend ranges. Approval creates an immutable version. Trip-only overrides | Journey step 3 | REQ-002 |
-| Trip context | City fixed to the pilot; optional dates; party; purpose | Journey step 4 | REQ-002 |
+| Text interview | Chat asking 3–5 short questions (v1's evidence argues for fewer), run once when the profile is created; extracts typed candidates linked to the user's own answers; skipping the chat, or a model failure, leads to the recap form | Journey step 1; baseline for voice | REQ-002, REQ-003 (subset) |
+| Taste recap and profile | Editable recap covering general, dining and experience preferences, must-haves and spend ranges. Approval creates an immutable version, and matching needs an approved profile. Trip-only overrides | Journey steps 1 and 8 | REQ-002 |
+| Trip details | The trip is created with its first item; city fixed to the pilot; dates, party and purpose optional | Journey step 5 | REQ-002 |
 | Content import and rights | Operator import script with validation, permission records, publish, withdraw and an audit log; operator-entered pilot-city place catalog | Supply without fake content | REQ-005 |
-| Matching and explanations | Eligibility filter, then versioned weighted components. Content fit is separate from author similarity, which only appears with contributor consent. Cited reasons, tradeoffs and unknowns; honest empty state | The core bet (H1) | REQ-006 |
-| Discover and detail | Matched list, itinerary detail, reviews with context; an "Open in Maps" link per place | Journey steps 5–6 | REQ-007 (list) |
-| Adapt and board | Copy with lineage plus constraint flags, then preview and accept. Remove, move up/down, add. Revisions and conflict handling | Journey steps 7–8 | REQ-008 |
-| Outbound links | Allowlisted redirect; one logical click event; never shown as a booking | Journey step 9; revenue signal | REQ-011 (subset) |
+| Matching and explanations | Ranks itinerary items against the approved profile: an eligibility filter, then versioned weighted components. A place that appears in several itineraries is grouped into one result. Content fit stays separate from author similarity, which only appears with contributor consent. Cited reasons, tradeoffs and unknowns; honest empty state | The core bet (H1) | REQ-006 |
+| Discover and detail | Matched item list; item detail with the source traveler's context and reviews; the source itinerary one tap away; an "Open in Maps" link per place | Journey steps 2–3 | REQ-007 (list) |
+| Add to trip and board | Add single items with lineage to their source. Adding a whole itinerary stays as a shortcut, with a preview and flags. Remove, move up/down. Revisions and conflict handling | Journey steps 4–5 | REQ-008 |
+| Outbound links | Allowlisted redirect; one logical click event; never shown as a booking | Journey step 6; revenue signal | REQ-011 (subset) |
 | Feedback and reports | "Useful / not useful" on matches; "report a problem" goes to an operator list | Trust metric | REQ-010 (report), REQ-012 |
 | Telemetry | Authoritative events from committed actions; internal accounts flagged | Measuring the pilot | REQ-012 |
 | Spend caps and kill switches | Per-user and global daily model budgets checked before each call; metered usage; switches for model features, matching and outbound links | Real money | REQ-013 |
@@ -196,14 +202,15 @@ Bottom navigation: Discover, Trips, Inbox, Profile. Inbox is new, for messages, 
 | Screen | Main decision | States that change the experience |
 | --- | --- | --- |
 | Sign in | Get in with an email code | Code sent; wrong or expired code; too many attempts; offline |
-| Interview | Answer one question or skip | Thinking; model error (retry or skip to recap); daily budget reached (manual recap) |
-| Taste recap | Correct and approve; remember or this trip only | Uncertain values flagged; unknowns stay unknown; newer version approved on another device (reload); saving |
-| Trip context | Dates, party, purpose, overrides | Invalid dates; dates unknown; currency and price basis shown |
-| Discover | Which itinerary or review to open | Loading; partial failure; no suitable content (honest empty state); blocked by a must-have (reason shown) |
-| Itinerary or review detail | Does this fit me, and what's the catch? | Reasons, tradeoffs, unknowns; author similarity hidden without consent; source withdrawn; dated event expired |
-| Adaptation preview | Accept or reject the copy | Flags per stop; stale preview (source changed or withdrawn) needs a new preview |
+| Interview (first time only) | Answer one question or skip to the form | Thinking; model error (continue in the form); daily budget reached (continue in the form) |
+| Taste recap (first time, then from Profile) | Correct and approve | Uncertain values flagged; unknowns stay unknown; newer version approved on another device (reload); saving; no Discover until approved |
+| Trip details (optional) | Dates, party, purpose, trip-only preferences | Invalid dates; dates unknown; currency and price basis shown |
+| Discover | Which matched item to add or open | Loading; partial failure; no suitable items (honest empty state); blocked by a must-have (reason shown) |
+| Item detail | Does this fit me, what's the catch, and whose trip is it from? | Reasons, tradeoffs, unknowns; every source traveler's note; author similarity hidden without consent; source withdrawn |
+| Itinerary or review detail | See an item in the context of the trip it came from | Reasons, tradeoffs, unknowns; author similarity hidden without consent; source withdrawn; dated event expired |
+| Whole-itinerary preview (shortcut) | Accept or reject copying all of its items | Flags per item; stale preview (source changed or withdrawn) needs a new preview |
 | Trip board | Keep, move, remove or add | Empty; saving; conflict (load the latest); stop whose source was withdrawn; unknown travel times left unknown |
-| Add a place | Pick from matched places | Nothing suitable |
+| Add to trip (from any item) | Add it, or pick which trip if there's more than one | Added; already on the trip; conflicts flagged |
 | Trips | Resume a trip | No trips yet; network failure |
 | Profile and privacy | Update taste, delete account, sign out | Edits create a new version; deletion in progress or failed with retry |
 | Report a problem | Say what's wrong with a source | Submitted; offline |
@@ -227,7 +234,7 @@ Activity badges ("Maya kept this") appear in the Activity tab and on place detai
 - Identity and profile (M01): `app_user` bound to the auth provider's verified subject, `private_profile`, `private_profile_version` (immutable once approved), `preference_value`, `spend_range` (minor units, currency, basis), `preference_evidence`.
 - Interview and commands (M02 subset): interview `conversation` and messages, and `mutation_receipt` for idempotency. No outbox until an asynchronous consumer exists.
 - Content and catalog (M03): `place` (operator-entered: name, area, category, coordinates, official or partner URL), the contributor's public profile and consented public taste, `community_content`, `content_revision`, `content_permission`, `published_itinerary`/`day`/`stop`, and `review` with context.
-- Matching (M04): trip context snapshot, `match_model_version`, `match_run`, `match_assessment`, and `match_component` with evidence and explanation; `feedback_event`.
+- Matching (M04): profile and trip context snapshot, `match_model_version`, `match_run`, `match_assessment` (its typed target is an itinerary item, the primary unit, or a whole itinerary, review or place), and `match_component` with evidence and explanation; `feedback_event`.
 - Trips (M05): `trip`, `trip_revision`, `trip_day`, `trip_stop`, `trip_source` (lineage, including the channel each stop came from: matched content, activity, partner, contributor update or manual).
 - Operations (M07/M08 subset): `partner_handoff`, `usage_event`, budget counters, `decision_event`, `content_report`, `moderation_action`, deletion record.
 - Social (founder additions):
@@ -274,10 +281,10 @@ Scenario: contributor C's 3-day itinerary for the pilot city and two of C's revi
 | # | Observable result | PRD criteria | Evidence |
 | --- | --- | --- | --- |
 | T1 | C's content can be published only with a current permission record, and appears in matching once published. | AC-REQ-005-01 | Import tests; public projection check |
-| T2 | T answers the interview, corrects one recap value and approves: exactly one approved version exists, and a retried approval returns the same version. | AC-REQ-002-01, AC-REQ-002-02 | Transaction tests; device run |
-| T3 | For T's 3-day trip with a must-have, Discover shows C's itinerary with at least one cited reason, a tradeoff (or "no evidenced tradeoff") and its unknowns. Items failing the must-have show as blocked or needs-check, never as fits. | AC-REQ-006-01, AC-REQ-006-02 | Deterministic ranking tests; eval cases |
+| T2 | T answers the interview, corrects one recap value and approves: exactly one approved version exists, and a retried approval returns the same version. Before approval Discover can't be reached, and skipping the chat leads to the recap form. | AC-REQ-002-01, AC-REQ-002-02, AC-REQ-002-03 | Transaction tests; device run |
+| T3 | With a must-have in T's profile, Discover lists items from C's itinerary ranked for T. Each item shows its source, at least one cited reason, a tradeoff (or "no evidenced tradeoff") and its unknowns. A place in two itineraries appears once, with both notes. Items failing the must-have show as blocked or needs-check, never as fits. After T edits the profile, the next load uses a new match run. | AC-REQ-006-01, AC-REQ-006-02, AC-REQ-006-03 | Deterministic ranking tests; eval cases |
 | T4 | Without C's public-taste consent, no author-similarity claim appears. | AC-REQ-006-02 | Permission test |
-| T5 | Accepting the preview creates a private trip with C's stops and lineage; flagged stops were shown before acceptance. | AC-REQ-008-01, AC-REQ-008-02 | Transaction tests; device run |
+| T5 | Adding one of C's items creates T's private trip, holding that item with lineage to C's itinerary. Adding C's whole itinerary shows a preview first, with flagged items, then copies them with lineage. | AC-REQ-008-01, AC-REQ-008-02 | Transaction tests; device run |
 | T6 | After T removes one stop, moves another, force-quits and signs in on a second device, both devices show the same latest revision. Two conflicting edits produce a conflict, not a silent overwrite. | AC-REQ-008-01, AC-REQ-008-02, AC-REQ-001-01 | Concurrency tests; two-device run |
 | T7 | "Check price and availability" opens the allowlisted page and records exactly one outbound event. A tampered URL is refused, and nothing says "booked". | AC-REQ-011-01, AC-REQ-011-02 | Redirect tests; device run |
 | T8 | U requesting T's profile or trip by ID is denied by both the API and row policies. | AC-REQ-001-02, NFR-001 | Two-user negative tests |
@@ -286,6 +293,17 @@ Scenario: contributor C's 3-day itinerary for the pilot city and two of C's revi
 | T11 | After the scripted journey, each authoritative event appears once per logical action, and internal accounts are flagged. | AC-REQ-012-01, AC-REQ-012-02 | Event reconciliation script |
 | T12 | After T deletes the account, T can't sign in and T's rows are gone; the deletion is recorded. | AC-REQ-014-01 (subset) | Deletion test |
 | T13 | T completes T2–T7 with VoiceOver and with TalkBack at 200% text size. | AC-REQ-015-01, NFR-005 | Device checklist |
+
+### Added criteria on PRD requirements (founder decision, 2026-09-23)
+
+- `AC-REQ-002-03`: A signed-in traveler without an approved profile goes to profile creation before Discover. Skipping the chat leads to the recap form, and matching starts only after approval.
+- `AC-REQ-006-03`: Discover ranks itinerary items, meaning the stops in permissioned itineraries, against the traveler's approved profile. Each result:
+  - names its source itinerary and traveler;
+  - gives at least one reason tied to the profile;
+  - gives a tradeoff, or "no evidenced tradeoff";
+  - lists its unknowns.
+
+  A place that appears in several itineraries is one result that lists every source.
 
 ### New requirements for the social features
 
@@ -344,10 +362,10 @@ Each slice is an end-to-end, demonstrable outcome; split it into 0.5–2 day tic
 | S0.2 Voice spike (throwaway, time-boxed) | Two-way audio with interruption on a physical iPhone and Android phone; latency and cost per minute measured | REQ-004 feasibility | Devices, development credentials |
 | S0.3 Founder track (no code) | Pilot city chosen, permissions collected, hand-run relevance study, spend ceiling, developer accounts | D-006, D-009, D-012, H1 | — |
 | 1 Sign-in and ownership | Sign in on two devices; U can't read T's data; account deletion | T8, T12 | S0.1, D-007 |
-| 2 Interview to approved profile | Type, correct, approve; trip-only overrides; budget fallback | T2, T10 | 1, D-008, D-009, D-011 |
+| 2 Profile creation | Chat or form, correct, approve; no Discover without an approved profile; trip-only overrides; budget fallback | T2, T10 | 1, D-008, D-009, D-011 |
 | 3 Content import and rights | Real permissioned itinerary imported, published and withdrawn | T1, T9 (read gate) | S0.1, D-006 |
-| 4 Matching and Discover | Traceable matches or an honest empty state; deterministic eval baseline | T3, T4 | 2, 3 |
-| 5 Adapt and board | Adapt, edit, restore, conflict | T5, T6, T9 (trip side) | 4 |
+| 4 Item matching and Discover | Items ranked for the profile, grouped by place and traceable to their sources, or an honest empty state; deterministic eval baseline | T3, T4 | 2, 3 |
+| 5 Add to trip and board | Add items, add a whole itinerary through its preview, edit, restore, conflict | T5, T6, T9 (trip side) | 4 |
 | 6 Links, feedback, telemetry | Outbound click, reports, reconciled events | T7, T11 | 5 |
 | 7 Safety foundation | Display names; block and report on every piece of user content; text filter; operator queue with a response owner; community guidelines and contact details; 18+ confirmation; rate limits | T22 | 1, D-021 |
 | 8 Contributor updates and Q&A | Revision diffs, "new" markers and update previews on boards; questions to the operator queue and published answers | T14, T15 | 3, 5, 7 |
@@ -366,12 +384,13 @@ With at most 20 travelers, report counts next to every rate. Staff and test acco
 | First-decision activation | New travelers keeping at least one place on a board within 24 hours of their first planning session ÷ new travelers who started a planning session | 24 hours | Whether the journey delivers value quickly (PRD §11) |
 | Matched-content share | Kept places whose lineage is a matched itinerary or review ÷ all kept places, on the latest board snapshot | 7 days | H1 inside the product (added) |
 | Channel mix | Kept places by the channel they came from (matched content, activity, partner, contributor update, manual) ÷ all kept places | 7 days | Keeps H1 readable now that social channels also add places |
+| Item add rate | Matched items added to a board ÷ matched items shown (visible impressions) | 7 days | Whether item-level matches are useful |
 | Kept places per started trip | Distinct places on the latest board snapshot ÷ started trips; show zeros and the median | 7 days | Planning depth (PRD §11) |
 | Interview accuracy | Candidates accepted unchanged, corrected, rejected or left unknown ÷ reviewed candidates | Per interview | Extraction quality; the baseline voice must beat |
 | Outbound intent | Distinct trip, place, provider and day clicks ÷ started trips | 7 days | Revenue-path signal (a click is not a booking) |
 | Trust failures | Reports by severity ÷ exposed matches | Pilot | A critical report disables the affected path |
 | Model cost per started trip | Metered model spend, including abandoned sessions ÷ started trips | Weekly | Cost hypothesis: about USD 1; investigate above USD 3 (PRD §11) |
-| Relevance study (H1) | Travelers preferring the matched set over destination-only suggestions | S0–S1 by hand; repeated in-product after slice 4 | Continue if at least 7 of 10 prefer matched and no critical trust failure (PRD §10) |
+| Relevance study (H1) | Travelers preferring items matched to their profile over destination-only suggestions | S0–S1 by hand; repeated in-product after slice 4 | Continue if at least 7 of 10 prefer matched and no critical trust failure (PRD §10) |
 | Sharing rate | Trips with activity sharing on ÷ started trips | Pilot | Whether travelers accept being visible |
 | Partner adoption | Trips with an accepted partner ÷ started trips; stops added by partners | Pilot | Whether co-planning matters for couples |
 | Q&A demand | Questions ÷ itinerary opens; answer rate; median time to answer | Pilot | Whether travelers want contact with contributors |
@@ -406,6 +425,8 @@ With at most 20 travelers, report counts next to every rate. Staff and test acco
 - `A-001`: TestFlight and Google Play internal testing are enough to reach the first cohort.
 - `A-002`: Operator-entered place facts (name, address, area, website) are enough for MVP-1; no Places API.
 - `A-003`: Each invited traveler plans one pilot-city trip within a 7-day window.
+- `A-004`: Adding a whole itinerary at once stays available as a secondary shortcut (PRD REQ-008). Remove it if single items are enough.
+- `A-005`: A profile needs at least a pace, two interests and must-haves (which may be "none") before matching starts; everything else can stay unknown.
 
 ### Decisions needed
 
@@ -438,6 +459,11 @@ With at most 20 travelers, report counts next to every rate. Staff and test acco
 - **Simplified:** import scripts instead of an internal moderation app; adaptation as copy-with-lineage plus flags plus manual edits; daily budget counters instead of the full reservation system; no outbox until an asynchronous consumer exists; "Open in Maps" links instead of an embedded map.
 - **Added:** the matched-content share metric; the `adaptation_accepted`, `match_feedback` and `content_reported` events; the relevance study moved to S0–S1 as a hand-run test; D-016, which surfaces the conflict between v1's recorded prices and the PRD's "undecided".
 - **Added by founder decision (2026-09-23), in the first pilot:** contributor itinerary updates (REQ-017), opt-in named trip activity (REQ-018), trip partners (REQ-019) with stop comments (REQ-020), ask-a-contributor Q&A (REQ-021), direct messages (REQ-022), the safety controls they need (REQ-023) and notifications (REQ-024). This brings forward PRD v1.1's later timing for feeds and collaborative editing, and moves report and block (REQ-010) back into MVP-1.
+- **Changed by founder decision (2026-09-23):**
+  - Every traveler creates a profile once and must have an approved profile before any matching (`AC-REQ-002-03`).
+  - Matching ranks the items in travelers' itineraries against that profile (`AC-REQ-006-03`).
+  - A trip is created by adding its first item, and trip details are optional.
+  - Adding a whole itinerary at once becomes a secondary shortcut (A-004).
 - **Unchanged:** requirement IDs, trust and privacy rules, stack direction (Expo, TypeScript API, Supabase), rollout stages, kill switches and cost hypotheses.
 - **Unresolved:** D-005 to D-022.
 
