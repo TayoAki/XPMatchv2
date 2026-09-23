@@ -186,7 +186,7 @@ Skipped by Gate 0. Not rewritten.
   - **Waits for a waitlist page plus a form and email provider** (the founder's choice; the live site's call to action is still "Get my Fit Score"): banner line 2, the About's waitlist line, the "Join the beta" CTA and the form.
   - **Waits for D-006 (the city):** the city-named variants and the form's "Where are you going?" options.
   - **Waits for D-035 (voice):** "a short voice chat" in How it works. Otherwise it says "a few taps".
-  - **Waits for D-005 (plan approval):** anything describing the product as planned.
+  - ~~**Waits for D-005 (plan approval):** anything describing the product as planned.~~ **Resolved:** the founder approved the plan on 2026-09-23. The other waits in this list still apply.
   - **Waits for the live-site fixes above:** anything that sends traffic to xpmatchme.com.
 - `[VERIFY]`: current LinkedIn character limits for headline and company tagline, and newsletter availability. Only the hashtag and Creator Mode removals carry a verified stamp (2026-07-28, from the skill).
 - `UNSOURCED`: "free while in beta" is the plan's pilot policy, not a price decision (D-016).

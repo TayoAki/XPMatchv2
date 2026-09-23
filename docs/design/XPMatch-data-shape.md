@@ -1,8 +1,8 @@
-# XPMatch data shape (proposed, v0.1)
+# XPMatch data shape (v0.1, approved)
 
 | Field | Value |
 | --- | --- |
-| Status | Decisions D-041 to D-045 **approved** by the founder on 2026-09-23. The document is part of plan draft 10, which still awaits approval as a whole (D-005) |
+| Status | **Approved** by the founder on 2026-09-23, with plan revision v1.2 as a whole (D-005, draft 10). Decisions D-041 to D-045 were approved the same day. Record later changes as a new version of this document |
 | Date | 2026-09-23 |
 | Inputs | PRD v1.1 §5 (entity groups M01–M08, state and write rules) and REQ-002, REQ-005, REQ-006, REQ-008, REQ-010. Plan §4, §6, §7, A-006 and D-033 to D-036. AGENTS.md. UI plan §6–7 |
 | Defines | The taste vocabulary (taxonomy 0.1); what to collect from contributors; field-level shapes for the tables the core loop uses; the option card contract; matching and planner rules v0 |

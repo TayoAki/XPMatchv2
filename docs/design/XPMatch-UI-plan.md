@@ -2,7 +2,7 @@
 
 | Field | Value |
 | --- | --- |
-| Status | Proposal. It goes with MVP-1 plan draft 9 (`docs/prds/XPMatch-MVP1-plan.md`); **founder approval pending** |
+| Status | Proposal. The MVP-1 plan it goes with (`docs/prds/XPMatch-MVP1-plan.md`, revision v1.2) was approved by the founder on 2026-09-23 (D-005). This document's own decisions, D-037 to D-040, are **not yet approved**; S0.1 proceeds on their recommended defaults (plan §15) |
 | Date | 2026-09-23 |
 | Inputs | PRD v1.1 §4 (screens, tokens, accessibility); plan draft 8 §4 and §6; v1 read-only review (commit `28c66b6`); research on React Native UI kits and theming, checked against live docs and npm on 2026-09-23 |
 | Requirements | REQ-015 (accessibility), REQ-025 and REQ-026 (options, swipe), REQ-029 (chat), **REQ-030 (appearance, new)** |

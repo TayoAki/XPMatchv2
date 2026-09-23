@@ -1,11 +1,11 @@
-# XPMatch MVP-1 plan (PRD revision v1.2, proposed)
+# XPMatch MVP-1 plan (PRD revision v1.2, approved)
 
 | Field | Value |
 | --- | --- |
 | Source | `docs/prds/XPMatch-Build-PRD-v1.1.md` (founder's PRD v1.1, 2026-09-23); read-only review of `TayoAki/XPMatchv1`; founder answers of 2026-09-23 |
 | Method | `mobile-plan-mvp` for scope; `software-factory` for intake, readiness and delivery slices |
-| Readiness | **READY WITH ASSUMPTIONS**: S0 and slices 1–2 can start once this revision is approved. Paid model and voice calls (slices 2b and 5) also need D-009 (spend ceiling), slices 3 onward need D-006 (pilot city and permissioned content), and the first external invite needs D-021 (who answers safety reports) |
-| Approval | **Pending** for the revision as a whole (D-005). Approved on 2026-09-23: D-041 to D-045 |
+| Readiness | **READY WITH ASSUMPTIONS**: this revision is approved, so S0 and slices 1–2 can start. Paid model and voice calls (slices 2b and 5) also need D-009 (spend ceiling), slices 3 onward need D-006 (pilot city and permissioned content), and the first external invite needs D-021 (who answers safety reports) |
+| Approval | **Approved** by the founder on 2026-09-23, as written in draft 10 (D-005). D-041 to D-045 were approved the same day. The other decisions (D-006 to D-040) stay open until the founder resolves them; §15 says which have working defaults and which block a slice |
 | Revision note | Draft 2 (2026-09-23) adds the social features the founder chose for the first pilot: contributor updates, trip partners with comments, an opt-in named activity feed, ask-a-contributor Q&A and direct messages. Draft 3 (2026-09-23) makes the flow profile-first: every traveler has an approved profile before matching, and matching ranks the individual items in travelers' itineraries. Draft 4 (2026-09-23): the app builds each traveler a complete itinerary from those items, shows how each item matches the profile and which similar travelers picked it, and lets any item be swapped in one tap. Draft 5 (2026-09-23) plans for a 1,000-tester beta, reached in gated waves after the pilot (§12). Draft 6 (2026-09-23): travelers review what they did, through evening check-ins during the trip and a check-in after it. Ratings stay private unless shared as reviews, and whole trips can be published before the first wave. Draft 7 (2026-09-23): one-tap sign-in with Apple or Google, a voice interview or a survey for the profile, plans requested by typing in a chat box, swipes or arrow taps to change items, and trips saved automatically. Draft 8 (2026-09-23): the chat first answers with options the traveler swipes through, changes by typing and can undo, and a "Create itinerary" button then turns the picks into the itinerary. Draft 9 (2026-09-23): travelers can change the app's colors (System, Light or Dark, and five contrast-checked accents, REQ-030), and the UI plan in `docs/design/XPMatch-UI-plan.md` sets the design system: v1's design language with the PRD's colors. Draft 10 (2026-09-23): the data shape in `docs/design/XPMatch-data-shape.md` defines the taste vocabulary (taxonomy 0.1), the contributor capture template, field-level shapes for the core loop, matching and planner rules v0, and the option card contract (D-041 to D-045) |
 
 PRD v1.1 stays the base document. This revision changes scope and order only; everything not mentioned here (trust rules, data conventions, quality thresholds, rollout, rollback) carries over unchanged. Requirement IDs are the PRD's own.
@@ -20,13 +20,13 @@ PRD v1.1 stays the base document. This revision changes scope and order only; ev
 - Planning assumption (founder, 2026-09-23): the beta grows to 1,000 testers. At that size the servers aren't the constraint; content per city, moderation and tester management are. MVP-1 builds in the cheap scale choices from day one, and the beta grows in gated waves after the 20-person pilot (§12).
 - Travelers feed the supply side (founder, 2026-09-23). On each evening of the trip and once after it, they tick what they did and rate it. Ratings are private by default and only suggest profile changes for approval. In the pilot, travelers can share ratings as labeled, moderated reviews; before the first wave, they can publish whole trips as itineraries. This is how content keeps up with 1,000 testers.
 - Look and feel (founder, 2026-09-23): v2 keeps v1's calm design language but uses the PRD's colors, and travelers can change the colors themselves (REQ-030). The components follow shadcn's model through its React Native counterpart (D-037). Details are in `docs/design/XPMatch-UI-plan.md`.
-- Founder input needed: approve this revision (D-005). Choose the pilot city and start collecting content permissions now (D-006); nothing after slice 2 can be shown honestly without them. Before the first external invite, name who answers safety reports and how fast (D-021).
+- Founder approval: this revision was approved on 2026-09-23 (D-005). Still needed from the founder: choose the pilot city and start collecting content permissions now (D-006), because nothing after slice 2 can be shown honestly without them. Set the spend caps before paid model and voice calls (D-009). Before the first external invite, name who answers safety reports and how fast (D-021).
 
 ## 2. Product, users and constraints
 
 **Promise (PRD v1.1):** Tell XPMatch how you like to travel. It helps you choose relevant travelers' itineraries, contextual reviews and places, explains the tradeoffs, and turns your choices into a private trip board.
 
-**Proposed wording (needs founder approval; corrected in draft 9):** Tell XPMatch how you like to travel. It builds your trip from what real travelers actually did, matched stop by stop to how you travel, shows why each stop fits you, and lets you swap anything in one tap.
+**Product wording (approved with this revision, D-005; corrected in draft 9):** Tell XPMatch how you like to travel. It builds your trip from what real travelers actually did, matched stop by stop to how you travel, shows why each stop fits you, and lets you swap anything in one tap.
 - **Why it changed:** draft 4 said "what travelers like you actually did". But items are matched to the traveler's own profile, and similarity to the source traveler appears only with consent (§5, AGENTS.md).
 
 - **First customer:** a solo traveler or couple planning a 2–4 day leisure trip to the pilot city, invited into the pilot.
@@ -307,7 +307,7 @@ Plan items show similar travelers who picked them (founder decision). So the rel
 ## 7. Data and access boundaries
 
 **Entities** (subset of PRD §5 groups M01–M08; names follow the PRD).
-- **Field-level detail:** fields, the taste vocabulary (taxonomy 0.1) and matching rules v0 are in `docs/design/XPMatch-data-shape.md` (proposal, draft 10).
+- **Field-level detail:** fields, the taste vocabulary (taxonomy 0.1) and matching rules v0 are in `docs/design/XPMatch-data-shape.md` (added in draft 10, approved with this revision).
 - **Tables it adds to the list below:** `account_settings` (REQ-030), `city`, `area`, `place_hours`, `place_fact`, `proposal_slot`, `proposal_option`, `proposal_event`, `taxonomy_dimension` and `checkin_schedule`.
 
 The entities:
@@ -606,7 +606,7 @@ With at most 20 travelers, report counts next to every rate. In the waves, repor
 
 | ID | Decision | Recommended default | Resolved by | Blocks |
 | --- | --- | --- | --- | --- |
-| D-005 | This MVP-1 scope | Approve as written, or name the cuts to reverse | Founder approval | All implementation |
+| D-005 | This MVP-1 scope | Approve as written, or name the cuts to reverse | **Approved** as written (founder, 2026-09-23; draft 10) | All implementation |
 | D-006 | Pilot city and content supply | The city where permissioned content is fastest to secure. Target 5 contributors, 15 itineraries and 30 reviews, with at least 3 distinct suitable itineraries per invited traveler (PRD §12). No city has been chosen; v1 used Rome as its example | Permission inventory | Slices 3 onward |
 | D-007 | Sign-in method | One tap with Apple or Google, no codes or passwords (founder, 2026-09-23). No email fallback in the pilot; revisit if testers ask | Slice 1 two-device test | Slice 1 |
 | D-008 | Text model provider | Run 8–12 fixture interviews and trip requests through 2–3 candidates; compare accuracy and cost | Eval results | Slices 2b and 5 |
@@ -759,8 +759,8 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
   - `docs/design/XPMatch-data-shape.md`: taxonomy 0.1, field-level shapes, matching and planner rules v0, and the option card contract.
   - The contributor capture template for S0.3.
   - Decisions D-041 to D-045.
-- **Approved on 2026-09-23:** D-041 to D-045.
-- **Unresolved:** D-005 to D-040.
+- **Approved on 2026-09-23:** this revision as a whole (D-005, draft 10), and D-041 to D-045.
+- **Unresolved:** D-006 to D-040 (§15).
 
 ## 14. Completion check
 
@@ -774,6 +774,8 @@ These are proposed thresholds, not measurements; pilot data should confirm or re
 
 ## 15. Readiness and next action
 
-**Readiness: READY WITH ASSUMPTIONS.** S0.1 and slices 1–2 can start once D-005 is approved. D-007, D-008, D-010, D-011 and D-017 to D-040 have working defaults, and D-041 to D-045 are approved. D-009 needs the founder's cap amounts before slices 2b and 5 make paid model and voice calls. Slices 3 onward need D-006, and the first external invite needs D-021 confirmed. Waves beyond the pilot need the §12 work, NFR-008 to NFR-010, and D-025 to D-029 confirmed.
+**Readiness: READY WITH ASSUMPTIONS.** The founder approved this revision on 2026-09-23 (D-005), so S0.1 and slices 1–2 can start. D-007, D-008, D-010, D-011 and D-017 to D-040 have working defaults, and D-041 to D-045 are approved. D-009 needs the founder's cap amounts before slices 2b and 5 make paid model and voice calls. Slices 3 onward need D-006, and the first external invite needs D-021 confirmed. Waves beyond the pilot need the §12 work, NFR-008 to NFR-010, and D-025 to D-029 confirmed.
 
-**Next action (founder):** approve revision v1.2 as written, or list the changes you want. After approval, the factory's next task is S0.1 (project shell) on its own branch, with CI and device evidence.
+**Next action:** the factory's next task is S0.1 (project shell) on its own branch, with CI and device evidence. Any paid provider, account or credential it needs waits for the founder's explicit authorization (AGENTS.md).
+
+**Founder, before the slices that need them:** the pilot city and content permissions (D-006, slices 3 onward), the spend caps (D-009, paid calls in slices 2b and 5), and who answers safety reports (D-021, the first external invite).
