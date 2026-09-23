@@ -42,7 +42,7 @@ Graded on 2026-09-23 by an independent agent that hadn't written the artifacts:
 - Post 3's reasoning cites A-006 (items per day by pace), not D-036.
 - Two quotes are re-labeled as weak or misapplied evidence.
 
-**Re-run result:** pending. See `_run.md`.
+**Re-run result:** 14/20, still FAIL. See "Re-grade (review cycle 2)" below.
 
 ## `cmba-profile` × XPMatch — 2026-09-23
 
@@ -75,7 +75,7 @@ Graded on 2026-09-23 by an independent agent that hadn't written the artifacts:
   - the Inspiration-page line;
   - the example card with specific ratings and a named reviewer.
 
-**Re-run result:** pending.
+**Re-run result:** 15/20, PASS at the threshold. See "Re-grade (review cycle 2)" below.
 
 ## `cmba-offer` × XPMatch — triage only, 2026-09-23
 
